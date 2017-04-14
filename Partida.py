@@ -1,7 +1,10 @@
 class Partida:
-
     def __init__(self, turno, jugadores):
-        self.turno=turno
-        self.jugadores=jugadores
+        self.turno = turno
+        self.jugadores = jugadores
+
+    def crearPartida(self):
+
+
 
 
