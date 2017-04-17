@@ -59,7 +59,7 @@ screen = ""
 bgSurface = ""
 
 
-class newSprite(pygame.sprite.Sprite):
+class NewSprite(pygame.sprite.Sprite):
     def __init__(self, filename):
         pygame.sprite.Sprite.__init__(self)
         self.images = []
@@ -98,7 +98,7 @@ class newSprite(pygame.sprite.Sprite):
         updateDisplay()
 
 
-class newTextBox(pygame.sprite.Sprite):
+class NewTextBox(pygame.sprite.Sprite):
     def __init__(self, text, xpos, ypos, width, case, maxLength, fontSize):
         pygame.sprite.Sprite.__init__(self)
         self.text = ""
@@ -168,7 +168,7 @@ class newTextBox(pygame.sprite.Sprite):
         updateDisplay()
 
 
-class newLabel(pygame.sprite.Sprite):
+class NewLabel(pygame.sprite.Sprite):
     def __init__(self, text, fontSize, font, fontColour, xpos, ypos, background):
         pygame.sprite.Sprite.__init__(self)
         self.fontColour = pygame.Color(fontColour)
@@ -290,7 +290,7 @@ def showSprite(sprite):
 
 
 def makeSprite(filename):
-    thisSprite = newSprite(filename)
+    thisSprite = NewSprite(filename)
     return thisSprite
 
 
@@ -479,7 +479,7 @@ def keyPressed(keyCheck=""):
 
 def makeLabel(text, fontSize, xpos, ypos, fontColour='black', font='Arial', background="clear"):
     # make a text sprite
-    thisText = newLabel(text, fontSize, font, fontColour, xpos, ypos, background)
+    thisText = NewLabel(text, fontSize, font, fontColour, xpos, ypos, background)
     return thisText
 
 
@@ -503,7 +503,7 @@ def waitPress():
 
 
 def makeTextBox(xpos, ypos, width, case=0, startingText="Please type here", maxLength=0, fontSize=22):
-    thisTextBox = newTextBox(startingText, xpos, ypos, width, case, maxLength, fontSize)
+    thisTextBox = NewTextBox(startingText, xpos, ypos, width, case, maxLength, fontSize)
     textboxGroup.add(thisTextBox)
     return thisTextBox
 
