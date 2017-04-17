@@ -4,6 +4,7 @@ class Partida:
         self.jugadores = jugadores
 
     def crearPartida(self):
+        pass
 
 
 
