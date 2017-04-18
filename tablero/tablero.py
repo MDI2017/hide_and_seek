@@ -110,13 +110,11 @@ class Tablero:
                         casillero.color = COLORES.ZONA_ESPCAPE
 
                 else:
-                    if (indexColumna <= 3 or indexColumna >= 6):
+                    if indexColumna <= 3 or indexColumna >= 6:
                         casillero.zona = ZONAS.FUERA_TABLERO
                     else:
                         casillero.zona = ZONAS.LIBERTAD
                         casillero.color = COLORES.ZONA_LIBERTAD
-
-
 
                 casillero.dibujarCasillero()
 

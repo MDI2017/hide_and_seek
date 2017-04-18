@@ -39,6 +39,7 @@ class Casillero:
 
     def _dibujarDivicionSuperior(self):
         ancho_division = 1
+        color = COLORES.MUROS
         punto_x_inicial = self.posicionX
         punto_y_inicial = self.posicionY
         punto_x_final = punto_x_inicial + self.lado
@@ -47,7 +48,11 @@ class Casillero:
         if self.paredes[DIVISIONES.SUPERIOR]:
             ancho_division = 5
 
-        drawLine(punto_x_inicial, punto_y_inicial, punto_x_final, punto_y_final, COLORES.MUROS, ancho_division)
+        elif self.zona == ZONAS.DOBLE_LANZAMIENTO:
+            color = COLORES.ROJO
+            ancho_division = 3
+
+        drawLine(punto_x_inicial, punto_y_inicial, punto_x_final, punto_y_final, color, ancho_division)
 
     def _dibujarDivisionDerecha(self):
         ancho_division = 1
@@ -63,6 +68,7 @@ class Casillero:
 
     def _dibujarDivicionInferior(self):
         ancho_division = 1
+        color = COLORES.MUROS
         punto_x_inicial = self.posicionX
         punto_y_inicial = self.posicionY + self.lado
         punto_x_final = punto_x_inicial + self.lado
@@ -71,7 +77,11 @@ class Casillero:
         if self.paredes[DIVISIONES.INFERIOR]:
             ancho_division = 5
 
-        drawLine(punto_x_inicial, punto_y_inicial, punto_x_final, punto_y_final, COLORES.MUROS, ancho_division)
+        elif self.zona == ZONAS.PERRITO_GUARDIAN:
+            color = COLORES.AZUl
+            ancho_division = 3
+
+        drawLine(punto_x_inicial, punto_y_inicial, punto_x_final, punto_y_final, color, ancho_division)
 
     def _dibujarDivisionIzquierda(self):
         ancho_division = 1

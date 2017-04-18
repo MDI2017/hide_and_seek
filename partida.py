@@ -3,7 +3,8 @@ class Partida:
         self.turno = turno
         self.jugadores = jugadores
 
-
+    def crearPartida(self):
+        pass
 
 
 
