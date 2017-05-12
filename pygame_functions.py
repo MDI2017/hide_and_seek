@@ -575,7 +575,7 @@ def mousePressed():
     pygame.event.clear()
     mouseState = pygame.mouse.get_pressed()
     if mouseState[0]:
-        return True
+        return pygame.mouse.get_pos()
     else:
         return False
 
