@@ -4,10 +4,10 @@ Desarrollo para la materia Metodología de la investigación
 ## Integrantes:
   
   
-  - Scrum Master: Stocco Daniel   
-  - Product Owner: Rodriguez Ignacio
+  - _**Scrum Master**_: Stocco Daniel   
+  - _**Product Owner**_: Rodriguez Ignacio
 
-  - _Developers:_
+  - _**Developers**:_
     * Sandoval Gustavo
     * Quinteros Mauro
     * Medina Lisandro
