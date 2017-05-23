@@ -169,16 +169,18 @@ def main():
     # INICIALIZAR VARIABLES CON RUTAS
 
     app_carpeta = os.getcwd()
-    img_carpeta = app_carpeta + os.sep + "imagen" + os.sep
+    img_carpeta = app_carpeta + os.sep + "images" + os.sep
+
+    print(img_carpeta)
 
     # DECLARAR Y VERIFICAR ICONOS DE LA APLICACIÓN:
 
-    iconos = (img_carpeta + "pyremoto64x64.png",
-              img_carpeta + "conec16x16.png",
-              img_carpeta + "salir16x16.png",
-              img_carpeta + "star16x16.png",
-              img_carpeta + "conec32x32.png",
-              img_carpeta + "salir32x32.png")
+    iconos = (img_carpeta + "ficha-roja (3rd copy).png",
+              img_carpeta + "ficha-roja (4th copy).png",
+              img_carpeta + "ficha-roja (5th copy).png",
+              img_carpeta + "ficha-roja (another copy).png",
+              img_carpeta + "ficha-roja (copy).png",
+              img_carpeta + "ficha-roja.png")
     error1 = f_verificar_iconos(iconos)
 
     if not error1:
