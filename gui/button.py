@@ -12,13 +12,10 @@ class Button(Dibujable):
 
     def boton_precionado(self, posicion):
 
-        if posicion and self.posicionX < posicion[1] < self.posicionX + self.alto \
-                and self.posicionY < posicion[0] < self.posicionY + self.ancho:
+        if not posicion:
+            return False
+
+        if posicion and self.posicionX < posicion[0] < self.posicionX + self.alto \
+                and self.posicionY < posicion[1] < self.posicionY + self.ancho:
             print(posicion)
             return True
-
-        return False
-
-
-
-

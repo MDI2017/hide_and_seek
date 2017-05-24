@@ -5,8 +5,14 @@ ALTO_CASILLERO = 60
 
 
 class Tablero:
-    def __init__(self):
+    def __init__(self, renderizado=False):
         self.casilleros = [[Casillero(60, 60 * x, 60 * i) for i in range(12)] for x in range(10)]
+        self.renderizado = renderizado
+
+    def dibujarTablero(self):
+        self.dibujarCasilleros()
+        self.dibujarDivisiones()
+        self.renderizado = True
 
     def dibujarCasilleros(self):
 
