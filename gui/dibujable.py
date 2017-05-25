@@ -1,13 +1,11 @@
 from pygame_functions import drawRect, drawLine
 from constantes import COLORES
+from .posicionable import Posicionable
 
 
-class Dibujable:
+class Dibujable(Posicionable):
     def __init__(self, posicion_x, posicion_y, ancho, alto, color=COLORES.AZUl, dibujado=False):
-        self.posicionX = posicion_x
-        self.posicionY = posicion_y
-        self.alto = alto
-        self.ancho = ancho
+        super().__init__(posicion_x, posicion_y, ancho, alto)
         self.color = color
         self.dibujado = dibujado
 
