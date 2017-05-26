@@ -1,3 +1,5 @@
+import os
+
 
 class ESTADOS:
     ESTA_OCUPADO = True
@@ -40,3 +42,26 @@ class ZONAS:
     PERRITO_GUARDIAN = 4
     DOBLE_LANZAMIENTO = 7
     PIEDRA_LIBRE = 700
+
+
+class PATHS:
+    PATH_JUEGO = os.getcwd()
+    PATH_IMAGENES = PATH_JUEGO + os.sep + "images" + os.sep
+
+
+class FONT_SIZE:
+    GRANDE = 32
+    MEDIANO = 16
+    CHICO = 32
+
+
+class SEPARACIONES:
+    SEPARACION = 8
+
+
+class RECT:
+    POS_X = 0
+    POS_Y = 1
+    ANCHO = 2
+    ALTO = 3
+
