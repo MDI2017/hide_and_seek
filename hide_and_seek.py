@@ -16,13 +16,14 @@ tablero_renderizado = False
 renderizar_tablero = False
 boton_dibujado = False
 tablero = Tablero()
-boton = Button(250, 250, 200, 100)
-boton_atras = Button(670, 100, 100, 100)
+boton = Button(250, 250, "boton_iniciar_partida_habilitado.png")
+boton_atras = Button(670, 100, "boton_iniciar_partida_habilitado.png")
+
 
 jugadores = [
-{ 'nombre':"un nombre", 'numero': 2, 'es_contador': True },
-{ 'nombre':"otro nombre", 'numero': 1, 'es_contador': False },
-{ 'nombre':"mas nombre", 'numero': 4, 'es_contador': False }
+    {'nombre': "un nombre", 'numero': 2, 'es_contador': True},
+    {'nombre': "otro nombre", 'numero': 1, 'es_contador': False},
+    {'nombre': "mas nombre", 'numero': 4, 'es_contador': False}
 
 ]
 
@@ -52,29 +53,30 @@ while juego_iniciado:
     if not grilla_2.dibujada:
         grilla_2.dibujar_grilla()
 
-
     if not boton.dibujado and not tablero.renderizado:
         boton.dibujar()
+        boton.agregar_imagen("boton_iniciar_partida_presionado.png")
+        boton.agregar_imagen("boton_iniciar_partida_desactivado.png")
+        print(boton.spriteRect)
 
-    if boton.dibujado and boton.boton_precionado(mouseAction):
+    if boton.dibujado and boton.click_boton(mouseAction):
         clearShapes()
         boton.dibujado = False
         dibujar_tablero()
         boton_atras.dibujar()
+        boton_atras.agregar_imagen("boton_iniciar_partida_presionado.png")
+        boton_atras.agregar_imagen("boton_iniciar_partida_desactivado.png")
 
         boton.dibujado = False
 
     grilla_1.imput_click(mouseAction)
     grilla_2.imput_click(mouseAction)
 
-
     # boton_atras.boton_precionado((730, 110 ))
-    if boton_atras.dibujado and boton_atras.boton_precionado(mouseAction):
+    if boton_atras.dibujado and boton_atras.click_boton(mouseAction):
         clearShapes()
         tablero.renderizado = False
         boton_atras.dibujado = False
         boton.dibujar()
-
-
 
 endWait()
