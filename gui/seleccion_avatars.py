@@ -8,7 +8,10 @@ class avatars:
     def __init__(self):
         screenSize(800, 400)
         setBackgroundColour(COLORES.BLANCO)
-        self.xpos = 5
+        self.xposCaza = 5
+        self.xposCont = 5
+        self.yposCaza = 50
+        self.yposCont = 200
         self.numAvatar = None
         self.sprite1 = makeSprite("avatar1.png")
         self.sprite2 = makeSprite("avatar2.png")
@@ -17,18 +20,21 @@ class avatars:
         self.sprite5 = makeSprite("avatar5.png")
         self.lista = [self.sprite1,self.sprite2,self.sprite3,self.sprite4,self.sprite5]
 
-        self.cazador=makeLabel('Cazador:',58,25,5)
+        self.cazador = makeLabel('Cazador:',36,25,5)
         showLabel(self.cazador)
 
         for avatar in range(0,2):
-            moveSprite(self.lista[avatar], self.xpos ,15)
+            moveSprite(self.lista[avatar], self.xposCaza ,self.yposCaza)
             showSprite(self.lista[avatar])
-            self.xpos += 80
+            self.xposCaza += 80
 
-        for avatar in range(0,3):
-            moveSprite(self.lista[avatar], self.xpos ,15)
+        self.contadores = makeLabel('Contadores:',36,25,125)
+        showLabel(self.contadores)
+
+        for avatar in range(2,5):
+            moveSprite(self.lista[avatar], self.xposCont ,self.yposCont)
             showSprite(self.lista[avatar])
-            self.xpos += 80
+            self.xposCont += 80
 
 
         while True:
