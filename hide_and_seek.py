@@ -3,6 +3,7 @@ from tablero.tablero import Tablero
 from constantes import *
 from gui.button import Button
 from dado.dado import dado
+from partida import Partida
 
 screenSize(730, 720)
 setBackgroundColour(COLORES.BLANCO)
@@ -17,6 +18,16 @@ tablero = Tablero()
 boton = Button(250, 250, 200, 100)
 boton_atras = Button(670, 100, 100, 100)
 
+jugadores = [
+{ 'nombre':"un nombre", 'numero': 2, 'es_contador': True },
+{ 'nombre':"otro nombre", 'numero': 1, 'es_contador': False },
+{ 'nombre':"mas nombre", 'numero': 4, 'es_contador': False }
+
+]
+
+partida = Partida(jugadores)
+
+print(partida.jugadores)
 
 def dibujar_tablero():
     tablero.dibujarTablero()
