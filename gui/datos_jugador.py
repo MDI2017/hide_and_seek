@@ -18,9 +18,11 @@ class GrillaJugador:
     def _dibujar_textbox(self):
          showTextBox(self.textBox)
          # textBoxInput(self.textBox)
+
     def imput_click(self, posicion_mouse):
 
         if Clickeable.elemento_precionado(posicion_mouse, self.posX, self.posY, 300, self.textBox.boxSize):
-            print('clock')
-            textBoxInput(self.textBox)
-
+            nombre_jugador = textBoxInput(self.textBox)
+            hideTextBox(self.textBox)
+            label_nombre = makeLabel(nombre_jugador, 24, self.posX, self.posY + 5)
+            showLabel(label_nombre)
