@@ -1,5 +1,4 @@
 from pygame_functions import *
-from constantes import *
 from gui.clickeable import Clickeable
 
 
