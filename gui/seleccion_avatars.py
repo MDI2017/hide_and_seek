@@ -38,24 +38,24 @@ class avatars:
             self.xposCont += 80
 
         while True:
-            if Clickeable().elemento_precionado(mousePressed(), self.sprite1.rect[0], self.sprite1.rect[1],
-                                                self.sprite1.rect[2], self.sprite1.rect[3]):
+            if Clickeable().click_elemento(mousePressed(), self.sprite1.rect[0], self.sprite1.rect[1],
+                                           self.sprite1.rect[2], self.sprite1.rect[3]):
                 self.numAvatar = 0
                 break
-            if Clickeable().elemento_precionado(mousePressed(), self.sprite2.rect[0], self.sprite2.rect[1],
-                                                self.sprite2.rect[2], self.sprite2.rect[3]):
+            if Clickeable().click_elemento(mousePressed(), self.sprite2.rect[0], self.sprite2.rect[1],
+                                           self.sprite2.rect[2], self.sprite2.rect[3]):
                 self.numAvatar = 1
                 break
-            if Clickeable().elemento_precionado(mousePressed(), self.sprite3.rect[0], self.sprite3.rect[1],
-                                                self.sprite3.rect[2], self.sprite3.rect[3]):
+            if Clickeable().click_elemento(mousePressed(), self.sprite3.rect[0], self.sprite3.rect[1],
+                                           self.sprite3.rect[2], self.sprite3.rect[3]):
                 self.numAvatar = 2
                 break
-            if Clickeable().elemento_precionado(mousePressed(), self.sprite4.rect[0], self.sprite4.rect[1],
-                                                self.sprite4.rect[2], self.sprite4.rect[3]):
+            if Clickeable().click_elemento(mousePressed(), self.sprite4.rect[0], self.sprite4.rect[1],
+                                           self.sprite4.rect[2], self.sprite4.rect[3]):
                 self.numAvatar = 3
                 break
-            if Clickeable().elemento_precionado(mousePressed(), self.sprite5.rect[0], self.sprite5.rect[1],
-                                                self.sprite5.rect[2], self.sprite5.rect[3]):
+            if Clickeable().click_elemento(mousePressed(), self.sprite5.rect[0], self.sprite5.rect[1],
+                                           self.sprite5.rect[2], self.sprite5.rect[3]):
                 self.numAvatar = 4
                 break
 
