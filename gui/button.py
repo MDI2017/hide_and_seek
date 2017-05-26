@@ -19,7 +19,6 @@ class Button(Clickeable, Dibujable):
         self.nombeArchivoDesactivado = None
 
     def _al_clickear(self):
-        print('hago clock')
         self.cambiar_imagen(PRESIONADO)
 
     def _al_dibujar(self):
@@ -31,5 +30,4 @@ class Button(Clickeable, Dibujable):
             self.cambiar_imagen(INACTIVO)
 
     def _al_liberar_click(self):
-        print('libero')
         self.cambiar_imagen(ACTIVO)
