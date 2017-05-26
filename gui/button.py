@@ -8,29 +8,28 @@ PRESIONADO = 1
 INACTIVO = 2
 
 
-class Button(Dibujable):
+class Button(Clickeable, Dibujable):
     """
     Clase para generar los botones necesarios dentro de la interfaz gráfica
     """
 
-    def __init__(self, posicion_x, posicion_y, nombre_archivo, ancho=None, alto=None, dibujado=False, inactivo=False):
-        super().__init__(posicion_x, posicion_y, nombre_archivo, ancho, alto, dibujado)
+    def __init__(self, posicion_x, posicion_y, nombre_archivo, ancho=None, alto=None, dibujado=False):
+        super().__init__(posicion_x, posicion_y, nombre_archivo)
         self.nombeArchivoPresionado = None
         self.nombeArchivoDesactivado = None
-        self.inactivo = inactivo
 
-    def click_boton(self, posicion_mouse):
+    def _al_clickear(self):
+        print('hago clock')
+        self.cambiar_imagen(PRESIONADO)
+
+    def _al_dibujar(self):
+        self.rect = self.sprite.rect
+        self.xFinal = self.rect[RECT.POS_X] + self.rect[RECT.ANCHO]
+        self.yFinal = self.rect[RECT.POS_Y] + self.rect[RECT.ALTO]
 
         if self.inactivo:
-            return False
-        elif Clickeable.click_sprite(posicion_mouse, self.spriteRect):
-            if self.sprite.currentImage == PRESIONADO:
-                return True
-            else:
-                self.cambiar_imagen(1)
-                return True
-        elif self.sprite.currentImage == ACTIVO:
-            return False
-        else:
-            self.cambiar_imagen(ACTIVO)
-            return False
+            self.cambiar_imagen(INACTIVO)
+
+    def _al_liberar_click(self):
+        print('libero')
+        self.cambiar_imagen(ACTIVO)

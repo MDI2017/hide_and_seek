@@ -1,4 +1,4 @@
-from pygame_functions import makeSprite, moveSprite, showSprite, addSpriteImage, changeSpriteImage
+from pygame_functions import makeSprite, moveSprite, showSprite, addSpriteImage, changeSpriteImage, hideSprite
 from constantes import PATHS
 from .posicionable import Posicionable
 
@@ -8,19 +8,24 @@ class Dibujable(Posicionable):
         super().__init__(posicion_x, posicion_y, ancho, alto)
         self.nombeArchivo = nombre_archivo
         self.dibujado = dibujado
-        self.sprite = None
+        self.sprite = makeSprite(PATHS.PATH_IMAGENES + self.nombeArchivo)
         self.spriteRect = None
 
     def dibujar(self):
-        self.sprite = makeSprite(PATHS.PATH_IMAGENES + self.nombeArchivo)
         moveSprite(self.sprite, self.posicionX, self.posicionY)
-        self.spriteRect = self.sprite.rect
         showSprite(self.sprite)
+        self._al_dibujar()
         self.dibujado = True
 
     def agregar_imagen(self, nombre_archivo):
         addSpriteImage(self.sprite, PATHS.PATH_IMAGENES + nombre_archivo)
 
     def cambiar_imagen(self, indice):
-        print(indice)
         changeSpriteImage(self.sprite, indice)
+
+    def ocultar(self):
+        hideSprite(self.sprite)
+        self.dibujado = False
+
+    def _al_dibujar(self):
+        pass

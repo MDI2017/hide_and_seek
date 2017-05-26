@@ -1,28 +1,43 @@
+import pygame
 from constantes import RECT
+from gui.posicionable import Posicionable
 
 
-class Clickeable:
-    @staticmethod
-    def click_elemento(posicion_mouse, posicion_x, posicion_y, alto, ancho):
-        """
-        Esta funcion recibe un tupla con un con las coordenadas de el lugar donde el mouse hizo click
-        :param posicion:  
-        :return: 
-        """
+class Clickeable(Posicionable):
+    def __init__(self, posicion_x, posicion_y, ancho=None, alto=None):
+        super().__init__(posicion_x, posicion_y, ancho, alto)
 
-        if not posicion_mouse:
+        self.rect = None
+        self.xFinal = None
+        self.yFinal = None
+        self.inactivo = None
+
+    def click_elemento(self, posicion_mouse):
+
+        if self.inactivo or not posicion_mouse or not self._verificar_posicion(posicion_mouse,
+                                                                               self.rect[RECT.POS_X], self.xFinal,
+                                                                               self.rect[RECT.POS_Y], self.yFinal):
             return False
+        else:
+            return self._clickeado()
 
-        return Clickeable._clickeado(posicion_mouse, posicion_x, posicion_x + ancho, posicion_y, posicion_y + alto)
+    def _clickeado(self):
+        self._al_clickear()
 
-    @staticmethod
-    def click_sprite(posicion_mouse, rect_sprite):
-        if not posicion_mouse:
-            return False
-        x_final = rect_sprite[RECT.POS_X] + rect_sprite[RECT.ANCHO]
-        y_final = rect_sprite[RECT.POS_Y] + rect_sprite[RECT.ALTO]
-        return Clickeable._clickeado(posicion_mouse, rect_sprite[RECT.POS_X], x_final, rect_sprite[RECT.POS_Y], y_final)
+        while True:
+            for event in pygame.event.get():
+                if event.type == pygame.MOUSEBUTTONUP:
+                    posicion_mouse = pygame.mouse.get_pos()
+                    self._al_liberar_click()
+                    return self._verificar_posicion(posicion_mouse,
+                                                    self.rect[RECT.POS_X], self.xFinal,
+                                                    self.rect[RECT.POS_Y], self.yFinal)
 
-    @staticmethod
-    def _clickeado(posicion_mouse, x_inicial, x_final, y_inicial, y_final):
+    def _verificar_posicion(self, posicion_mouse, x_inicial, x_final, y_inicial, y_final):
         return x_inicial < posicion_mouse[0] < x_final and y_inicial < posicion_mouse[1] < y_final
+
+    def _al_clickear(self):
+        pass
+
+    def _al_liberar_click(self):
+        pass
