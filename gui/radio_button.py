@@ -30,3 +30,7 @@ class RadioButton(Clickeable, Dibujable):
             self.cambiar_imagen(SELECCIONADO)
 
         self.seleccionado = not self.seleccionado
+
+    def quitar_seleccion(self):
+        self.seleccionado = False
+        self.cambiar_imagen(INACTIVO)

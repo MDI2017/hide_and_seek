@@ -12,7 +12,8 @@ class Button(Clickeable, Dibujable):
         super().__init__(posicion_x, posicion_y, nombre_archivo)
 
     def _al_clickear(self):
-        self.cambiar_imagen(ESTADOS_BOTONES.PRESIONADO)
+        if len(self.sprite.images) > 1:
+            self.cambiar_imagen(ESTADOS_BOTONES.PRESIONADO)
 
     def _al_dibujar(self):
         self.rect = self.sprite.rect

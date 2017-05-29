@@ -2,6 +2,7 @@ from pygame_functions import *
 from tablero.tablero import Tablero
 from constantes import *
 from gui.button import Button
+from gui.setting_partida import SettingPartida
 from gui.datos_jugador import GrillaJugador
 from dado.dado import dado
 from partida import Partida
@@ -36,12 +37,13 @@ boton_atras.agregar_imagen("boton_iniciar_partida_desactivado.png")
 #
 # print(partida.jugadores)
 
-grilla_1 = GrillaJugador(100, 100)
-grilla_2 = GrillaJugador(100, 200)
-
+setting = SettingPartida()
 
 def dibujar_tablero():
     tablero.dibujarTablero()
+
+def mostrar_setting():
+    setting.mostrar_pantalla_sentting()
 
 
 while juego_iniciado:
@@ -56,25 +58,14 @@ while juego_iniciado:
         if event.type == pygame.MOUSEBUTTONDOWN:
             mouseAction = pygame.mouse.get_pos()
 
-    if not grilla_1.dibujada:
-        grilla_1.dibujar_grilla()
-
-    if not grilla_2.dibujada:
-        grilla_2.dibujar_grilla()
-
     if not boton.dibujado and not tablero.renderizado:
         boton.dibujar()
 
     if boton.dibujado and boton.click_elemento(mouseAction):
         boton.ocultar()
+        # mostrar_setting()
         dibujar_tablero()
         boton_atras.dibujar()
-
-    grilla_1.textBox.click_elemento(mouseAction)
-    grilla_2.textBox.click_elemento(mouseAction)
-    grilla_1.radioButtonCazador.click_elemento(mouseAction)
-    grilla_2.radioButtonCazador.click_elemento(mouseAction)
-
 
     if boton_atras.dibujado and boton_atras.click_elemento(mouseAction):
         clearShapes()
