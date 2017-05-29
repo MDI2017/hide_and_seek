@@ -1,18 +1,18 @@
-from constantes import RECT, ESTADOS_BOTONES
+from constantes import RECT
 from gui.dibujable import Dibujable
 from gui.clickeable import Clickeable
 
+INACTIVO = 0
+SELECCIONADO = 1
+DESHABILIDATDO = 2
 
-class Button(Clickeable, Dibujable):
-    """
-    Clase para generar los botones necesarios dentro de la interfaz gráfica
-    """
 
+class RadioButton(Clickeable, Dibujable):
     def __init__(self, posicion_x, posicion_y, nombre_archivo, ancho=None, alto=None, dibujado=False):
         super().__init__(posicion_x, posicion_y, nombre_archivo)
 
-    def _al_clickear(self):
-        self.cambiar_imagen(ESTADOS_BOTONES.PRESIONADO)
+        self.seleccionado = None
+
 
     def _al_dibujar(self):
         self.rect = self.sprite.rect
@@ -20,8 +20,13 @@ class Button(Clickeable, Dibujable):
         self.yFinal = self.rect[RECT.POS_Y] + self.rect[RECT.ALTO]
 
         if self.inactivo:
-            self.cambiar_imagen(ESTADOS_BOTONES.INACTIVO)
+            self.cambiar_imagen(DESHABILIDATDO)
 
     def _al_liberar_click(self):
-        self.cambiar_imagen(ESTADOS_BOTONES.ACTIVO)
-#
+
+        if self.seleccionado:
+            self.cambiar_imagen(INACTIVO)
+        else:
+            self.cambiar_imagen(SELECCIONADO)
+
+        self.seleccionado = not self.seleccionado

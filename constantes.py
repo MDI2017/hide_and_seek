@@ -5,6 +5,11 @@ class ESTADOS:
     ESTA_OCUPADO = True
     TIENE_MURO = True
 
+class ESTADOS_BOTONES:
+    ACTIVO = 0
+    PRESIONADO = 1
+    INACTIVO = 2
+
 class DIVISIONES:
     SUPERIOR = 0
     DERECHA = 1

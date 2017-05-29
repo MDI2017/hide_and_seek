@@ -24,7 +24,7 @@ boton_atras = Button(670, 100, "boton_iniciar_partida_habilitado.png")
 boton_atras.agregar_imagen("boton_iniciar_partida_presionado.png")
 boton_atras.agregar_imagen("boton_iniciar_partida_desactivado.png")
 
-#
+
 # jugadores = [
 #     {'nombre': "un nombre", 'numero': 2, 'es_contador': True},
 #     {'nombre': "otro nombre", 'numero': 1, 'es_contador': False},
@@ -36,8 +36,8 @@ boton_atras.agregar_imagen("boton_iniciar_partida_desactivado.png")
 #
 # print(partida.jugadores)
 
-grilla_1 = GrillaJugador(250, 100)
-grilla_2 = GrillaJugador(250, 200)
+grilla_1 = GrillaJugador(100, 100)
+grilla_2 = GrillaJugador(100, 200)
 
 
 def dibujar_tablero():
@@ -72,8 +72,10 @@ while juego_iniciado:
 
     grilla_1.textBox.click_elemento(mouseAction)
     grilla_2.textBox.click_elemento(mouseAction)
+    grilla_1.radioButtonCazador.click_elemento(mouseAction)
+    grilla_2.radioButtonCazador.click_elemento(mouseAction)
 
-    # boton_atras.boton_precionado((730, 110 ))
+
     if boton_atras.dibujado and boton_atras.click_elemento(mouseAction):
         clearShapes()
         tablero.renderizado = False

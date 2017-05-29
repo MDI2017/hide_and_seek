@@ -43,6 +43,8 @@ class Input(Clickeable):
     def _mostrar_textBox(self):
         hideLabel(self.label)
         showTextBox(self.textBox)
+        print(self.textBox.rect)
+        print(self.rect)
 
 
 
