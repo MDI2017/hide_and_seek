@@ -14,3 +14,13 @@ Desarrollo para la materia Metodología de la investigación
     * Boschi Eduardo
     * Guajardo Nicolas
     * Mignini Adriano
+    
+## Pre requisitos:
+* PyGame,
+python3 -m pip install pygame --user
+* Python 3.x
+
+## Para ejecutar el proyecto:
+En el raiz del proyecto ejecutar:
+python3 hide_and_seek.py
+    
