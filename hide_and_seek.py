@@ -63,9 +63,9 @@ while juego_iniciado:
 
     if boton.dibujado and boton.click_elemento(mouseAction):
         boton.ocultar()
-        # mostrar_setting()
-        dibujar_tablero()
-        boton_atras.dibujar()
+        mostrar_setting()
+        # dibujar_tablero()
+        # boton_atras.dibujar()
 
     if boton_atras.dibujado and boton_atras.click_elemento(mouseAction):
         clearShapes()

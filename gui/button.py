@@ -16,13 +16,17 @@ class Button(Clickeable, Dibujable):
             self.cambiar_imagen(ESTADOS_BOTONES.PRESIONADO)
 
     def _al_dibujar(self):
-        self.rect = self.sprite.rect
-        self.xFinal = self.rect[RECT.POS_X] + self.rect[RECT.ANCHO]
-        self.yFinal = self.rect[RECT.POS_Y] + self.rect[RECT.ALTO]
-
+        self._set_parametros()
         if self.inactivo:
             self.cambiar_imagen(ESTADOS_BOTONES.INACTIVO)
 
     def _al_liberar_click(self):
         self.cambiar_imagen(ESTADOS_BOTONES.ACTIVO)
-#
+
+    def _set_parametros(self):
+        self.rect = self.sprite.rect
+        self.xFinal = self.rect[RECT.POS_X] + self.rect[RECT.ANCHO]
+        self.yFinal = self.rect[RECT.POS_Y] + self.rect[RECT.ALTO]
+
+    def _al_mover(self):
+        self._set_parametros()

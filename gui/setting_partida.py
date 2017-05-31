@@ -38,6 +38,9 @@ class SettingPartida:
                         break
                     if grilla.botonSeleccionAvatar.click_elemento(mouseAction):
                         self._abrir_seleccion_avatar(indice)
+                        break
+                    if grilla.botonBorrar.click_elemento(mouseAction):
+                        break
 
     def verificar_seleccion_radio(self, grilla_seleccionada):
 

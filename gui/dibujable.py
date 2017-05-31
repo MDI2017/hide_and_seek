@@ -27,5 +27,16 @@ class Dibujable(Posicionable):
         hideSprite(self.sprite)
         self.dibujado = False
 
+    def mover(self, pos_x=None, pos_y=None):
+        if pos_x:
+            self.posicionX = pos_x
+        if pos_y:
+            self.posicionY = pos_y
+        moveSprite(self.sprite, self.posicionX, self.posicionY)
+        self._al_mover()
+
     def _al_dibujar(self):
+        pass
+
+    def _al_mover(self):
         pass
