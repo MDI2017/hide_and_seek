@@ -45,6 +45,8 @@ def dibujar_tablero():
 def mostrar_setting():
     setting.mostrar_pantalla_sentting()
 
+pygame.display.set_caption("VENTANA PRINCIPAL")
+
 
 while juego_iniciado:
 

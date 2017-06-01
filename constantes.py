@@ -62,6 +62,7 @@ class FONT_SIZE:
 
 class SEPARACIONES:
     SEPARACION = 8
+    PADDING_VENTANA_PPAL = 16
 
 
 class RECT:
