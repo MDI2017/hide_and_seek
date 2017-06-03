@@ -46,7 +46,8 @@ class Input(Clickeable):
         print(self.textBox.rect)
         print(self.rect)
 
-
+    def ocultarTextBox(self):
+        textboxGroup.remove(self.textBox)
 
 
 
