@@ -57,7 +57,14 @@ class SettingPartida:
                             self.grillas.pop()
                         break
                     if self.botonAgregarJugador.click_elemento(mouseAction):
-                        
+                        # LO QUE HAY DENTRO DE ESTE IF ES SOLO PARA PROBAR EL boton "botonBorrar".
+
+                            grillaa = GrillaJugador(SEPARACIONES.PADDING_VENTANA_PPAL, 144)
+                            self.grillas.append(grillaa)
+                            grillaa.dibujar_grilla()
+                            grillaa = GrillaJugador(SEPARACIONES.PADDING_VENTANA_PPAL, 208)
+                            self.grillas.append(grillaa)
+                            grillaa.dibujar_grilla()
                             break
                     if self.botonCazadorAleatorio.click_elemento(mouseAction):
                         break
