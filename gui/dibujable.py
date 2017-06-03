@@ -3,6 +3,7 @@ from constantes import PATHS
 from .posicionable import Posicionable
 
 
+
 class Dibujable(Posicionable):
     def __init__(self, posicion_x, posicion_y, nombre_archivo, ancho=None, alto=None,  dibujado=False):
         super().__init__(posicion_x, posicion_y, ancho, alto)
@@ -10,6 +11,7 @@ class Dibujable(Posicionable):
         self.dibujado = dibujado
         self.sprite = makeSprite(PATHS.PATH_IMAGENES + self.nombeArchivo)
         self.spriteRect = None
+
 
     def dibujar(self):
         moveSprite(self.sprite, self.posicionX, self.posicionY)

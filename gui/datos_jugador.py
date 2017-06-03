@@ -27,6 +27,7 @@ class GrillaJugador:
         self.botonSeleccionAvatar = None
         self.radioButtonCazador = None
 
+
     def dibujar_grilla(self):
         self.__dibujar_boton_borrar()
         self._dibujar_textbox()
@@ -34,11 +35,14 @@ class GrillaJugador:
         self._dibujar_radio_button()
         self.dibujada = True
 
+
+
     def _dibujar_textbox(self):
 
         posicion_x_text_box = self.botonBorrar.rect[POS_X] + self.botonBorrar.rect[ANCHO] + SEPARACIONES.SEPARACION
         posicion_y_text_box = self.posY + (self._mediaGrilla - ALTO_GRILLA / 2)
         self.textBox = Input(posicion_x_text_box, posicion_y_text_box, LARGO_INPUT, 0, "Nombre jugador", 0, FUENTE_GRILLA)
+
 
     def __dibujar_boton_borrar(self):
         self.botonBorrar = Button(self.posX, self.posY, "boton_borrar_habilitado.png")
@@ -49,6 +53,7 @@ class GrillaJugador:
         self.botonBorrar.mover(pos_y=posicion_y_boton)
 
     def _dibujar_boton_selecion_avatar(self):
+
         posicion_x_boton = self.textBox.rect[POS_X] + self.textBox.rect[ANCHO] + SEPARACIONES.SEPARACION
         posicion_y_boton = self.posY
         self.botonSeleccionAvatar = Button(posicion_x_boton, posicion_y_boton, "no_avatar.png")
@@ -56,7 +61,9 @@ class GrillaJugador:
         posicion_y_boton = self.posY + (self._mediaGrilla - self.botonSeleccionAvatar.rect[ALTO] / 2)
         self.botonSeleccionAvatar.mover(pos_y=posicion_y_boton)
 
+
     def _dibujar_radio_button(self):
+
         posicion_x_boton = self.botonSeleccionAvatar.rect[POS_X] + self.botonSeleccionAvatar.rect[ANCHO] + SEPARACIONES.SEPARACION
         posicion_y_boton = self.posY
         self.radioButtonCazador = RadioButton(posicion_x_boton, posicion_y_boton, "radio_cazador_no_seleccionado.png")
@@ -64,3 +71,11 @@ class GrillaJugador:
         self.radioButtonCazador.dibujar()
         posicion_y_boton = self.posY + (self._mediaGrilla - self.radioButtonCazador.rect[ALTO] / 2)
         self.radioButtonCazador.mover(pos_y=posicion_y_boton)
+
+
+
+
+
+
+
+

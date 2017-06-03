@@ -1,12 +1,12 @@
+
 from .button import Button
 from .datos_jugador import GrillaJugador
 import pygame
 from constantes import SEPARACIONES, RECT
 
-
 class SettingPartida:
     def __init__(self):
-        self.jugadores = []
+        self.jugadores=[]
         self.grillas = [GrillaJugador(SEPARACIONES.PADDING_VENTANA_PPAL, SEPARACIONES.PADDING_VENTANA_PPAL),
                         GrillaJugador(SEPARACIONES.PADDING_VENTANA_PPAL, 80),
                         # GrillaJugador(100, 260),
@@ -15,6 +15,7 @@ class SettingPartida:
         self.botonAgregarJugador = None
         self.botonCazadorAleatorio = None
         self.botonComenzarPartida = None
+
 
     def mostrar_pantalla_sentting(self):
         pygame.display.set_caption("SETTING PARTIDA")
@@ -46,9 +47,18 @@ class SettingPartida:
                         self._abrir_seleccion_avatar(indice)
                         break
                     if grilla.botonBorrar.click_elemento(mouseAction):
+                        if len(self.grillas) >2:
+                            self.grillas[-1].textBox.ocultarTextBox()
+                            self.grillas[-1].textBox.ocultarLabel()
+                            self.grillas[-1].botonSeleccionAvatar.ocultar()
+                            self.grillas[-1].botonBorrar.ocultar()
+                            self.grillas[-1].radioButtonCazador.ocultar()
+
+                            self.grillas.pop()
                         break
                     if self.botonAgregarJugador.click_elemento(mouseAction):
-                        break
+                        
+                            break
                     if self.botonCazadorAleatorio.click_elemento(mouseAction):
                         break
                     if self.botonComenzarPartida.click_elemento(mouseAction):
@@ -87,8 +97,5 @@ class SettingPartida:
         self.botonComenzarPartida.agregar_imagen("boton_iniciar_partida_presionado.png")
         self.botonComenzarPartida.agregar_imagen("boton_iniciar_partida_desactivado.png")
         self.botonComenzarPartida.dibujar()
-
-
-
 
 

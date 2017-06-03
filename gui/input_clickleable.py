@@ -1,4 +1,4 @@
-from pygame_functions import makeTextBox, showTextBox, textBoxInput, makeLabel, showLabel, hideLabel, hideTextBox
+from pygame_functions import makeTextBox, showTextBox, textBoxInput, makeLabel, showLabel, hideLabel, hideTextBox,textboxGroup
 from .clickeable import Clickeable
 from constantes import RECT
 
@@ -45,6 +45,8 @@ class Input(Clickeable):
         showTextBox(self.textBox)
         print(self.textBox.rect)
         print(self.rect)
+
+
 
 
 
