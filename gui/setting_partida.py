@@ -47,7 +47,7 @@ class SettingPartida:
                         self._abrir_seleccion_avatar(indice)
                         break
                     if grilla.botonBorrar.click_elemento(mouseAction):
-                        if len(self.grillas) >2:
+                        if len(self.grillas) > 2:
                             self.grillas[-1].textBox.ocultarTextBox()
                             self.grillas[-1].textBox.ocultarLabel()
                             self.grillas[-1].botonSeleccionAvatar.ocultar()
@@ -57,15 +57,16 @@ class SettingPartida:
                             self.grillas.pop()
                         break
                     if self.botonAgregarJugador.click_elemento(mouseAction):
-                        # LO QUE HAY DENTRO DE ESTE IF ES SOLO PARA PROBAR EL boton "botonBorrar".
+                        self._agregar_grilla()
 
-                            grillaa = GrillaJugador(SEPARACIONES.PADDING_VENTANA_PPAL, 144)
-                            self.grillas.append(grillaa)
-                            grillaa.dibujar_grilla()
-                            grillaa = GrillaJugador(SEPARACIONES.PADDING_VENTANA_PPAL, 208)
-                            self.grillas.append(grillaa)
-                            grillaa.dibujar_grilla()
-                            break
+                        # LO QUE HAY DENTRO DE ESTE IF ES SOLO PARA PROBAR EL boton "botonBorrar".
+                        #     grillaa = GrillaJugador(SEPARACIONES.PADDING_VENTANA_PPAL, 144)
+                        #     self.grillas.append(grillaa)
+                        #     grillaa.dibujar_grilla()
+                        #     grillaa = GrillaJugador(SEPARACIONES.PADDING_VENTANA_PPAL, 208)
+                        #     self.grillas.append(grillaa)
+                        #     grillaa.dibujar_grilla()
+                        break
                     if self.botonCazadorAleatorio.click_elemento(mouseAction):
                         break
                     if self.botonComenzarPartida.click_elemento(mouseAction):
@@ -80,8 +81,14 @@ class SettingPartida:
     def _abrir_seleccion_avatar(self, numero_jugador):
         print("aqui llamo a la funcion que abre la lista de avatars con el id: " + str(numero_jugador))
 
+    def _agregar_grilla(self):
+        indice_ultima_grilla = len(self.grillas) - 1
+        pos_y_nueva_grilla = self.grillas[indice_ultima_grilla].altoGrilla + self.grillas[indice_ultima_grilla].posY + SEPARACIONES.SEPARACION
+        grilla = GrillaJugador(SEPARACIONES.PADDING_VENTANA_PPAL, pos_y_nueva_grilla)
+        self.grillas.append(grilla)
+        grilla.dibujar_grilla()
+
     def _dibujar_botones_accion(self):
-        print(pygame.display.Info().current_w)
 
         self.botonAgregarJugador = Button(300, SEPARACIONES.PADDING_VENTANA_PPAL, "boton_agregar_jugador_habilitado.png")
         self.botonAgregarJugador.agregar_imagen("boton_agregar_jugador_presionado.png")
