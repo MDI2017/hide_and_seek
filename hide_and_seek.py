@@ -3,7 +3,6 @@ from tablero.tablero import Tablero
 from constantes import *
 from gui.button import Button
 from gui.setting_partida import SettingPartida
-from gui.datos_jugador import GrillaJugador
 from dado.dado import dado
 from partida import Partida
 

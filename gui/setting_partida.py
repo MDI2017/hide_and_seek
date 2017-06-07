@@ -1,5 +1,5 @@
 from .button import Button
-from .datos_jugador import GrillaJugador
+from .grilla_jugador import GrillaJugador
 import pygame
 from constantes import SEPARACIONES, RECT
 
@@ -63,6 +63,7 @@ class SettingPartida:
                     if self.botonCazadorAleatorio.click_elemento(mouseAction):
                         break
                     if self.botonComenzarPartida.click_elemento(mouseAction):
+                        self._iniciar_partida()
                         break
 
     def verificar_seleccion_radio(self, grilla_seleccionada):
@@ -70,6 +71,12 @@ class SettingPartida:
         for grilla in self.grillas:
             if grilla != grilla_seleccionada and grilla.radioButtonCazador.seleccionado:
                 grilla.radioButtonCazador.quitar_seleccion()
+
+            if grilla == grilla_seleccionada:
+                if grilla.radioButtonCazador.seleccionado:
+                    self.botonComenzarPartida.activar()
+                else:
+                    self.botonComenzarPartida.desactivar()
 
     def _abrir_seleccion_avatar(self, numero_jugador):
         print("aqui llamo a la funcion que abre la lista de avatars con el id: " + str(numero_jugador))
@@ -109,13 +116,30 @@ class SettingPartida:
         self.botonCazadorAleatorio.agregar_imagen("boton_cazador_aleatorio_desactivado.png")
         self.botonCazadorAleatorio.dibujar()
 
-        posicion_y_iniciar_partida = self.botonCazadorAleatorio.rect[RECT.POS_Y] + self.botonAgregarJugador.rect[
-            RECT.ALTO] + SEPARACIONES.SEPARACION
+        posicion_y_iniciar_partida = self.botonCazadorAleatorio.rect[RECT.POS_Y] + \
+                                     self.botonAgregarJugador.rect[RECT.ALTO] + SEPARACIONES.SEPARACION
 
         self.botonComenzarPartida = Button(posicion_x_botones, posicion_y_iniciar_partida,
                                            "boton_iniciar_partida_habilitado.png")
         self.botonComenzarPartida.agregar_imagen("boton_iniciar_partida_presionado.png")
         self.botonComenzarPartida.agregar_imagen("boton_iniciar_partida_desactivado.png")
+        self.botonComenzarPartida.inactivo = True
+
         self.botonComenzarPartida.dibujar()
 
+    def _iniciar_partida(self):
 
+        hay_cazador = False
+        datos_jugadores = []
+
+        for grilla in self.grillas:
+            datos_jugador = grilla.obtener_datos()
+            if datos_jugador:
+                datos_jugadores.append(grilla.obtener_datos())
+                if datos_jugador['es_cazador']:
+                    hay_cazador = True
+
+        if hay_cazador and len(datos_jugadores) >= 2:
+            print(datos_jugadores)
+        else:
+            print('un no hay cazador')
