@@ -48,7 +48,9 @@ pygame.display.set_caption("VENTANA PRINCIPAL")
 
 
 while juego_iniciado:
-
+    """
+    bucle principal del juego
+    """
     # pygame.event.clear()
     # print(pygame.mouse.get_pressed())
 

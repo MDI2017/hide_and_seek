@@ -2,6 +2,7 @@ from .button import Button
 from .grilla_jugador import GrillaJugador
 import pygame
 from constantes import SEPARACIONES, RECT
+import random
 
 
 class SettingPartida:
@@ -61,6 +62,7 @@ class SettingPartida:
                         self._agregar_grilla()
                         break
                     if self.botonCazadorAleatorio.click_elemento(mouseAction):
+                        print(self.jugador_aleatorio())
                         break
                     if self.botonComenzarPartida.click_elemento(mouseAction):
                         self._iniciar_partida()
@@ -143,3 +145,7 @@ class SettingPartida:
             print(datos_jugadores)
         else:
             print('un no hay cazador')
+
+    def jugador_aleatorio(self):
+        movimientos = random.randint(1, len(self.grillas))
+        return movimientos
