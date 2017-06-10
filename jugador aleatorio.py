@@ -1,3 +1,6 @@
 import random
 def jugadorAleatorio():
-    movimientos=random.randint(1,length(array))
+     return random.randint(1, 4)
+
+
+print(jugadorAleatorio())

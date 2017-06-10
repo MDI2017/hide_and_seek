@@ -3,7 +3,6 @@ from tablero.tablero import Tablero
 from constantes import *
 from gui.button import Button
 from gui.setting_partida import SettingPartida
-from gui.datos_jugador import GrillaJugador
 from dado.dado import dado
 from partida import Partida
 
@@ -49,7 +48,9 @@ pygame.display.set_caption("VENTANA PRINCIPAL")
 
 
 while juego_iniciado:
-
+    """
+    bucle principal del juego
+    """
     # pygame.event.clear()
     # print(pygame.mouse.get_pressed())
 

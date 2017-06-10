@@ -30,3 +30,9 @@ class Button(Clickeable, Dibujable):
 
     def _al_mover(self):
         self._set_parametros()
+
+    def _al_desactivar(self):
+        self.cambiar_imagen(ESTADOS_BOTONES.INACTIVO)
+
+    def _al_activar(self):
+        self.cambiar_imagen(ESTADOS_BOTONES.ACTIVO)
