@@ -17,12 +17,15 @@ class Partida():
         self.boton_atras = Button(600, 100, "boton_iniciar_partida_habilitado.png")
         self.boton_atras.agregar_imagen("boton_iniciar_partida_presionado.png")
         self.boton_atras.agregar_imagen("boton_iniciar_partida_desactivado.png")
+        self.turno = 0
 
     def iniciar_partida(self, jugadores):
         self.tablero.dibujarTablero()
         self.boton_atras.dibujar()
         self._crear_jugadores(jugadores)
+        print('turno jugador: ' + str(self.turno))
         self.__bucle_partida()
+
 
     def _crear_jugadores(self, jugadores):
         for numero_jugador, data_jugador in enumerate(jugadores):
@@ -38,8 +41,6 @@ class Partida():
     def __bucle_partida(self):
 
         en_partida = True
-        enter_presionado = False
-
         while en_partida:
             mouseAction = False
             for event in pygame.event.get():
@@ -50,8 +51,11 @@ class Partida():
 
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_RETURN:
-                        print('preciono enter')
                         self._enter_presionado()
+
+                    if event.key == pygame.K_UP or event.key == pygame.K_DOWN \
+                            or event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
+                        self._arrow_presionado(event.key)
 
             if mouseAction:
                 if self.boton_atras.dibujado and self.boton_atras.click_elemento(mouseAction):
@@ -65,5 +69,33 @@ class Partida():
             for event in pygame.event.get():
                 if event.type == pygame.KEYUP:
                     if event.key == pygame.K_RETURN:
-                        print('libero enter')
+                        print('turno jugador ' + self._cambio_turno())
                         return
+
+    def _arrow_presionado(self, tecla_precionada):
+        while True:
+            for event in pygame.event.get():
+                if event.type == pygame.KEYUP:
+                    if event.key == tecla_precionada:
+                        self._mover_ficha(tecla_precionada)
+                        return
+
+    def _mover_ficha(self, direccion):
+        if self.turno == 'cazador':
+            self.cazador.ficha.mover_ficha(direccion)
+        else:
+            self.corredores[int(self.turno)].ficha.mover_ficha(direccion)
+
+
+    def _cambio_turno(self):
+
+        if self.turno == 'cazador':
+            self.turno = 0
+        else:
+            self.turno += 1
+
+        if self.turno < len(self.corredores):
+            return str(self.turno)
+        else:
+            self.turno = "cazador"
+            return self.turno
