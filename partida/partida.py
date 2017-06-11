@@ -21,10 +21,10 @@ class Partida():
     def iniciar_partida(self, jugadores):
         self.tablero.dibujarTablero()
         self.boton_atras.dibujar()
-        self._crearJugadores(jugadores)
+        self._crear_jugadores(jugadores)
         self.__bucle_partida()
 
-    def _crearJugadores(self, jugadores):
+    def _crear_jugadores(self, jugadores):
         for numero_jugador, data_jugador in enumerate(jugadores):
 
             if data_jugador['es_cazador']:
@@ -38,6 +38,7 @@ class Partida():
     def __bucle_partida(self):
 
         en_partida = True
+        enter_presionado = False
 
         while en_partida:
             mouseAction = False
@@ -47,9 +48,22 @@ class Partida():
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     mouseAction = pygame.mouse.get_pos()
 
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_RETURN:
+                        print('preciono enter')
+                        self._enter_presionado()
+
             if mouseAction:
                 if self.boton_atras.dibujado and self.boton_atras.click_elemento(mouseAction):
                     self.tablero.renderizado = False
                     clearShapes()
                     self.boton_atras.ocultar()
                     en_partida = False
+
+    def _enter_presionado(self):
+        while True:
+            for event in pygame.event.get():
+                if event.type == pygame.KEYUP:
+                    if event.key == pygame.K_RETURN:
+                        print('libero enter')
+                        return
