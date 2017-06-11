@@ -4,7 +4,7 @@ from constantes import *
 from gui.button import Button
 from gui.setting_partida import SettingPartida
 from dado.dado import dado
-from partida import Partida
+from partida.partida import Partida
 
 screenSize(730, 720)
 setBackgroundColour(COLORES.BLANCO)
@@ -15,31 +15,32 @@ juego_iniciado = True
 tablero_renderizado = False
 renderizar_tablero = False
 boton_dibujado = False
-tablero = Tablero()
 boton = Button(250, 250, "boton_iniciar_partida_habilitado.png")
 boton.agregar_imagen("boton_iniciar_partida_presionado.png")
 boton.agregar_imagen("boton_iniciar_partida_desactivado.png")
 
-boton_atras = Button(670, 100, "boton_iniciar_partida_habilitado.png")
-boton_atras.agregar_imagen("boton_iniciar_partida_presionado.png")
-boton_atras.agregar_imagen("boton_iniciar_partida_desactivado.png")
 
+jugadores = [
+    {'nombre': "Jugador 1", 'es_contador': True, 'avatar': "avatar1.png"},
+    {'nombre': "Jugador 2", 'es_contador': False, 'avatar': "avatar2.png"},
+    {'nombre': "Jugador 3", 'es_contador': False, 'avatar': "avatar3.png"},
+    {'nombre': "Jugador 4", 'es_contador': False, 'avatar': "avatar4.png"},
+    {'nombre': "Jugador 5", 'es_contador': False, 'avatar': "avatar5.png"}
 
-# jugadores = [
-#     {'nombre': "un nombre", 'numero': 2, 'es_contador': True},
-#     {'nombre': "otro nombre", 'numero': 1, 'es_contador': False},
-#     {'nombre': "mas nombre", 'numero': 4, 'es_contador': False}
+]
 #
-# ]
-#
-# partida = Partida(jugadores)
+partida = Partida()
 #
 # print(partida.jugadores)
 
 setting = SettingPartida()
 
-def dibujar_tablero():
-    tablero.dibujarTablero()
+def iniciar_partida():
+    global partida
+    partida.iniciar_partida()
+    jugadores = [
+        {}
+    ]
 
 def mostrar_setting():
     setting.mostrar_pantalla_sentting()
@@ -61,19 +62,12 @@ while juego_iniciado:
         if event.type == pygame.MOUSEBUTTONDOWN:
             mouseAction = pygame.mouse.get_pos()
 
-    if not boton.dibujado and not tablero.renderizado:
+    if not boton.dibujado and not partida.tablero.renderizado:
         boton.dibujar()
 
     if boton.dibujado and boton.click_elemento(mouseAction):
         boton.ocultar()
-        mostrar_setting()
-        # dibujar_tablero()
-        # boton_atras.dibujar()
-
-    if boton_atras.dibujado and boton_atras.click_elemento(mouseAction):
-        clearShapes()
-        tablero.renderizado = False
-        boton_atras.ocultar()
-        boton.dibujar()
+        # mostrar_setting()
+        iniciar_partida()
 
 endWait()
