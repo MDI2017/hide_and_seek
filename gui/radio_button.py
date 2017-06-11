@@ -4,7 +4,7 @@ from gui.clickeable import Clickeable
 
 INACTIVO = 0
 SELECCIONADO = 1
-DESHABILIDATDO = 2
+DESHABILITADO = 2
 
 
 class RadioButton(Clickeable, Dibujable):
@@ -20,7 +20,7 @@ class RadioButton(Clickeable, Dibujable):
         self.yFinal = self.rect[RECT.POS_Y] + self.rect[RECT.ALTO]
 
         if self.inactivo:
-            self.cambiar_imagen(DESHABILIDATDO)
+            self.cambiar_imagen(DESHABILITADO)
 
     def _al_liberar_click(self):
 
