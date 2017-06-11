@@ -21,26 +21,22 @@ boton.agregar_imagen("boton_iniciar_partida_desactivado.png")
 
 
 jugadores = [
-    {'nombre': "Jugador 1", 'es_contador': True, 'avatar': "avatar1.png"},
-    {'nombre': "Jugador 2", 'es_contador': False, 'avatar': "avatar2.png"},
-    {'nombre': "Jugador 3", 'es_contador': False, 'avatar': "avatar3.png"},
-    {'nombre': "Jugador 4", 'es_contador': False, 'avatar': "avatar4.png"},
-    {'nombre': "Jugador 5", 'es_contador': False, 'avatar': "avatar5.png"}
+    {'nombre': "Jugador 1", 'es_cazador': True, 'avatar': "avatar1.png"},
+    {'nombre': "Jugador 2", 'es_cazador': False, 'avatar': "avatar2.png"},
+    {'nombre': "Jugador 3", 'es_cazador': False, 'avatar': "avatar3.png"},
+    {'nombre': "Jugador 4", 'es_cazador': False, 'avatar': "avatar4.png"},
+    {'nombre': "Jugador 5", 'es_cazador': False, 'avatar': "avatar5.png"}
 
 ]
 #
 partida = Partida()
-#
-# print(partida.jugadores)
 
 setting = SettingPartida()
 
 def iniciar_partida():
     global partida
-    partida.iniciar_partida()
-    jugadores = [
-        {}
-    ]
+    partida.iniciar_partida(jugadores)
+
 
 def mostrar_setting():
     setting.mostrar_pantalla_sentting()

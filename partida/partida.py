@@ -1,9 +1,10 @@
-from jugador import Jugador
-from dado.dado import dado
-from tablero.tablero import Tablero
-from gui.button import Button
 import pygame
+
+from gui.button import Button
+from jugadores.cazador import Cazador
+from jugadores.corredor import Corredor
 from pygame_functions import clearShapes
+from tablero.tablero import Tablero
 
 
 class Partida():
@@ -11,7 +12,8 @@ class Partida():
         # self.turno = Turno()  Clase Turno todavía no creada
         # self.dado = dado()
         self.tablero = Tablero()
-        self.jugadores = None
+        self.corredores = []
+        self.cazador = None
         self.boton_atras = Button(600, 100, "boton_iniciar_partida_habilitado.png")
         self.boton_atras.agregar_imagen("boton_iniciar_partida_presionado.png")
         self.boton_atras.agregar_imagen("boton_iniciar_partida_desactivado.png")
@@ -19,7 +21,19 @@ class Partida():
     def iniciar_partida(self, jugadores):
         self.tablero.dibujarTablero()
         self.boton_atras.dibujar()
+        self._crearJugadores(jugadores)
         self.__bucle_partida()
+
+    def _crearJugadores(self, jugadores):
+        for numero_jugador, data_jugador in enumerate(jugadores):
+
+            if data_jugador['es_cazador']:
+                self.cazador = Cazador(data_jugador['nombre'], data_jugador['avatar'])
+            else:
+                print('corredor')
+                corredor = Corredor(data_jugador['nombre'], data_jugador['avatar'])
+                self.corredores.append(corredor)
+                corredor.crear_ficha(len(self.corredores) - 1)
 
     def __bucle_partida(self):
 

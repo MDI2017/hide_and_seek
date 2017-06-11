@@ -1,6 +1,7 @@
 import os
 
-
+class CASILLAS:
+    LADO = 60
 class ESTADOS:
     ESTA_OCUPADO = True
     TIENE_MURO = True
