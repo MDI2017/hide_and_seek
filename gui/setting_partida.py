@@ -24,7 +24,7 @@ class SettingPartida:
         for grilla in self.grillas:
             grilla.dibujar_grilla()
 
-        self.__bucle_setting_partida()
+        return self.__bucle_setting_partida()
 
     def __bucle_setting_partida(self):
 
@@ -37,7 +37,9 @@ class SettingPartida:
                     mouseAction = pygame.mouse.get_pos()
 
             if mouseAction:
+
                 for indice, grilla in enumerate(self.grillas):
+
                     if grilla.radioButtonCazador.click_elemento(mouseAction):
                         self.verificar_seleccion_radio(grilla)
                         break
@@ -48,13 +50,8 @@ class SettingPartida:
                         break
                     if grilla.botonBorrar.click_elemento(mouseAction):
                         if len(self.grillas) > 2:
-                            self.grillas[-1].textBox.ocultarTextBox()
-                            self.grillas[-1].textBox.ocultarLabel()
-                            self.grillas[-1].botonSeleccionAvatar.ocultar()
-                            self.grillas[-1].botonBorrar.ocultar()
-                            self.grillas[-1].radioButtonCazador.ocultar()
-
-                            self.grillas.pop()
+                            grilla.ocultar_grilla()
+                            self.grillas.pop(indice)
 
                         if len(self.grillas) < 5 and self.botonAgregarJugador.inactivo:
                             self.botonAgregarJugador.activar()
@@ -67,8 +64,7 @@ class SettingPartida:
                         print(self.jugador_aleatorio())
                         break
                     if self.botonComenzarPartida.click_elemento(mouseAction):
-                        self._iniciar_partida()
-                        break
+                        return self._iniciar_partida()
 
     def verificar_seleccion_radio(self, grilla_seleccionada):
 
@@ -88,7 +84,6 @@ class SettingPartida:
         self.grillas[numero_jugador].dibujar_boton_selecion_avatar(avatar.nomAvatar)
         self.grillas[numero_jugador].avatar = avatar.nomAvatar
         self.avatarSeleccionado = avatar.seleccionado
-
 
     def _agregar_grilla(self):
 
@@ -149,10 +144,17 @@ class SettingPartida:
                     hay_cazador = True
 
         if hay_cazador and len(datos_jugadores) >= 2:
-            print(datos_jugadores)
+            return datos_jugadores
         else:
             print('un no hay cazador')
 
     def jugador_aleatorio(self):
         movimientos = random.randint(1, len(self.grillas))
         return movimientos
+
+    def ocultar_setting(self):
+        for grilla in self.grillas:
+            grilla.ocultar_grilla()
+            self.botonAgregarJugador.ocultar()
+            self.botonCazadorAleatorio.ocultar()
+            self.botonComenzarPartida.ocultar()

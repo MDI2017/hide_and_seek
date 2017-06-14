@@ -19,28 +19,18 @@ boton = Button(250, 250, "boton_iniciar_partida_habilitado.png")
 boton.agregar_imagen("boton_iniciar_partida_presionado.png")
 boton.agregar_imagen("boton_iniciar_partida_desactivado.png")
 
-
-jugadores = [
-    {'nombre': "Jugador 1", 'es_cazador': True, 'avatar': "avatar1.png"},
-    {'nombre': "Jugador 2", 'es_cazador': False, 'avatar': "avatar2.png"},
-    {'nombre': "Jugador 3", 'es_cazador': False, 'avatar': "avatar3.png"},
-    {'nombre': "Jugador 4", 'es_cazador': False, 'avatar': "avatar4.png"},
-    {'nombre': "Jugador 5", 'es_cazador': False, 'avatar': "avatar5.png"}
-
-]
 #
 partida = Partida()
 
 setting = SettingPartida()
 
 
-def iniciar_partida():
-    global partida
-    partida.iniciar_partida(jugadores)
-
-
 def mostrar_setting():
-    setting.mostrar_pantalla_sentting()
+    global partida
+    datos_jugadores = setting.mostrar_pantalla_sentting()
+    clearShapes()
+    setting.ocultar_setting()
+    partida.iniciar_partida(datos_jugadores)
 
 pygame.display.set_caption("VENTANA PRINCIPAL")
 
@@ -65,6 +55,5 @@ while juego_iniciado:
     if boton.dibujado and boton.click_elemento(mouseAction):
         boton.ocultar()
         mostrar_setting()
-        #iniciar_partida()
 
 endWait()

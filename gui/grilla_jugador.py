@@ -75,3 +75,10 @@ class GrillaJugador:
             'es_cazador': self.radioButtonCazador.seleccionado,
             'avatar': self.avatar,
         }
+
+    def ocultar_grilla(self):
+        self.textBox.ocultarTextBox()
+        self.textBox.ocultarLabel()
+        self.botonSeleccionAvatar.ocultar()
+        self.botonBorrar.ocultar()
+        self.radioButtonCazador.ocultar()
