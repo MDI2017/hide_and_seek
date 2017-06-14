@@ -25,6 +25,7 @@ class GrillaJugador:
         self.textBox = None
         self.botonSeleccionAvatar = None
         self.radioButtonCazador = None
+        self.avatar = None
 
     def dibujar_grilla(self):
         self.__dibujar_boton_borrar()
@@ -72,4 +73,5 @@ class GrillaJugador:
         return {
             'nombre': self.textBox.texto,
             'es_cazador': self.radioButtonCazador.seleccionado,
+            'avatar': self.avatar,
         }

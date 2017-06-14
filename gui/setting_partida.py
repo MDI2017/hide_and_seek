@@ -3,6 +3,7 @@ from .grilla_jugador import GrillaJugador
 import pygame
 from constantes import SEPARACIONES, RECT
 import random
+from gui.seleccion_avatars import Avatars
 
 
 class SettingPartida:
@@ -81,6 +82,7 @@ class SettingPartida:
                     self.botonComenzarPartida.desactivar()
 
     def _abrir_seleccion_avatar(self, numero_jugador):
+        avatar = Avatars()
         print("aqui llamo a la funcion que abre la lista de avatars con el id: " + str(numero_jugador))
 
     def _agregar_grilla(self):

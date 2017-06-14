@@ -33,6 +33,7 @@ partida = Partida()
 
 setting = SettingPartida()
 
+
 def iniciar_partida():
     global partida
     partida.iniciar_partida(jugadores)
@@ -63,7 +64,7 @@ while juego_iniciado:
 
     if boton.dibujado and boton.click_elemento(mouseAction):
         boton.ocultar()
-        # mostrar_setting()
-        iniciar_partida()
+        mostrar_setting()
+        #iniciar_partida()
 
 endWait()
