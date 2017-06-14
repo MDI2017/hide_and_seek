@@ -30,7 +30,7 @@ class GrillaJugador:
     def dibujar_grilla(self):
         self.__dibujar_boton_borrar()
         self._dibujar_textbox()
-        self._dibujar_boton_selecion_avatar()
+        self.dibujar_boton_selecion_avatar()
         self._dibujar_radio_button()
         self.dibujada = True
 
@@ -48,10 +48,10 @@ class GrillaJugador:
         posicion_y_boton = self.posY + (self._mediaGrilla - self.botonBorrar.rect[ALTO] / 2)
         self.botonBorrar.mover(pos_y=posicion_y_boton)
 
-    def _dibujar_boton_selecion_avatar(self):
+    def dibujar_boton_selecion_avatar(self, archivo="no_avatar.png"):
         posicion_x_boton = self.textBox.rect[POS_X] + self.textBox.rect[ANCHO] + SEPARACIONES.SEPARACION
         posicion_y_boton = self.posY
-        self.botonSeleccionAvatar = Button(posicion_x_boton, posicion_y_boton, "no_avatar.png")
+        self.botonSeleccionAvatar = Button(posicion_x_boton, posicion_y_boton, archivo)
         self.botonSeleccionAvatar.dibujar()
         posicion_y_boton = self.posY + (self._mediaGrilla - self.botonSeleccionAvatar.rect[ALTO] / 2)
         self.botonSeleccionAvatar.mover(pos_y=posicion_y_boton)

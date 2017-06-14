@@ -15,6 +15,7 @@ class SettingPartida:
         self.botonAgregarJugador = None
         self.botonCazadorAleatorio = None
         self.botonComenzarPartida = None
+        self.avatarSeleccionado = [False, False, False, False, False]
 
     def mostrar_pantalla_sentting(self):
         pygame.display.set_caption("SETTING PARTIDA")
@@ -82,8 +83,12 @@ class SettingPartida:
                     self.botonComenzarPartida.desactivar()
 
     def _abrir_seleccion_avatar(self, numero_jugador):
-        avatar = Avatars()
-        print("aqui llamo a la funcion que abre la lista de avatars con el id: " + str(numero_jugador))
+        avatar = Avatars(self.avatarSeleccionado)
+        self.grillas[numero_jugador].botonSeleccionAvatar.ocultar()
+        self.grillas[numero_jugador].dibujar_boton_selecion_avatar(avatar.nomAvatar)
+        self.grillas[numero_jugador].avatar = avatar.nomAvatar
+        self.avatarSeleccionado = avatar.seleccionado
+
 
     def _agregar_grilla(self):
 
