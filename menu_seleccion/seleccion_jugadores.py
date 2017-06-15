@@ -33,5 +33,4 @@ class GrillaSeleccion:
         endWait()
 
 
-gr = GrillaSeleccion()
-gr.grilla()
+

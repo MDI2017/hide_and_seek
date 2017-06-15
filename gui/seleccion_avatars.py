@@ -1,8 +1,9 @@
 from pygame_functions import *
 from gui.button import Button
+from constantes import *
 
 
-class Avatars:
+class Avatars(Button):
     def __init__(self, seleccionado):
         # Definicion de fondo, atributos a usar y Sprites
         self.xpos = 25
@@ -22,7 +23,7 @@ class Avatars:
             self.lista[i].agregar_imagen("avatar" + str(i + 1) + "_presionado.png")
             self.lista[i].dibujar()
             if seleccionado[i]:
-                self.lista[i].cambiar_imagen(1)
+                self.lista[i].cambiar_imagen(ESTADOS_BOTONES.PRESIONADO)
             self.xpos += 80
 
         # Asignacion de funcionalidad clickeable
@@ -35,23 +36,23 @@ class Avatars:
                     self.mouseAction = pygame.mouse.get_pos()
 
             if self.mouseAction:
-                if self.lista[0].click_elemento(self.mouseAction):
+                if self.lista[0].click_elemento(self.mouseAction) & (not self.seleccionado[0]):
                     self.nomAvatar = "avatar1.png"
                     self.seleccionado[0] = True
                     break
-                if self.lista[1].click_elemento(self.mouseAction):
+                if self.lista[1].click_elemento(self.mouseAction) & (not self.seleccionado[1]):
                     self.nomAvatar = "avatar2.png"
                     self.seleccionado[1] = True
                     break
-                if self.lista[2].click_elemento(self.mouseAction):
+                if self.lista[2].click_elemento(self.mouseAction) & (not self.seleccionado[2]):
                     self.nomAvatar = "avatar3.png"
                     self.seleccionado[2] = True
                     break
-                if self.lista[3].click_elemento(self.mouseAction):
+                if self.lista[3].click_elemento(self.mouseAction) & (not self.seleccionado[3]):
                     self.nomAvatar = "avatar4.png"
                     self.seleccionado[3] = True
                     break
-                if self.lista[4].click_elemento(self.mouseAction):
+                if self.lista[4].click_elemento(self.mouseAction) & (not self.seleccionado[4]):
                     self.nomAvatar = "avatar5.png"
                     self.seleccionado[4] = True
                     break

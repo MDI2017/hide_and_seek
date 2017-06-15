@@ -1,15 +1,20 @@
 import os
 
+
 class CASILLAS:
     LADO = 60
+
+
 class ESTADOS:
     ESTA_OCUPADO = True
     TIENE_MURO = True
+
 
 class ESTADOS_BOTONES:
     ACTIVO = 0
     PRESIONADO = 1
     INACTIVO = 2
+
 
 class DIVISIONES:
     SUPERIOR = 0
@@ -71,4 +76,3 @@ class RECT:
     POS_Y = 1
     ANCHO = 2
     ALTO = 3
-
