@@ -63,10 +63,10 @@ class SettingPartida:
                         self._agregar_grilla()
                         break
                     if self.botonCazadorAleatorio.click_elemento(mouseAction):
-                        print(self.jugador_aleatorio())
+                        self.jugador_aleatorio()
                         break
                     if self.botonComenzarPartida.click_elemento(mouseAction):
-                        return self._iniciar_partida()
+                            return self._iniciar_partida()
 
     def verificar_seleccion_radio(self, grilla_seleccionada):
 
@@ -129,6 +129,20 @@ class SettingPartida:
 
         self.botonComenzarPartida.dibujar()
 
+    def jugador_aleatorio(self, ):
+        indice = random.randint(0, len(self.grillas) - 1)
+        print(indice)
+        self.grillas[indice].radioButtonCazador._al_liberar_click()
+        self.verificar_seleccion_radio(self.grillas[indice])
+        return indice
+
+    def ocultar_setting(self):
+        for grilla in self.grillas:
+            grilla.ocultar_grilla()
+            self.botonAgregarJugador.ocultar()
+            self.botonCazadorAleatorio.ocultar()
+            self.botonComenzarPartida.ocultar()
+
     def _iniciar_partida(self):
 
         hay_cazador = False
@@ -144,15 +158,4 @@ class SettingPartida:
         if hay_cazador and len(datos_jugadores) >= 2:
             return datos_jugadores
         else:
-            print('un no hay cazador')
-
-    def jugador_aleatorio(self):
-        movimientos = random.randint(1, len(self.grillas))
-        return movimientos
-
-    def ocultar_setting(self):
-        for grilla in self.grillas:
-            grilla.ocultar_grilla()
-            self.botonAgregarJugador.ocultar()
-            self.botonCazadorAleatorio.ocultar()
-            self.botonComenzarPartida.ocultar()
+            print('no hay cazador')

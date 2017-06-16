@@ -14,7 +14,7 @@ class Partida():
         self.tablero = Tablero()
         self.corredores = []
         self.cazador = None
-        self.boton_atras = Button(600, 100, "boton_iniciar_partida_habilitado.png")
+        self.boton_atras = Button(980, 680, "boton_iniciar_partida_habilitado.png")
         self.boton_atras.agregar_imagen("boton_iniciar_partida_presionado.png")
         self.boton_atras.agregar_imagen("boton_iniciar_partida_desactivado.png")
         self.turno = 0
