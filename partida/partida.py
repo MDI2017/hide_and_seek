@@ -5,12 +5,13 @@ from jugadores.cazador import Cazador
 from jugadores.corredor import Corredor
 from pygame_functions import clearShapes
 from tablero.tablero import Tablero
+from partida.dado import Dado
 
 
 class Partida():
     def __init__(self):
         # self.turno = Turno()  Clase Turno todavía no creada
-        # self.dado = dado()
+
         self.tablero = Tablero()
         self.corredores = []
         self.cazador = None
@@ -18,13 +19,18 @@ class Partida():
         self.boton_atras.agregar_imagen("boton_iniciar_partida_presionado.png")
         self.boton_atras.agregar_imagen("boton_iniciar_partida_desactivado.png")
         self.turno = 0
+        self.dado=None
+        self.movimientos=None
+
 
     def iniciar_partida(self, jugadores):
         self.tablero.dibujarTablero()
         self.boton_atras.dibujar()
         self._crear_jugadores(jugadores)
+        self.dado = Dado()
         print('turno jugador: ' + str(self.turno))
         self.__bucle_partida()
+
 
 
     def _crear_jugadores(self, jugadores):
@@ -82,8 +88,10 @@ class Partida():
 
     def _mover_ficha(self, direccion):
         if self.turno == 'cazador':
+
             self.cazador.ficha.mover_ficha(direccion)
         else:
+
             self.corredores[int(self.turno)].ficha.mover_ficha(direccion)
 
 
@@ -99,3 +107,5 @@ class Partida():
         else:
             self.turno = "cazador"
             return self.turno
+
+
