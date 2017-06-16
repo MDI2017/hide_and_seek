@@ -6,7 +6,7 @@ from jugadores.corredor import Corredor
 from pygame_functions import clearShapes
 from tablero.tablero import Tablero
 from partida.dado import Dado
-
+from pygame_functions import *
 
 class Partida():
     def __init__(self):
@@ -20,7 +20,8 @@ class Partida():
         self.boton_atras.agregar_imagen("boton_iniciar_partida_desactivado.png")
         self.turno = 0
         self.dado=None
-        self.movimientos=None
+        self.movimientos=0
+
 
 
     def iniciar_partida(self, jugadores):
@@ -28,6 +29,8 @@ class Partida():
         self.boton_atras.dibujar()
         self._crear_jugadores(jugadores)
         self.dado = Dado()
+        self.movimientos = Dado().tirarDado()
+        self.contador = 0
         print('turno jugador: ' + str(self.turno))
         self.__bucle_partida()
 
@@ -75,6 +78,8 @@ class Partida():
             for event in pygame.event.get():
                 if event.type == pygame.KEYUP:
                     if event.key == pygame.K_RETURN:
+                        self.contador=0
+                        self.movimientos = Dado().tirarDado()#ACA TIRA ERROR
                         print('turno jugador ' + self._cambio_turno())
                         return
 
@@ -88,11 +93,14 @@ class Partida():
 
     def _mover_ficha(self, direccion):
         if self.turno == 'cazador':
+            if self.contador<=self.movimientos  :
+                self.contador+=1
+                self.cazador.ficha.mover_ficha(direccion)
 
-            self.cazador.ficha.mover_ficha(direccion)
         else:
-
-            self.corredores[int(self.turno)].ficha.mover_ficha(direccion)
+            if self.contador<=self.movimientos  :
+                self.contador+=1
+                self.corredores[int(self.turno)].ficha.mover_ficha(direccion)
 
 
     def _cambio_turno(self):
@@ -103,9 +111,11 @@ class Partida():
             self.turno += 1
 
         if self.turno < len(self.corredores):
+
             return str(self.turno)
         else:
             self.turno = "cazador"
+
             return self.turno
 
 
