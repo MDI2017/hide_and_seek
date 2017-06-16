@@ -19,10 +19,8 @@ class Partida():
         self.boton_atras.agregar_imagen("boton_iniciar_partida_presionado.png")
         self.boton_atras.agregar_imagen("boton_iniciar_partida_desactivado.png")
         self.turno = 0
-        self.dado=None
-        self.movimientos=0
-
-
+        self.dado = None
+        self.movimientos = 0
 
     def iniciar_partida(self, jugadores):
         self.tablero.dibujarTablero()
@@ -33,8 +31,6 @@ class Partida():
         self.contador = 0
         print('turno jugador: ' + str(self.turno))
         self.__bucle_partida()
-
-
 
     def _crear_jugadores(self, jugadores):
         for numero_jugador, data_jugador in enumerate(jugadores):
@@ -48,7 +44,6 @@ class Partida():
                 corredor.crear_ficha(len(self.corredores) - 1)
 
     def __bucle_partida(self):
-
         en_partida = True
         while en_partida:
             mouseAction = False
