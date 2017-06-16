@@ -49,7 +49,7 @@ class Input(Clickeable):
     def ocultarTextBox(self):
         textboxGroup.remove(self.textBox)
 
-        
+
     def ocultarLabel(self):
         hideLabel(self.label)
 
