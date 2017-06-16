@@ -1,10 +1,8 @@
-from pygame_functions import *
-from tablero.tablero import Tablero
 from constantes import *
 from gui.button import Button
 from gui.setting_partida import SettingPartida
-from dado.dado import dado
 from partida.partida import Partida
+from pygame_functions import *
 
 screenSize(1100, 720)
 setBackgroundColour(COLORES.BLANCO)
