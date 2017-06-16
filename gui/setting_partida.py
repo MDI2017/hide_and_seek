@@ -15,7 +15,7 @@ class SettingPartida:
         self.botonAgregarJugador = None
         self.botonCazadorAleatorio = None
         self.botonComenzarPartida = None
-        self.avatarSeleccionado = [False, False, False, False, False]
+        self.avatarSeleccionado = [False, False, False, False, False, False, False, False, False]
 
     def mostrar_pantalla_sentting(self):
         pygame.display.set_caption("SETTING PARTIDA")
@@ -45,17 +45,19 @@ class SettingPartida:
                         break
                     if grilla.textBox.click_elemento(mouseAction):
                         break
-                    if grilla.botonSeleccionAvatar.click_elemento(mouseAction):
-                        self._abrir_seleccion_avatar(indice)
-                        break
+                    if grilla.botonSeleccionAvatar.click_elemento(mouseAction) and grilla.avatar is None:
+                            self._abrir_seleccion_avatar(indice)
+                            break
+
                     if grilla.botonBorrar.click_elemento(mouseAction):
                         if len(self.grillas) > 2:
                             grilla.ocultar_grilla()
                             self.grillas.pop(indice)
+                            if grilla.avatar is not None:
+                                self.avatarSeleccionado[int(grilla.avatar[6])-1] = False
 
                         if len(self.grillas) < 5 and self.botonAgregarJugador.inactivo:
                             self.botonAgregarJugador.activar()
-
                         break
                     if self.botonAgregarJugador.click_elemento(mouseAction):
                         self._agregar_grilla()
@@ -83,19 +85,15 @@ class SettingPartida:
         self.grillas[numero_jugador].botonSeleccionAvatar.ocultar()
         self.grillas[numero_jugador].dibujar_boton_selecion_avatar(avatar.nomAvatar)
         self.grillas[numero_jugador].avatar = avatar.nomAvatar
+        avatar.fondo.ocultar()
         self.avatarSeleccionado = avatar.seleccionado
 
     def _agregar_grilla(self):
-
         indice_ultima_grilla = len(self.grillas) - 1
-
         pos_y_nueva_grilla = self.grillas[indice_ultima_grilla].posY + SEPARACIONES.SEPARACION + 56
-
         grilla = GrillaJugador(SEPARACIONES.PADDING_VENTANA_PPAL, pos_y_nueva_grilla)
-
         self.grillas.append(grilla)
         grilla.dibujar_grilla()
-
         if len(self.grillas) == 5:
             self.botonAgregarJugador.desactivar()
 

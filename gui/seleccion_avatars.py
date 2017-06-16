@@ -1,24 +1,28 @@
 from pygame_functions import *
+from gui.dibujable import Dibujable
 from gui.button import Button
 from constantes import *
 
 
-class Avatars(Button):
+class Avatars:
     def __init__(self, seleccionado):
         # Definicion de fondo, atributos a usar y Sprites
+        self.fondo = Dibujable(0, 0, 'overlay.png')
+        self.fondo.dibujar()
         self.xpos = 25
         self.ypos = 600
         self.nomAvatar = None
-        self.sprite1, self.sprite2, self.sprite3, self.sprite4, self.sprite5 = None, None, None, None, None
-        self.lista = [self.sprite1, self.sprite2, self.sprite3, self.sprite4, self.sprite5]
+        self.sprite1, self.sprite2, self.sprite3, self.sprite4, self.sprite5, self.sprite6, self.sprite7, self.sprite8, self.sprite9 =\
+            None, None, None, None, None, None, None, None, None
+        self.lista = [self.sprite1, self.sprite2, self.sprite3, self.sprite4, self.sprite5, self.sprite6, self.sprite7, self.sprite8, self.sprite9]
         self.seleccionado = seleccionado
 
         # Titulos de categoria Sprite
-        self.titulo = makeLabel('Avatars:', 36, 30, 480, 'black')
+        self.titulo = makeLabel('Avatars:', 36, 30, 520, 'white')
         showLabel(self.titulo)
 
         # Dibujado de Sprites
-        for i in range(0, 5):
+        for i in range(0, 9):
             self.lista[i] = Button(self.xpos, self.ypos, "avatar" + str(i + 1) + ".png")
             self.lista[i].agregar_imagen("avatar" + str(i + 1) + "_presionado.png")
             self.lista[i].dibujar()
@@ -56,6 +60,22 @@ class Avatars(Button):
                     self.nomAvatar = "avatar5.png"
                     self.seleccionado[4] = True
                     break
+                if self.lista[5].click_elemento(self.mouseAction) & (not self.seleccionado[5]):
+                    self.nomAvatar = "avatar6.png"
+                    self.seleccionado[5] = True
+                    break
+                if self.lista[6].click_elemento(self.mouseAction) & (not self.seleccionado[6]):
+                    self.nomAvatar = "avatar7.png"
+                    self.seleccionado[6] = True
+                    break
+                if self.lista[7].click_elemento(self.mouseAction) & (not self.seleccionado[7]):
+                    self.nomAvatar = "avatar8.png"
+                    self.seleccionado[7] = True
+                    break
+                if self.lista[8].click_elemento(self.mouseAction) & (not self.seleccionado[8]):
+                    self.nomAvatar = "avatar9.png"
+                    self.seleccionado[8] = True
+                    break
         hideLabel(self.titulo)
-        for i in range(0, 5):
+        for i in range(0, 9):
             self.lista[i].ocultar()

@@ -6,7 +6,7 @@ from gui.setting_partida import SettingPartida
 from dado.dado import dado
 from partida.partida import Partida
 
-screenSize(1200, 720)
+screenSize(1100, 720)
 setBackgroundColour(COLORES.BLANCO)
 
 # movRestantes = dado()
