@@ -17,6 +17,7 @@ class Dado():
 
 
     def tirarDado(self):
+        pause(100)
         i = 0
         movimientos = 0
         while i < 6:
@@ -26,7 +27,7 @@ class Dado():
             if i == 6:
                 i = 0
             if spriteClicked(self.dadoImg):
-                movimientos = random.randint(1, 6)
+                movimientos = random.randint(1, 5)
                 changeSpriteImage(self.dadoImg, movimientos )
                 break
         return movimientos
