@@ -13,7 +13,7 @@ class Dado():
         showSprite(self.dadoImg)
         etiqueta = makeLabel("Movimientos: ", 20, 610, 20, "black")
         showLabel(etiqueta)
-
+        self.mouseAction=False
 
 
     def tirarDado(self):
@@ -21,14 +21,18 @@ class Dado():
         i = 0
         movimientos = 0
         while i < 6:
-            changeSpriteImage(self.dadoImg, i)
-            i += 1
             pause(100)
-            if i == 6:
-                i = 0
             if spriteClicked(self.dadoImg):
-                movimientos = random.randint(1, 5)
-                changeSpriteImage(self.dadoImg, movimientos )
+                while i < 6:
+                    changeSpriteImage(self.dadoImg, i)
+                    i += 1
+                    pause(100)
+                    if i == 6:
+                        i = 0
+                    if spriteClicked(self.dadoImg):
+                        movimientos = random.randint(1, 5)
+                        changeSpriteImage(self.dadoImg, movimientos)
+                        break
                 break
         return movimientos
 
