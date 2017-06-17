@@ -13,7 +13,7 @@ class Dado():
         showSprite(self.dadoImg)
         etiqueta = makeLabel("Movimientos: ", 20, 610, 20, "black")
         showLabel(etiqueta)
-        self.mouseAction=False
+
 
 
     def tirarDado(self):
@@ -35,4 +35,3 @@ class Dado():
                         break
                 break
         return movimientos
-
