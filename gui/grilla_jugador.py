@@ -34,6 +34,8 @@ class GrillaJugador:
         self._dibujar_radio_button()
         self.dibujada = True
 
+    # def mover_grilla(self, posY):
+
     def _dibujar_textbox(self):
         posicion_x_text_box = self.botonBorrar.rect[POS_X] + self.botonBorrar.rect[ANCHO] + SEPARACIONES.SEPARACION
         posicion_y_text_box = self.posY + (self._mediaGrilla - ALTO_GRILLA / 2)

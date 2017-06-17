@@ -1,6 +1,7 @@
 from .button import Button
 from .grilla_jugador import GrillaJugador
 import pygame
+from pygame_functions import *
 from constantes import SEPARACIONES, RECT
 import random
 from gui.seleccion_avatars import Avatars
@@ -53,6 +54,7 @@ class SettingPartida:
                         if len(self.grillas) > 2:
                             grilla.ocultar_grilla()
                             self.grillas.pop(indice)
+                            self.mover_grilla(indice)
                             if grilla.avatar is not None:
                                 self.avatarSeleccionado[int(grilla.avatar[6])-1] = False
 
@@ -143,8 +145,19 @@ class SettingPartida:
             self.botonCazadorAleatorio.ocultar()
             self.botonComenzarPartida.ocultar()
 
-    def _iniciar_partida(self):
+    def mover_grilla(self, indice):
+        for i in range(indice, len(self.grillas)):
+            # self.grillas[i].mover_grilla(64)
+            posY = self.grillas[i].posY
+            if self.grillas[i].textBox.texto is None:
+                self.grillas[i].textBox.textBox.move(47, posY-64, True)
+            else:
+                moveLabel(self.grillas[i].textBox.label, 47, posY-64)
+            self.grillas[i].botonSeleccionAvatar.mover(None, posY-73)
+            self.grillas[i].botonBorrar.mover(None, posY-64)
+            self.grillas[i].radioButtonCazador.mover(None,posY-58)
 
+    def _iniciar_partida(self):
         hay_cazador = False
         datos_jugadores = []
 
