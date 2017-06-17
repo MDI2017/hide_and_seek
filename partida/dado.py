@@ -11,8 +11,8 @@ class Dado():
         addSpriteImage(self.dadoImg, "images/dice6.png")
         moveSprite(self.dadoImg, 670, 100, True)
         showSprite(self.dadoImg)
-        etiqueta = makeLabel("Movimientos: ", 20, 610, 20, "black")
-        showLabel(etiqueta)
+        self.etiqueta = makeLabel("Movimientos: ", 20, 610, 20, "black")
+        showLabel(self.etiqueta)
 
 
 

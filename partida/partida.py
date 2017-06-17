@@ -65,6 +65,9 @@ class Partida():
                 if self.boton_atras.dibujado and self.boton_atras.click_elemento(mouseAction):
                     self.tablero.renderizado = False
                     clearShapes()
+                    self.cazador.ficha.ocultar()
+                    for corredor in self.corredores:
+                        corredor.ficha.ocultar()
                     self.boton_atras.ocultar()
                     en_partida = False
 
