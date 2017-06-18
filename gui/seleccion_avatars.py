@@ -1,10 +1,10 @@
-from pygame_functions import *
+from pygame_functions import*
 from gui.dibujable import Dibujable
 from gui.button import Button
-from constantes import *
+from constantes import*
 
 
-class Avatars(Button):
+class Avatars:
     def __init__(self, seleccionado):
         # Definicion de fondo y Sprites
         self.fondo = Dibujable(0, 0, 'overlay.png')
