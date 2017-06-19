@@ -33,6 +33,7 @@ class Partida():
         self.dado = Dado()
         self.info.juagdor_actual(self.turno)
         self.movimientos = Dado().tirarDado()
+        self.info.movim_restantes(self.movimientos)
         self.contador = 0
         print('turno jugador: ' + str(self.turno))
         self.__bucle_partida()
@@ -98,11 +99,13 @@ class Partida():
         if self.turno == 'cazador':
             if self.contador <= self.movimientos:
                 self.contador += 1
+                self.info.movim_restantes(self.movimientos-self.contador)
                 self.cazador.ficha.mover_ficha(direccion)
 
         else:
             if self.contador <= self.movimientos:
                 self.contador += 1
+                self.info.movim_restantes(self.movimientos-self.contador)
                 self.corredores[int(self.turno)].ficha.mover_ficha(direccion)
 
 
@@ -115,14 +118,13 @@ class Partida():
             self.turno += 1
 
         self.info.juagdor_actual(self.turno)
+        self.movimientos = Dado().tirarDado()  # ACA TIRA ERROR
+        self.info.movim_restantes(self.movimientos)
 
         if self.turno < len(self.corredores):
-            self.movimientos = Dado().tirarDado()  # ACA TIRA ERROR
             return str(self.turno)
         else:
-            self.info.juagdor_actual(self.turno)
             self.turno = "cazador"
-            self.movimientos = Dado().tirarDado()  # ACA TIRA ERROR
             return self.turno
 
 
