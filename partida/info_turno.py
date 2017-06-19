@@ -7,13 +7,13 @@ class Info_turno:
     def __init__(self, jugadores):
         self.jugadores = jugadores
         self.cazador = None
-        self.posX = 620
-        self.posY = 320
+        self.posX = 630
+        self.posY = 400
         self.movimientos = None
         self.nombres = []
         self.avatars = []
         self._renderizar_sprites(jugadores)
-        self.titulo = makeLabel('Turno actual: ', 34, self.posX, self.posY-70)
+        self.titulo = makeLabel('Turno actual: ', 34, self.posX-10, self.posY-55)
 
     def _renderizar_sprites(self, jugadores):
 
@@ -22,15 +22,20 @@ class Info_turno:
             if data_jugador['es_cazador']:
                 self.cazador = Jugador(data_jugador['nombre'], data_jugador['avatar'])
                 self.cazador.nombre = makeLabel(self.cazador.nombre, 28, self.posX, self.posY)
+                if self.cazador.avatar is None:
+                    self.cazador.avatar = "no_avatar.png"
                 self.cazador.avatar = Dibujable(self.posX, self.posY + 40, self.cazador.avatar)
             else:
                 jugador.append(Jugador(data_jugador['nombre'], data_jugador['avatar']))
         for indice in jugador:
             print(indice.nombre)
+            if indice.avatar is None:
+                indice.avatar = "no_avatar.png"
             self.nombres.append(makeLabel(indice.nombre, 32, self.posX, self.posY))
             self.avatars.append(Dibujable(self.posX, self.posY + 40, indice.avatar))
 
     def juagdor_actual(self, turno):
+        drawRect(self.posX - 10, self.posY + 6, 2, 135, 'black')
         showLabel(self.titulo)
         if turno < len(self.jugadores)-1:
             showLabel(self.nombres[turno])
