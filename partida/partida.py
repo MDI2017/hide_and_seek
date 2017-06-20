@@ -44,6 +44,7 @@ class Partida():
         for numero_jugador, data_jugador in enumerate(jugadores):
 
             if data_jugador['es_cazador']:
+
                 self.cazador = Cazador(data_jugador['nombre'], data_jugador['avatar'])
             else:
                 print('corredor')
