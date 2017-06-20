@@ -42,7 +42,6 @@ class Partida():
         self.dado = Dado(670, 100)
         self.dado.dibujar()
         self.info.jugador_actual(self.turno)
-        # self.movimientos = self.dado.tirar_dado()
         self.info.movim_restantes(self.movimientos)
         self.contador = 0
         print('turno jugador: ' + str(self.turno))
@@ -52,7 +51,6 @@ class Partida():
         for numero_jugador, data_jugador in enumerate(jugadores):
 
             if data_jugador['es_cazador']:
-
                 self.cazador = Cazador(data_jugador['nombre'], data_jugador['avatar'])
             else:
                 print('corredor')
@@ -89,7 +87,8 @@ class Partida():
                     en_partida = False
 
                 if self.dado.dibujado and self.dado.click_elemento(mouseAction):
-                    self.info.movim_restantes(self.dado.tirar_dado())
+                    self.movimientos = self.dado.tirar_dado()
+                    self.info.movim_restantes(self.movimientos)
 
 
 
@@ -99,7 +98,7 @@ class Partida():
                 if event.type == pygame.KEYUP:
                     if event.key == pygame.K_RETURN:
                         self.contador = 0
-                        # self.movimientos = self.dado.tirar_dado()
+                        self.movimientos = 0
                         print('turno jugador ' + self._cambio_turno())
                         return
 
