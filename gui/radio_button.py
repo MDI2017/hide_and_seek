@@ -8,6 +8,9 @@ DESHABILITADO = 2
 
 
 class RadioButton(Clickeable, Dibujable):
+    """
+    Clase encargada de que al dibujarse el boton podamos seleccionar y asi tambien quitar la seleccion a este
+    """
     def __init__(self, posicion_x, posicion_y, nombre_archivo, ancho=None, alto=None, dibujado=False):
         super().__init__(posicion_x, posicion_y, nombre_archivo)
 

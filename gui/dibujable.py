@@ -5,6 +5,10 @@ from .posicionable import Posicionable
 
 
 class Dibujable(Posicionable):
+    """
+    Clase que da la propiedad a los elementos de ser dibujados, y la posibilidad de cambiar las imagenes y de poder 
+    moverlos de posicion
+    """
     def __init__(self, posicion_x, posicion_y, nombre_archivo, ancho=None, alto=None,  dibujado=False):
         super().__init__(posicion_x, posicion_y, ancho, alto)
         self.nombeArchivo = nombre_archivo

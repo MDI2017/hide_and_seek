@@ -3,6 +3,9 @@ from constantes import *
 
 
 class GrillaSeleccion:
+    """
+    Clase que genera la grilla para la seleccion de jugador, nos permite introducir nombre, imprimirlo y agregar jugador.
+    """
     def nuevoJugador(self, posX, posY):
         self.posX = posX
         self.posY = posY

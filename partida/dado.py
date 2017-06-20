@@ -3,6 +3,20 @@ from pygame_functions import *
 from gui.dibujable import Dibujable
 from gui.clickeable import Clickeable
 
+class Dado():
+    """
+    Clase que crea y dibuja el dado, nos da la posibilidad de poder tirarlo y que nos de un resultado aleatorio dentro de las 6
+    posibilidades
+    """
+    def __init__(self):
+        self.dadoImg = makeSprite("images/dice1.png")
+        addSpriteImage(self.dadoImg, "images/dice2.png")
+        addSpriteImage(self.dadoImg, "images/dice3.png")
+        addSpriteImage(self.dadoImg, "images/dice4.png")
+        addSpriteImage(self.dadoImg, "images/dice5.png")
+        addSpriteImage(self.dadoImg, "images/dice6.png")
+        moveSprite(self.dadoImg, 670, 80, True)
+        showSprite(self.dadoImg)
 
 class Dado(Clickeable, Dibujable):
 

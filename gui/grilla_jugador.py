@@ -15,6 +15,10 @@ ALTO_GRILLA = FUENTE_GRILLA * 1.7
 
 
 class GrillaJugador:
+    """
+    Clase que genera y dibuja la grilla con sus correspondientes botones. Dentro de la grilla podemos ingresar el nombre 
+    del jugador, como tambien asi borrarlo. Permite seleccionar quien va a ser el unico cazador de la partida. 
+    """
     def __init__(self, posX, posY, alto_grilla=40, dibujada=False):
         self.altoGrilla = alto_grilla
         self._mediaGrilla = self.altoGrilla / 2

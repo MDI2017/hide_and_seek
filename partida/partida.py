@@ -12,6 +12,12 @@ from constantes import DIVISIONES
 
 
 class Partida():
+    """
+    Clase encargada de dibujar el tablero, iniciar la partida, crear los jugadores (cazador y corredor/es), del 
+    movimiento de las fichas durante cada turno y del cambio de turno.
+    Esta clase es la que contiene las reglas del juego y la encargada de verificar cuando un jugador gano la partida
+    
+    """
     def __init__(self):
         # self.turno = Turno()  Clase Turno todavía no creada
 
@@ -22,6 +28,7 @@ class Partida():
         self.boton_atras.agregar_imagen("boton_iniciar_partida_presionado.png")
         self.boton_atras.agregar_imagen("boton_iniciar_partida_desactivado.png")
         self.turno = 0
+        self.primer_turno = True
         self.dado = None
         self.info = None
         self.movimientos = 0
@@ -99,49 +106,41 @@ class Partida():
 
     def _mover_ficha(self, direccion):
 
+        self.posicionCazadorX=self.cazador.ficha.casillero[0]
+        self.posicionCazadorY=self.cazador.ficha.casillero[1]
         if self.turno == 'cazador':
             if direccion == pygame.K_UP:
-                if self.tablero.casilleros[self.cazador.ficha.casillero[0]][self.cazador.ficha.casillero[1]].paredes[
-                    DIVISIONES.SUPERIOR]:
-                    print("No es posible moverse debido a pared sup")
-                    return
+                if self.tablero.casilleros[self.posicionCazadorX][self.posicionCazadorY].paredes[DIVISIONES.SUPERIOR]:
+                    return False
             if direccion == pygame.K_DOWN:
-                if self.tablero.casilleros[self.cazador.ficha.casillero[0]][self.cazador.ficha.casillero[1]].paredes[
-                    DIVISIONES.INFERIOR]:
-                    print("No es posible moverse debido a pared inferior")
-                    return
+                if self.tablero.casilleros[self.posicionCazadorX][self.posicionCazadorY].paredes[DIVISIONES.INFERIOR]:
+                    return False
             if direccion == pygame.K_RIGHT:
-                if self.tablero.casilleros[self.cazador.ficha.casillero[0]][self.cazador.ficha.casillero[1]].paredes[
-                    DIVISIONES.DERECHA]:
-                    print("No es posible moverse debido a pared der")
-                    return
+                if self.tablero.casilleros[self.posicionCazadorX][self.posicionCazadorY].paredes[DIVISIONES.DERECHA]:
+                    return False
             if direccion == pygame.K_LEFT:
-                if self.tablero.casilleros[self.cazador.ficha.casillero[0]][self.cazador.ficha.casillero[1]].paredes[
-                    DIVISIONES.IZQUIERDA]:
-                    print("No es posible moverse debido a pared izq")
-                    return
+                if self.tablero.casilleros[self.posicionCazadorX][self.posicionCazadorY].paredes[DIVISIONES.IZQUIERDA]:
+                    return False
             if self.contador <= self.movimientos:
                 self.contador += 1
                 self.info.movim_restantes(self.movimientos - self.contador)
                 self.cazador.ficha.mover_ficha(direccion)
 
         else:
+            self.posicionCorredorX=self.corredores[int(self.turno)].ficha.casillero[0]
+            self.posicionCorredorY=self.corredores[int(self.turno)].ficha.casillero[1]
             if direccion == pygame.K_UP:
-                if self.tablero.casilleros[self.corredores[int(self.turno)].ficha.casillero[0]][
-                    self.corredores[int(self.turno)].ficha.casillero[1]].paredes[DIVISIONES.SUPERIOR]:
-                    return "No es posible moverse debido a pared inferior"
-            if direccion == pygame.K_DOWN:
-                if self.tablero.casilleros[self.corredores[int(self.turno)].ficha.casillero[0]][
-                    self.corredores[int(self.turno)].ficha.casillero[1]].paredes[DIVISIONES.INFERIOR]:
-                    return "No es posible moverse debido a pared inferior"
-            if direccion == pygame.K_RIGHT:
-                if self.tablero.casilleros[self.corredores[int(self.turno)].ficha.casillero[0]][
-                    self.corredores[int(self.turno)].ficha.casillero[1]].paredes[DIVISIONES.DERECHA]:
-                    return "No es posible moverse debido a pared inferior"
-            if direccion == pygame.K_LEFT:
-                if self.tablero.casilleros[self.corredores[int(self.turno)].ficha.casillero[0]][
-                    self.corredores[int(self.turno)].ficha.casillero[1]].paredes[DIVISIONES.IZQUIERDA]:
-                    return "No es posible moverse debido a pared inferior"
+                if self.tablero.casilleros[self.posicionCorredorX][self.posicionCorredorY].paredes[DIVISIONES.SUPERIOR]:
+                    return False
+            if direccion==pygame.K_DOWN:
+                if self.tablero.casilleros[self.posicionCorredorX][self.posicionCorredorY].paredes[DIVISIONES.INFERIOR]:
+                    return False
+            if direccion==pygame.K_RIGHT:
+                if self.tablero.casilleros[self.posicionCorredorX][self.posicionCorredorY].paredes[DIVISIONES.DERECHA]:
+                    return False
+            if direccion==pygame.K_LEFT:
+                if self.tablero.casilleros[self.posicionCorredorX][self.posicionCorredorY].paredes[DIVISIONES.IZQUIERDA]:
+                    return False
             if self.contador <= self.movimientos:
                 self.contador += 1
                 self.info.movim_restantes(self.movimientos - self.contador)
@@ -155,12 +154,22 @@ class Partida():
         else:
             self.turno += 1
 
-        self.info.jugador_actual(self.turno)
-        self.movimientos = Dado().tirarDado()  # ACA TIRA ERROR
+        if self.primer_turno is True and self.turno is len(self.corredores):
+            self.info.jugador_actual(0)
+        else:
+            self.info.jugador_actual(self.turno)
+
+        self.movimientos = Dado().tirarDado()
         self.info.movim_restantes(self.movimientos)
 
         if self.turno < len(self.corredores):
             return str(self.turno)
         else:
-            self.turno = "cazador"
-            return self.turno
+            if self.primer_turno is True:
+                print(self.turno)
+                self.turno = 0
+                self.primer_turno = False
+                return str(self.turno)
+            else:
+                self.turno = 'cazador'
+                return self.turno
