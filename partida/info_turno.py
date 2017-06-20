@@ -34,7 +34,7 @@ class Info_turno:
             self.nombres.append(makeLabel(indice.nombre, 32, self.posX, self.posY))
             self.avatars.append(Dibujable(self.posX, self.posY + 40, indice.avatar))
 
-    def juagdor_actual(self, turno):
+    def jugador_actual(self, turno):
         drawRect(self.posX - 10, self.posY + 6, 2, 135, 'black')
         showLabel(self.titulo)
         if turno < len(self.jugadores)-1:
