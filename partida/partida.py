@@ -39,9 +39,10 @@ class Partida():
         self.boton_atras.dibujar()
         self._crear_jugadores(jugadores)
         self.info = Info_turno(jugadores)
-        #self.dado = Dado()
+        self.dado = Dado(670, 100)
+        self.dado.dibujar()
         self.info.jugador_actual(self.turno)
-        self.movimientos = 100#Dado().tirarDado()
+        # self.movimientos = self.dado.tirar_dado()
         self.info.movim_restantes(self.movimientos)
         self.contador = 0
         print('turno jugador: ' + str(self.turno))
@@ -87,12 +88,18 @@ class Partida():
                     self.boton_atras.ocultar()
                     en_partida = False
 
+                if self.dado.dibujado and self.dado.click_elemento(mouseAction):
+                    self.info.movim_restantes(self.dado.tirar_dado())
+
+
+
     def _enter_presionado(self):
         while True:
             for event in pygame.event.get():
                 if event.type == pygame.KEYUP:
                     if event.key == pygame.K_RETURN:
                         self.contador = 0
+                        # self.movimientos = self.dado.tirar_dado()
                         print('turno jugador ' + self._cambio_turno())
                         return
 
@@ -105,8 +112,9 @@ class Partida():
                         return
 
     def _mover_ficha(self, direccion):
-        self.posicionCazadorX = self.cazador.ficha.casillero[0]
-        self.posicionCazadorY = self.cazador.ficha.casillero[1]
+
+        self.posicionCazadorX=self.cazador.ficha.casillero[0]
+        self.posicionCazadorY=self.cazador.ficha.casillero[1]
         if self.turno == 'cazador':
             if direccion == pygame.K_UP:
                 if self.tablero.casilleros[self.posicionCazadorX][self.posicionCazadorY].paredes[DIVISIONES.SUPERIOR]:
@@ -166,7 +174,6 @@ class Partida():
         else:
             self.info.jugador_actual(self.turno)
 
-        #self.movimientos = Dado().tirarDado()
         self.info.movim_restantes(self.movimientos)
 
         if self.turno < len(self.corredores):
