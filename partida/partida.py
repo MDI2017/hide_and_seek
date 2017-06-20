@@ -100,37 +100,41 @@ class Partida():
 
     def _mover_ficha(self, direccion):
 
+        self.posicionCazadorX=self.cazador.ficha.casillero[0]
+        self.posicionCazadorY=self.cazador.ficha.casillero[1]
         if self.turno == 'cazador':
             if direccion == pygame.K_UP:
-                if self.tablero.casilleros[self.cazador.ficha.casillero[0]][self.cazador.ficha.casillero[1]].paredes[DIVISIONES.SUPERIOR]:
-                    return "No es posible moverse debido a pared inferior"
+                if self.tablero.casilleros[self.posicionCazadorX][self.posicionCazadorY].paredes[DIVISIONES.SUPERIOR]:
+                    return False
             if direccion == pygame.K_DOWN:
-                if self.tablero.casilleros[self.cazador.ficha.casillero[0]][self.cazador.ficha.casillero[1]].paredes[DIVISIONES.INFERIOR]:
-                    return "No es posible moverse debido a pared inferior"
+                if self.tablero.casilleros[self.posicionCazadorX][self.posicionCazadorY].paredes[DIVISIONES.INFERIOR]:
+                    return False
             if direccion == pygame.K_RIGHT:
-                if self.tablero.casilleros[self.cazador.ficha.casillero[0]][self.cazador.ficha.casillero[1]].paredes[DIVISIONES.DERECHA]:
-                    return "No es posible moverse debido a pared inferior"
+                if self.tablero.casilleros[self.posicionCazadorX][self.posicionCazadorY].paredes[DIVISIONES.DERECHA]:
+                    return False
             if direccion == pygame.K_LEFT:
-                if self.tablero.casilleros[self.cazador.ficha.casillero[0]][self.cazador.ficha.casillero[1]].paredes[DIVISIONES.IZQUIERDA]:
-                    return "No es posible moverse debido a pared inferior"
+                if self.tablero.casilleros[self.posicionCazadorX][self.posicionCazadorY].paredes[DIVISIONES.IZQUIERDA]:
+                    return False
             if self.contador <= self.movimientos:
                 self.contador += 1
                 self.info.movim_restantes(self.movimientos-self.contador)
                 self.cazador.ficha.mover_ficha(direccion)
 
         else:
+            self.posicionCorredorX=self.corredores[int(self.turno)].ficha.casillero[0]
+            self.posicionCorredorY=self.corredores[int(self.turno)].ficha.casillero[1]
             if direccion == pygame.K_UP:
-                if self.tablero.casilleros[self.corredores[int(self.turno)].ficha.casillero[0]][self.corredores[int(self.turno)].ficha.casillero[1]].paredes[DIVISIONES.SUPERIOR]:
-                    return "No es posible moverse debido a pared inferior"
+                if self.tablero.casilleros[self.posicionCorredorX][self.posicionCorredorY].paredes[DIVISIONES.SUPERIOR]:
+                    return False
             if direccion==pygame.K_DOWN:
-                if self.tablero.casilleros[self.corredores[int(self.turno)].ficha.casillero[0]][self.corredores[int(self.turno)].ficha.casillero[1]].paredes[DIVISIONES.INFERIOR]:
-                    return "No es posible moverse debido a pared inferior"
+                if self.tablero.casilleros[self.posicionCorredorX][self.posicionCorredorY].paredes[DIVISIONES.INFERIOR]:
+                    return False
             if direccion==pygame.K_RIGHT:
-                if self.tablero.casilleros[self.corredores[int(self.turno)].ficha.casillero[0]][self.corredores[int(self.turno)].ficha.casillero[1]].paredes[DIVISIONES.DERECHA]:
-                    return "No es posible moverse debido a pared inferior"
+                if self.tablero.casilleros[self.posicionCorredorX][self.posicionCorredorY].paredes[DIVISIONES.DERECHA]:
+                    return False
             if direccion==pygame.K_LEFT:
-                if self.tablero.casilleros[self.corredores[int(self.turno)].ficha.casillero[0]][self.corredores[int(self.turno)].ficha.casillero[1]].paredes[DIVISIONES.IZQUIERDA]:
-                    return "No es posible moverse debido a pared inferior"
+                if self.tablero.casilleros[self.posicionCorredorX][self.posicionCorredorY].paredes[DIVISIONES.IZQUIERDA]:
+                    return False
             if self.contador <= self.movimientos:
                 self.contador += 1
                 self.info.movim_restantes(self.movimientos-self.contador)

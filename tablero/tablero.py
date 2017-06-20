@@ -106,6 +106,7 @@ class Tablero:
 
                 elif indexFila == 10:
                     if 3 <= indexColumna <= 6:
+                        casillero.paredes[DIVISIONES.SUPERIOR] = ESTADOS.TIENE_MURO
                         casillero.zona = ZONAS.PROHIBIDA
                         casillero.color = COLORES.ZONA_PROHIBIDA
                     elif indexColumna == 2 or indexColumna == 7:

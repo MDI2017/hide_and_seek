@@ -13,23 +13,23 @@ class Ficha(Dibujable):
     def mover_ficha(self, direccion):
 
         if direccion == pygame.K_UP:
-            if self.casillero[1] - 1 < 0:
-                return self.mover(self.posicionX, self.posicionY)
+            if self.casillero[1] == 0:
+                return False
             else:
                 self.casillero[1] -= 1
         elif direccion == pygame.K_DOWN:
-            if self.casillero[1] + 1 > 10:
-                return self.mover(self.posicionX, self.posicionY)
+            if self.casillero[1] == 10:
+                return False
             else:
                 self.casillero[1] += 1
         elif direccion == pygame.K_RIGHT:
-            if self.casillero[0] + 1 > 9:
-                return self.mover(self.posicionX, self.posicionY)
+            if self.casillero[0] == 9:
+                return False
             else:
                 self.casillero[0] += 1
         elif direccion == pygame.K_LEFT:
-            if self.casillero[0] - 1 < 0:
-                return self.mover(self.posicionX, self.posicionY)
+            if self.casillero[0] == 0:
+                return False
             else:
                 self.casillero[0] -= 1
         self.mover(CASILLAS.LADO * self.casillero[0], CASILLAS.LADO * self.casillero[1])
