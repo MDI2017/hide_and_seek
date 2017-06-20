@@ -8,6 +8,11 @@ from gui.seleccion_avatars import Avatars
 
 
 class SettingPartida:
+    """
+    Clase que genera la pantalla inicial de la partida: grilla, botones, seleccion de avatars. Esta clase se encarga de
+    que podamos agregar hasta 5 jugadores, borrar estos jugadores hasta 2 (menos no permitido), elegir jugadores aleatoreamente,
+    y nos da la opcion de iniciar partida.
+    """
     def __init__(self):
         self.jugadores = []
         self.grillas = [GrillaJugador(SEPARACIONES.PADDING_VENTANA_PPAL, SEPARACIONES.PADDING_VENTANA_PPAL),

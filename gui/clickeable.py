@@ -4,6 +4,10 @@ from gui.posicionable import Posicionable
 
 
 class Clickeable(Posicionable):
+    """
+    Clase que le da la propiedad a los elementos para ser clickeables y asi ser seleccionado. Recibe una la posicion donde se hizo
+    click en el mouse, si el elemento esta ubicado donde se hizo el click se realiza la operacion
+    """
     def __init__(self, posicion_x, posicion_y, ancho=None, alto=None):
         super().__init__(posicion_x, posicion_y, ancho, alto)
 
