@@ -33,3 +33,7 @@ ser atrapados por los **_cazadores_**. En paralelo, el cazador también tiene un
 corredores antes de que cumplan su objetivo, este juego de un mínimo de 2 jugadores se ejecuta en un tablero,
 losmovimientos de ambos jugadores están restringidos en base a las normas del juego _(ver normas del juego)_ y
 limitados a un dado de seis(6) caras. Aquel que cumpla su objetivo primero, gana el juego.
+
+## Informacion
+
+No se encuentra informacion primaria,secundaria ni terciaria al respecto ya que es una idea propia
