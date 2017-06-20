@@ -148,13 +148,6 @@ class SettingPartida:
     def mover_grilla(self, indice):
         for i in range(indice, len(self.grillas)):
             self.grillas[i].mover_grilla()
-            # if self.grillas[i].textBox.texto is None:
-            #     self.grillas[i].textBox.textBox.move(47, posY-64, True)
-            # else:
-            #     moveLabel(self.grillas[i].textBox.label, 47, posY-64)
-            # self.grillas[i].botonSeleccionAvatar.mover(None, posY-73)
-            # self.grillas[i].botonBorrar.mover(None, posY-64)
-            # self.grillas[i].radioButtonCazador.mover(None,posY-58)
 
     def _iniciar_partida(self):
         hay_cazador = False

@@ -26,7 +26,6 @@ class Input(Clickeable):
         self._textBoxVisible = True
 
     def _al_liberar_click(self):
-
         self._mostrar_textBox()
         self.texto = None
         self.label = None
@@ -44,8 +43,6 @@ class Input(Clickeable):
         hideLabel(self.label)
         showTextBox(self.textBox)
 
-        print(self.textBox.rect)
-        print(self.rect)
 
     def ocultarTextBox(self):
         textboxGroup.remove(self.textBox)
@@ -54,11 +51,10 @@ class Input(Clickeable):
         hideLabel(self.label)
 
     def mover_input(self):
-        self.ocultarTextBox()
-        self.textBox = makeTextBox(self.posicionX, self.posicionY, self.ancho, self.case, self.placeHolder,
-                                   self.maxLength, self.fuente)
+        self.rect[RECT.POS_Y] = self.posicionY
+        self.yFinal = self.rect[RECT.POS_Y] + self.rect[RECT.ALTO]
         self.textBox.move(self.posicionX, self.posicionY, True)
-        if self.texto is not None:
+        if self.label:
             moveLabel(self.label, self.posicionX, self.posicionY)
 
 
