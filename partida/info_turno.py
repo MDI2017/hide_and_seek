@@ -60,5 +60,5 @@ class Info_turno:
     def movim_restantes(self, movimientos):
         if self.movimientos is not None:
             hideLabel(self.movimientos)
-        self.movimientos = makeLabel('Movimientos restantes: ' + str(movimientos+1), 24, self.posX, self.posY + 110)
+        self.movimientos = makeLabel('Movimientos restantes: ' + str(movimientos), 24, self.posX, self.posY + 110)
         showLabel(self.movimientos)
