@@ -34,11 +34,13 @@ class GrillaJugador:
         self._dibujar_radio_button()
         self.dibujada = True
 
-    def mover_grilla(self, posY):
-        self.textBox.
-        self.botonBorrar.mover(None, posY-64)
-        self.radioButtonCazador.mover(None, posY - 58)
-        self.botonSeleccionAvatar.mover(None, posY - 73)
+    def mover_grilla(self):
+        self.posY -= 64
+        self.textBox.posicionY = self.posY + (self._mediaGrilla - ALTO_GRILLA / 2)
+        self.textBox.mover_input()
+        self.botonBorrar.mover(None, self.posY + (self._mediaGrilla - self.botonBorrar.rect[ALTO] / 2))
+        self.radioButtonCazador.mover(None, self.posY + (self._mediaGrilla - self.radioButtonCazador.rect[ALTO] / 2))
+        self.botonSeleccionAvatar.mover(None,self.posY + (self._mediaGrilla - self.botonSeleccionAvatar.rect[ALTO] / 2) )
 
     def _dibujar_textbox(self):
         posicion_x_text_box = self.botonBorrar.rect[POS_X] + self.botonBorrar.rect[ANCHO] + SEPARACIONES.SEPARACION
