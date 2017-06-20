@@ -8,6 +8,8 @@ from pygame_functions import clearShapes
 from tablero.tablero import Tablero
 from partida.dado import Dado
 from pygame_functions import *
+from constantes import DIVISIONES
+
 
 
 class Partida():
@@ -31,7 +33,7 @@ class Partida():
         self._crear_jugadores(jugadores)
         self.info = Info_turno(jugadores)
         self.dado = Dado()
-        self.info.juagdor_actual(self.turno)
+        self.info.jugador_actual(self.turno)
         self.movimientos = Dado().tirarDado()
         self.info.movim_restantes(self.movimientos)
         self.contador = 0
@@ -83,7 +85,7 @@ class Partida():
                 if event.type == pygame.KEYUP:
                     if event.key == pygame.K_RETURN:
                         self.contador = 0
-                        #self.movimientos = Dado().tirarDado()#ACA TIRA ERROR
+                        # self.movimientos = Dado().tirarDado()ACA TIRA ERROR
                         print('turno jugador ' + self._cambio_turno())
                         return
 
@@ -96,13 +98,38 @@ class Partida():
                         return
 
     def _mover_ficha(self, direccion):
+
         if self.turno == 'cazador':
+            if direccion == pygame.K_UP:
+                if self.tablero.casilleros[self.cazador.ficha.casillero[0]][self.cazador.ficha.casillero[1]].paredes[DIVISIONES.SUPERIOR]:
+                    return "No es posible moverse debido a pared inferior"
+            if direccion == pygame.K_DOWN:
+                if self.tablero.casilleros[self.cazador.ficha.casillero[0]][self.cazador.ficha.casillero[1]].paredes[DIVISIONES.INFERIOR]:
+                    return "No es posible moverse debido a pared inferior"
+            if direccion == pygame.K_RIGHT:
+                if self.tablero.casilleros[self.cazador.ficha.casillero[0]][self.cazador.ficha.casillero[1]].paredes[DIVISIONES.DERECHA]:
+                    return "No es posible moverse debido a pared inferior"
+            if direccion == pygame.K_LEFT:
+                if self.tablero.casilleros[self.cazador.ficha.casillero[0]][self.cazador.ficha.casillero[1]].paredes[DIVISIONES.IZQUIERDA]:
+                    return "No es posible moverse debido a pared inferior"
             if self.contador <= self.movimientos:
                 self.contador += 1
                 self.info.movim_restantes(self.movimientos-self.contador)
                 self.cazador.ficha.mover_ficha(direccion)
 
         else:
+            if direccion == pygame.K_UP:
+                if self.tablero.casilleros[self.corredores[int(self.turno)].ficha.casillero[0]][self.corredores[int(self.turno)].ficha.casillero[1]].paredes[DIVISIONES.SUPERIOR]:
+                    return "No es posible moverse debido a pared inferior"
+            if direccion==pygame.K_DOWN:
+                if self.tablero.casilleros[self.corredores[int(self.turno)].ficha.casillero[0]][self.corredores[int(self.turno)].ficha.casillero[1]].paredes[DIVISIONES.INFERIOR]:
+                    return "No es posible moverse debido a pared inferior"
+            if direccion==pygame.K_RIGHT:
+                if self.tablero.casilleros[self.corredores[int(self.turno)].ficha.casillero[0]][self.corredores[int(self.turno)].ficha.casillero[1]].paredes[DIVISIONES.DERECHA]:
+                    return "No es posible moverse debido a pared inferior"
+            if direccion==pygame.K_LEFT:
+                if self.tablero.casilleros[self.corredores[int(self.turno)].ficha.casillero[0]][self.corredores[int(self.turno)].ficha.casillero[1]].paredes[DIVISIONES.IZQUIERDA]:
+                    return "No es posible moverse debido a pared inferior"
             if self.contador <= self.movimientos:
                 self.contador += 1
                 self.info.movim_restantes(self.movimientos-self.contador)
@@ -116,7 +143,7 @@ class Partida():
         else:
             self.turno += 1
 
-        self.info.juagdor_actual(self.turno)
+        self.info.jugador_actual(self.turno)
         self.movimientos = Dado().tirarDado()  # ACA TIRA ERROR
         self.info.movim_restantes(self.movimientos)
 
@@ -125,5 +152,3 @@ class Partida():
         else:
             self.turno = "cazador"
             return self.turno
-
-

@@ -1,7 +1,7 @@
 import pygame
 from gui.dibujable import Dibujable
 from constantes import CASILLAS
-from tablero import tablero
+
 
 class Ficha(Dibujable):
     def __init__(self, casillero, nombre_archivo, ancho=60, alto=60, dibujado=False):
@@ -9,36 +9,31 @@ class Ficha(Dibujable):
         self.casillero = casillero
         self.posicionX = CASILLAS.LADO * self.casillero[0]
         self.posicionY = CASILLAS.LADO * self.casillero[1]
-        self.casillas=tablero.Casillero
 
     def mover_ficha(self, direccion):
 
         if direccion == pygame.K_UP:
-            # Codigo comentado restringe movimientos afuera del tablero. Descomentar cuando se logre incorporar restricciones de muro.
-            # if self.casillero[1] - 1 < 0:
-            #     return self.mover(self.posicionX, self.posicionY)
-            # else:
-            if self.casillas(60, self.posicionX, self.posicionY).paredes[0]:
-                print("Movimiento incompatible debido a muro superior")
+            if self.casillero[1] - 1 < 0:
+                return self.mover(self.posicionX, self.posicionY)
             else:
                 self.casillero[1] -= 1
         elif direccion == pygame.K_DOWN:
-            # if self.casillero[1] + 1 > 10:
-            #     return self.mover(self.posicionX, self.posicionY)
-            # else:
+            if self.casillero[1] + 1 > 10:
+                return self.mover(self.posicionX, self.posicionY)
+            else:
                 self.casillero[1] += 1
         elif direccion == pygame.K_RIGHT:
-            # if self.casillero[0] + 1 > 9:
-            #     return self.mover(self.posicionX, self.posicionY)
-            # else:
+            if self.casillero[0] + 1 > 9:
+                return self.mover(self.posicionX, self.posicionY)
+            else:
                 self.casillero[0] += 1
         elif direccion == pygame.K_LEFT:
-            # if self.casillero[0] - 1 < 0:
-            #     return self.mover(self.posicionX, self.posicionY)
-            # else:
+            if self.casillero[0] - 1 < 0:
+                return self.mover(self.posicionX, self.posicionY)
+            else:
                 self.casillero[0] -= 1
         self.mover(CASILLAS.LADO * self.casillero[0], CASILLAS.LADO * self.casillero[1])
-        print(self.casillero)
+        print("Casillero luego de moverse",self.casillero)
 
     def _al_mover(self):
         pass
