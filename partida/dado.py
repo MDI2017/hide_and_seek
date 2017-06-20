@@ -9,12 +9,8 @@ class Dado():
         addSpriteImage(self.dadoImg, "images/dice4.png")
         addSpriteImage(self.dadoImg, "images/dice5.png")
         addSpriteImage(self.dadoImg, "images/dice6.png")
-        moveSprite(self.dadoImg, 670, 100, True)
+        moveSprite(self.dadoImg, 670, 80, True)
         showSprite(self.dadoImg)
-        self.etiqueta = makeLabel("Movimientos: ", 20, 610, 20, "black")
-        showLabel(self.etiqueta)
-
-
 
     def tirarDado(self):
         pause(100)
