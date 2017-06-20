@@ -2,6 +2,10 @@ import random
 from pygame_functions import *
 
 class Dado():
+    """
+    Clase que crea y dibuja el dado, nos da la posibilidad de poder tirarlo y que nos de un resultado aleatorio dentro de las 6
+    posibilidades
+    """
     def __init__(self):
         self.dadoImg = makeSprite("images/dice1.png")
         addSpriteImage(self.dadoImg, "images/dice2.png")

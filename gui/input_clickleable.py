@@ -4,6 +4,10 @@ from constantes import RECT
 
 
 class Input(Clickeable):
+    """
+    Clase encargada de que al clickear input se pueda ingresar un texto, el cual va a generar una etiqueta 
+    y esta seria el nombre del jugador ingresado
+    """
     def __init__(self, posicion_x, posicion_y, ancho, case=0,
                  place_holder="Ingrese un Texto", max_length=0, fuente=22, alto=None):
         super().__init__(posicion_x, posicion_y, ancho, alto)

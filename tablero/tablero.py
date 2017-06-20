@@ -5,6 +5,9 @@ ALTO_CASILLERO = 60
 
 
 class Tablero:
+    """
+    Clase encargada de dibujar el tablero, los casilleros y las divisiones que estos conllevan
+    """
     def __init__(self, renderizado=False):
         self.casilleros = [[Casillero(60, 60 * x, 60 * i) for i in range(12)] for x in range(10)]
         self.renderizado = renderizado

@@ -14,6 +14,12 @@ from constantes import ESTADOS
 
 
 class Partida():
+    """
+    Clase encargada de dibujar el tablero, iniciar la partida, crear los jugadores (cazador y corredor/es), del 
+    movimiento de las fichas durante cada turno y del cambio de turno.
+    Esta clase es la que contiene las reglas del juego y la encargada de verificar cuando un jugador gano la partida
+    
+    """
     def __init__(self):
         # self.turno = Turno()  Clase Turno todavía no creada
 
@@ -24,6 +30,7 @@ class Partida():
         self.boton_atras.agregar_imagen("boton_iniciar_partida_presionado.png")
         self.boton_atras.agregar_imagen("boton_iniciar_partida_desactivado.png")
         self.turno = 0
+        self.primer_turno = True
         self.dado = None
         self.info = None
         self.movimientos = 0
@@ -159,12 +166,22 @@ class Partida():
         else:
             self.turno += 1
 
-        self.info.jugador_actual(self.turno)
-        self.movimientos = Dado().tirarDado()  # ACA TIRA ERROR
+        if self.primer_turno is True and self.turno is len(self.corredores):
+            self.info.jugador_actual(0)
+        else:
+            self.info.jugador_actual(self.turno)
+
+        self.movimientos = Dado().tirarDado()
         self.info.movim_restantes(self.movimientos)
 
         if self.turno < len(self.corredores):
             return str(self.turno)
         else:
-            self.turno = "cazador"
-            return self.turno
+            if self.primer_turno is True:
+                print(self.turno)
+                self.turno = 0
+                self.primer_turno = False
+                return str(self.turno)
+            else:
+                self.turno = 'cazador'
+                return self.turno
