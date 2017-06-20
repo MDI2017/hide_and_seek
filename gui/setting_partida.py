@@ -22,6 +22,7 @@ class SettingPartida:
         self.botonCazadorAleatorio = None
         self.botonComenzarPartida = None
         self.avatarSeleccionado = [False, False, False, False, False, False, False, False, False]
+        self.mensaje_error = None
 
     def mostrar_pantalla_sentting(self):
         pygame.display.set_caption("SETTING PARTIDA")
@@ -29,8 +30,12 @@ class SettingPartida:
 
         for grilla in self.grillas:
             grilla.dibujar_grilla()
-
-        return self.__bucle_setting_partida()
+        datos_jugadores = self.__bucle_setting_partida()
+        while not datos_jugadores:
+            datos_jugadores = self.__bucle_setting_partida()
+        if self.mensaje_error:
+            hideLabel(self.mensaje_error)
+        return datos_jugadores
 
     def __bucle_setting_partida(self):
 
@@ -152,15 +157,7 @@ class SettingPartida:
 
     def mover_grilla(self, indice):
         for i in range(indice, len(self.grillas)):
-            # self.grillas[i].mover_grilla(64)
-            posY = self.grillas[i].posY
-            if self.grillas[i].textBox.texto is None:
-                self.grillas[i].textBox.textBox.move(47, posY-64, True)
-            else:
-                moveLabel(self.grillas[i].textBox.label, 47, posY-64)
-            self.grillas[i].botonSeleccionAvatar.mover(None, posY-73)
-            self.grillas[i].botonBorrar.mover(None, posY-64)
-            self.grillas[i].radioButtonCazador.mover(None,posY-58)
+            self.grillas[i].mover_grilla()
 
     def _iniciar_partida(self):
         hay_cazador = False
@@ -176,4 +173,6 @@ class SettingPartida:
         if hay_cazador and len(datos_jugadores) >= 2:
             return datos_jugadores
         else:
-            print('no hay cazador')
+            if not self.mensaje_error:
+                self.mensaje_error = makeLabel('Falta Informacion de jugadores!',14,795,150)
+            showLabel(self.mensaje_error)

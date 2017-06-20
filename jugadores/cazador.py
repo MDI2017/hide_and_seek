@@ -6,7 +6,7 @@ class Cazador(Jugador):
     """
     Clase que crea al jugador cazador, se le asigna un nombre, un avatar y crea la ficha para poder introducirla al tablero
     """
-    def __init__(self, nombre, avatar):
+    def __init__(self, nombre , avatar):
         super().__init__(nombre, avatar)
         if self.avatar is None:
             self.avatar = "no_avatar.png"
