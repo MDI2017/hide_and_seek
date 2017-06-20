@@ -5,6 +5,9 @@ from constantes import*
 
 
 class Avatars:
+    """
+    Clase encargada de la seleccion de avatars
+    """
     def __init__(self, seleccionado):
         # Definicion de fondo y Sprites
         self.fondo = Dibujable(0, 0, 'overlay.png')
