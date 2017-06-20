@@ -12,6 +12,7 @@ class Ficha(Dibujable):
         self.casillero = casillero
         self.posicionX = CASILLAS.LADO * self.casillero[0]
         self.posicionY = CASILLAS.LADO * self.casillero[1]
+        self.piso_piedra_libre = False
 
     def mover_ficha(self, direccion):
 

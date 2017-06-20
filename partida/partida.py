@@ -8,7 +8,7 @@ from pygame_functions import clearShapes
 from tablero.tablero import Tablero
 from partida.dado import Dado
 from pygame_functions import *
-from constantes import DIVISIONES
+from constantes import DIVISIONES,ZONAS
 
 
 class Partida():
@@ -39,9 +39,9 @@ class Partida():
         self.boton_atras.dibujar()
         self._crear_jugadores(jugadores)
         self.info = Info_turno(jugadores)
-        self.dado = Dado()
+        #self.dado = Dado()
         self.info.jugador_actual(self.turno)
-        self.movimientos = Dado().tirarDado()
+        self.movimientos = 100#Dado().tirarDado()
         self.info.movim_restantes(self.movimientos)
         self.contador = 0
         print('turno jugador: ' + str(self.turno))
@@ -131,9 +131,14 @@ class Partida():
             if direccion == pygame.K_UP:
                 if self.tablero.casilleros[self.posicionCorredorX][self.posicionCorredorY].paredes[DIVISIONES.SUPERIOR]:
                     return False
+                if self.tablero.casilleros[self.posicionCorredorX][self.posicionCorredorY].zona is ZONAS.PIEDRA_LIBRE:
+                    self.corredores[int(self.turno)].ficha.piso_piedra_libre = True
             if direccion==pygame.K_DOWN:
                 if self.tablero.casilleros[self.posicionCorredorX][self.posicionCorredorY].paredes[DIVISIONES.INFERIOR]:
                     return False
+                if self.tablero.casilleros[self.posicionCorredorX][self.posicionCorredorY].zona is ZONAS.LIBERTAD and \
+                    self.corredores[int(self.turno)].ficha.piso_piedra_libre is True:
+                    self.corredores.pop(int(self.turno))
             if direccion==pygame.K_RIGHT:
                 if self.tablero.casilleros[self.posicionCorredorX][self.posicionCorredorY].paredes[DIVISIONES.DERECHA]:
                     return False
@@ -161,7 +166,7 @@ class Partida():
         else:
             self.info.jugador_actual(self.turno)
 
-        self.movimientos = Dado().tirarDado()
+        #self.movimientos = Dado().tirarDado()
         self.info.movim_restantes(self.movimientos)
 
         if self.turno < len(self.corredores):

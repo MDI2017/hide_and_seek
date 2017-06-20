@@ -97,3 +97,4 @@ class Casillero:
 
     def _pintarSuperficie(self):
         drawRect(self.posicionX, self.posicionY, self.lado, self.lado, self.color)
+
