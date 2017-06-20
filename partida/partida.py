@@ -9,6 +9,7 @@ from tablero.tablero import Tablero
 from partida.dado import Dado
 from pygame_functions import *
 from constantes import DIVISIONES
+from constantes import ESTADOS
 
 
 
@@ -102,18 +103,23 @@ class Partida():
 
         self.posicionCazadorX=self.cazador.ficha.casillero[0]
         self.posicionCazadorY=self.cazador.ficha.casillero[1]
+        self.tablero.casilleros[self.posicionCazadorX][self.posicionCazadorY] = ESTADOS.ESTA_OCUPADO
         if self.turno == 'cazador':
             if direccion == pygame.K_UP:
-                if self.tablero.casilleros[self.posicionCazadorX][self.posicionCazadorY].paredes[DIVISIONES.SUPERIOR]:
+                if self.tablero.casilleros[self.posicionCazadorX][self.posicionCazadorY].paredes[DIVISIONES.SUPERIOR]\
+                 or self.tablero.casilleros[self.posicionCazadorX][self.posicionCazadorY - 1] == ESTADOS.ESTA_OCUPADO:
                     return False
             if direccion == pygame.K_DOWN:
-                if self.tablero.casilleros[self.posicionCazadorX][self.posicionCazadorY].paredes[DIVISIONES.INFERIOR]:
+                if self.tablero.casilleros[self.posicionCazadorX][self.posicionCazadorY].paredes[DIVISIONES.INFERIOR] \
+                 or self.tablero.casilleros[self.posicionCazadorX][self.posicionCazadorY + 1] == ESTADOS.ESTA_OCUPADO:
                     return False
             if direccion == pygame.K_RIGHT:
-                if self.tablero.casilleros[self.posicionCazadorX][self.posicionCazadorY].paredes[DIVISIONES.DERECHA]:
+                if self.tablero.casilleros[self.posicionCazadorX][self.posicionCazadorY].paredes[DIVISIONES.DERECHA] \
+                 or self.tablero.casilleros[self.posicionCazadorX + 1 ][self.posicionCazadorY] == ESTADOS.ESTA_OCUPADO:
                     return False
             if direccion == pygame.K_LEFT:
-                if self.tablero.casilleros[self.posicionCazadorX][self.posicionCazadorY].paredes[DIVISIONES.IZQUIERDA]:
+                if self.tablero.casilleros[self.posicionCazadorX][self.posicionCazadorY].paredes[DIVISIONES.IZQUIERDA] \
+                 or self.tablero.casilleros[self.posicionCazadorX - 1][self.posicionCazadorY] == ESTADOS.ESTA_OCUPADO:
                     return False
             if self.contador <= self.movimientos:
                 self.contador += 1
@@ -123,17 +129,22 @@ class Partida():
         else:
             self.posicionCorredorX=self.corredores[int(self.turno)].ficha.casillero[0]
             self.posicionCorredorY=self.corredores[int(self.turno)].ficha.casillero[1]
+            self.tablero.casilleros[self.posicionCorredorX][self.posicionCorredorY] = ESTADOS.ESTA_OCUPADO
             if direccion == pygame.K_UP:
-                if self.tablero.casilleros[self.posicionCorredorX][self.posicionCorredorY].paredes[DIVISIONES.SUPERIOR]:
+                if self.tablero.casilleros[self.posicionCorredorX][self.posicionCorredorY].paredes[DIVISIONES.SUPERIOR]\
+                 or self.tablero.casilleros[self.posicionCorredorX][self.posicionCorredorY - 1] == ESTADOS.ESTA_OCUPADO:
                     return False
             if direccion==pygame.K_DOWN:
-                if self.tablero.casilleros[self.posicionCorredorX][self.posicionCorredorY].paredes[DIVISIONES.INFERIOR]:
+                if self.tablero.casilleros[self.posicionCorredorX][self.posicionCorredorY].paredes[DIVISIONES.INFERIOR]\
+                 or self.tablero.casilleros[self.posicionCorredorX][self.posicionCorredorY + 1] == ESTADOS.ESTA_OCUPADO:
                     return False
             if direccion==pygame.K_RIGHT:
-                if self.tablero.casilleros[self.posicionCorredorX][self.posicionCorredorY].paredes[DIVISIONES.DERECHA]:
+                if self.tablero.casilleros[self.posicionCorredorX][self.posicionCorredorY].paredes[DIVISIONES.DERECHA]\
+                 or self.tablero.casilleros[self.posicionCorredorX + 1][self.posicionCorredorY] == ESTADOS.ESTA_OCUPADO:
                     return False
             if direccion==pygame.K_LEFT:
-                if self.tablero.casilleros[self.posicionCorredorX][self.posicionCorredorY].paredes[DIVISIONES.IZQUIERDA]:
+                if self.tablero.casilleros[self.posicionCorredorX][self.posicionCorredorY].paredes[DIVISIONES.IZQUIERDA]\
+                 or self.tablero.casilleros[self.posicionCorredorX - 1][self.posicionCorredorY] == ESTADOS.ESTA_OCUPADO:
                     return False
             if self.contador <= self.movimientos:
                 self.contador += 1
