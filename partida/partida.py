@@ -11,7 +11,6 @@ from pygame_functions import *
 from constantes import DIVISIONES
 
 
-
 class Partida():
     """
     Clase encargada de dibujar el tablero, iniciar la partida, crear los jugadores (cazador y corredor/es), del 
@@ -123,7 +122,7 @@ class Partida():
                     return False
             if self.contador <= self.movimientos:
                 self.contador += 1
-                self.info.movim_restantes(self.movimientos-self.contador)
+                self.info.movim_restantes(self.movimientos - self.contador)
                 self.cazador.ficha.mover_ficha(direccion)
 
         else:
@@ -143,7 +142,7 @@ class Partida():
                     return False
             if self.contador <= self.movimientos:
                 self.contador += 1
-                self.info.movim_restantes(self.movimientos-self.contador)
+                self.info.movim_restantes(self.movimientos - self.contador)
                 self.corredores[int(self.turno)].ficha.mover_ficha(direccion)
 
     def _cambio_turno(self):
