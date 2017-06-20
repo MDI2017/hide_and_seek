@@ -32,8 +32,10 @@ class Ficha(Dibujable):
                 return self.mover(self.posicionX, self.posicionY)
             else:
                 self.casillero[0] -= 1
-        self.mover(CASILLAS.LADO * self.casillero[0], CASILLAS.LADO * self.casillero[1])
-        print("Casillero luego de moverse",self.casillero)
+
+        self.posicionX = CASILLAS.LADO * self.casillero[0]
+        self.posicionY = CASILLAS.LADO * self.casillero[1]
+        self.mover()
 
     def _al_mover(self):
         pass
