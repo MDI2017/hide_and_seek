@@ -25,7 +25,7 @@ class Casillero:
     def dibujarCasillero(self):
         """
         Método responsable de dibujar los casilleros dentro del área del tablero
-        :return: 
+         
         """
         self._pintarSuperficie()
 

@@ -4,6 +4,10 @@ from pygame_functions import *
 
 
 class Info_turno:
+    """
+    Clase que muestra cual es el turno actual, y muestra la cantidad de movimientos restantes del turno actual 
+    
+    """
     def __init__(self, jugadores):
         self.jugadores = jugadores
         self.cazador = None

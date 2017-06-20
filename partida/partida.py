@@ -13,6 +13,12 @@ from constantes import DIVISIONES
 
 
 class Partida():
+    """
+    Clase encargada de dibujar el tablero, iniciar la partida, crear los jugadores (cazador y corredor/es), del 
+    movimiento de las fichas durante cada turno y del cambio de turno.
+    Esta clase es la que contiene las reglas del juego y la encargada de verificar cuando un jugador gano la partida
+    
+    """
     def __init__(self):
         # self.turno = Turno()  Clase Turno todavía no creada
 
