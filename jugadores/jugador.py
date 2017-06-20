@@ -2,7 +2,7 @@ from pygame import *
 from gui.ficha import Ficha
 
 
-class Jugador():
+class Jugador:
     def __init__(self, nombre, avatar):
         self.nombre = nombre
         self.avatar = avatar
