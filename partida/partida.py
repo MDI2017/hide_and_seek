@@ -30,6 +30,7 @@ class Partida():
         self.boton_atras.agregar_imagen("boton_iniciar_partida_desactivado.png")
         self.turno = 0
         self.primer_turno = True
+        self.linea_doble_turno = False
         self.dado = None
         self.info = None
         self.movimientos = 0
@@ -93,7 +94,6 @@ class Partida():
                 if event.type == pygame.KEYUP:
                     if event.key == pygame.K_RETURN:
                         self.contador = 0
-                        # self.movimientos = Dado().tirarDado()ACA TIRA ERROR
                         print('turno jugador ' + self._cambio_turno())
                         return
 
@@ -106,9 +106,8 @@ class Partida():
                         return
 
     def _mover_ficha(self, direccion):
-
-        self.posicionCazadorX=self.cazador.ficha.casillero[0]
-        self.posicionCazadorY=self.cazador.ficha.casillero[1]
+        self.posicionCazadorX = self.cazador.ficha.casillero[0]
+        self.posicionCazadorY = self.cazador.ficha.casillero[1]
         if self.turno == 'cazador':
             if direccion == pygame.K_UP:
                 if self.tablero.casilleros[self.posicionCazadorX][self.posicionCazadorY].paredes[DIVISIONES.SUPERIOR]:
@@ -148,6 +147,9 @@ class Partida():
                 self.corredores[int(self.turno)].ficha.mover_ficha(direccion)
 
     def _cambio_turno(self):
+        """
+        Cambia de turno y saltea a cazador en la primera ronda.
+        """
         self.info.borrar(self.turno)
 
         if self.turno == 'cazador':
