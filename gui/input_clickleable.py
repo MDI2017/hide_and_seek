@@ -1,4 +1,4 @@
-from pygame_functions import makeTextBox, showTextBox, textBoxInput, makeLabel, showLabel, hideLabel, hideTextBox,textboxGroup
+from pygame_functions import makeTextBox,moveLabel, showTextBox, textBoxInput, makeLabel, showLabel, hideLabel, hideTextBox,textboxGroup
 from .clickeable import Clickeable
 from constantes import RECT
 
@@ -15,7 +15,7 @@ class Input(Clickeable):
         self.textBox = makeTextBox(self.posicionX, self.posicionY, self.ancho, self.case, self.placeHolder,
                                    self.maxLength, self.fuente)
 
-        self.rect = (self.posicionX, self.posicionY, self.ancho, self.textBox.boxSize)
+        self.rect = [self.posicionX, self.posicionY, self.ancho, self.textBox.boxSize]
         self.xFinal = self.rect[RECT.POS_X] + self.rect[RECT.ANCHO]
         self.yFinal = self.rect[RECT.POS_Y] + self.rect[RECT.ALTO]
 
@@ -26,7 +26,6 @@ class Input(Clickeable):
         self._textBoxVisible = True
 
     def _al_liberar_click(self):
-
         self._mostrar_textBox()
         self.texto = None
         self.label = None
@@ -43,15 +42,20 @@ class Input(Clickeable):
     def _mostrar_textBox(self):
         hideLabel(self.label)
         showTextBox(self.textBox)
-        print(self.textBox.rect)
-        print(self.rect)
+
 
     def ocultarTextBox(self):
         textboxGroup.remove(self.textBox)
 
-
     def ocultarLabel(self):
         hideLabel(self.label)
+
+    def mover_input(self):
+        self.rect[RECT.POS_Y] = self.posicionY
+        self.yFinal = self.rect[RECT.POS_Y] + self.rect[RECT.ALTO]
+        self.textBox.move(self.posicionX, self.posicionY, True)
+        if self.label:
+            moveLabel(self.label, self.posicionX, self.posicionY)
 
 
 

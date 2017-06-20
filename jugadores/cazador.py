@@ -3,7 +3,7 @@ from .jugador import Jugador
 
 
 class Cazador(Jugador):
-    def __init__(self, nombre, avatar):
+    def __init__(self, nombre , avatar):
         super().__init__(nombre, avatar)
         if self.avatar is None:
             self.avatar = "no_avatar.png"
