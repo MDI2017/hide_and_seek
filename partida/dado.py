@@ -10,10 +10,16 @@ class Dado(Clickeable, Dibujable):
                  ancho=None, alto=None, dibujado=False):
         super().__init__(posicion_x, posicion_y, nombre_archivo)
 
-        self.etiqueta = makeLabel("Movimientos: ", 20, 610, 20, "black")
-        showLabel(self.etiqueta)
+    def _al_liberar_click(self):
+        self._tirar_dado()
 
-    def tirarDado(self):
+    # def _clickeado(self):
+    #     return super()._clickeado()
+
+    # def _al_clickear(self):
+    #     super()._al_clickear()
+
+    def _tirar_dado(self):
         pause(100)
         i = 0
         movimientos = 0
