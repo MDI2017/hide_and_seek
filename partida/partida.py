@@ -8,7 +8,7 @@ from pygame_functions import clearShapes
 from tablero.tablero import Tablero
 from partida.dado import Dado
 from pygame_functions import *
-from constantes import DIVISIONES,ZONAS
+from constantes import DIVISIONES, ZONAS
 
 
 class Partida():
@@ -18,6 +18,7 @@ class Partida():
     Esta clase es la que contiene las reglas del juego y la encargada de verificar cuando un jugador gano la partida
     
     """
+
     def __init__(self):
         # self.turno = Turno()  Clase Turno todavía no creada
 
@@ -55,7 +56,6 @@ class Partida():
 
                 self.cazador = Cazador(data_jugador['nombre'], data_jugador['avatar'])
             else:
-                print('corredor')
                 corredor = Corredor(data_jugador['nombre'], data_jugador['avatar'])
                 self.corredores.append(corredor)
                 corredor.crear_ficha(len(self.corredores) - 1)
@@ -91,8 +91,6 @@ class Partida():
                 if self.dado.dibujado and self.dado.click_elemento(mouseAction):
                     self.info.movim_restantes(self.dado.tirar_dado())
 
-
-
     def _enter_presionado(self):
         while True:
             for event in pygame.event.get():
@@ -113,8 +111,9 @@ class Partida():
 
     def _mover_ficha(self, direccion):
 
-        self.posicionCazadorX=self.cazador.ficha.casillero[0]
-        self.posicionCazadorY=self.cazador.ficha.casillero[1]
+        self.posicionCazadorX = self.cazador.ficha.casillero[0]
+        self.posicionCazadorY = self.cazador.ficha.casillero[1]
+
         if self.turno == 'cazador':
             if direccion == pygame.K_UP:
                 if self.tablero.casilleros[self.posicionCazadorX][self.posicionCazadorY].paredes[DIVISIONES.SUPERIOR]:
@@ -134,23 +133,23 @@ class Partida():
                 self.cazador.ficha.mover_ficha(direccion)
 
         else:
-            self.posicionCorredorX=self.corredores[int(self.turno)].ficha.casillero[0]
-            self.posicionCorredorY=self.corredores[int(self.turno)].ficha.casillero[1]
+            self.posicionCorredorX = self.corredores[int(self.turno)].ficha.casillero[0]
+            self.posicionCorredorY = self.corredores[int(self.turno)].ficha.casillero[1]
             if direccion == pygame.K_UP:
                 if self.tablero.casilleros[self.posicionCorredorX][self.posicionCorredorY].paredes[DIVISIONES.SUPERIOR]:
                     return False
                 if self.tablero.casilleros[self.posicionCorredorX][self.posicionCorredorY].zona is ZONAS.PIEDRA_LIBRE:
                     self.corredores[int(self.turno)].ficha.piso_piedra_libre = True
-            if direccion==pygame.K_DOWN:
+            if direccion == pygame.K_DOWN:
                 if self.tablero.casilleros[self.posicionCorredorX][self.posicionCorredorY].paredes[DIVISIONES.INFERIOR]:
                     return False
                 if self.tablero.casilleros[self.posicionCorredorX][self.posicionCorredorY].zona is ZONAS.LIBERTAD and \
-                    self.corredores[int(self.turno)].ficha.piso_piedra_libre is True:
+                                self.corredores[int(self.turno)].ficha.piso_piedra_libre is True:
                     self.corredores.pop(int(self.turno))
-            if direccion==pygame.K_RIGHT:
+            if direccion == pygame.K_RIGHT:
                 if self.tablero.casilleros[self.posicionCorredorX][self.posicionCorredorY].paredes[DIVISIONES.DERECHA]:
                     return False
-            if direccion==pygame.K_LEFT:
+            if direccion == pygame.K_LEFT:
                 if self.tablero.casilleros[self.posicionCorredorX][self.posicionCorredorY].paredes[DIVISIONES.IZQUIERDA]:
                     return False
             if self.contador <= self.movimientos:
@@ -187,3 +186,10 @@ class Partida():
             else:
                 self.turno = 'cazador'
                 return self.turno
+
+    def _fin_turno(self):
+        if self.turno == 'cazador':
+            casillero_cazador = self.cazador.ficha.casillero
+            for
+
+
