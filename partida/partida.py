@@ -44,7 +44,6 @@ class Partida():
         self.dado.dibujar()
         self.info.jugador_actual(self.turno)
         self.info.movim_restantes(self.movimientos)
-        self.contador = 0
         print('turno jugador: ' + str(self.turno))
         self.__bucle_partida()
 
@@ -54,6 +53,7 @@ class Partida():
             if data_jugador['es_cazador']:
                 self.cazador = Cazador(data_jugador['nombre'], data_jugador['avatar'])
             else:
+                print('corredor')
                 corredor = Corredor(data_jugador['nombre'], data_jugador['avatar'])
                 self.corredores.append(corredor)
                 corredor.crear_ficha(len(self.corredores) - 1)
@@ -95,7 +95,6 @@ class Partida():
             for event in pygame.event.get():
                 if event.type == pygame.KEYUP:
                     if event.key == pygame.K_RETURN:
-                        self.contador = 0
                         self.movimientos = 0
                         print('turno jugador ' + self._cambio_turno())
                         return
@@ -126,11 +125,11 @@ class Partida():
             if direccion == pygame.K_LEFT:
                 if self.tablero.casilleros[self.posicionCazadorX][self.posicionCazadorY].paredes[DIVISIONES.IZQUIERDA]:
                     return False
-            if self.contador <= self.movimientos:
-                self.contador += 1
-                self.info.movim_restantes(self.movimientos - self.contador)
+
+            if self.movimientos > 0:
+                self.movimientos -= 1
+                self.info.movim_restantes(self.movimientos)
                 self.cazador.ficha.mover_ficha(direccion)
-                self._fin_turno()
 
         else:
             self.posicionCorredorX = self.corredores[int(self.turno)].ficha.casillero[0]
@@ -147,9 +146,9 @@ class Partida():
             if direccion == pygame.K_LEFT:
                 if self.tablero.casilleros[self.posicionCorredorX][self.posicionCorredorY].paredes[DIVISIONES.IZQUIERDA]:
                     return False
-            if self.contador <= self.movimientos:
-                self.contador += 1
-                self.info.movim_restantes(self.movimientos - self.contador)
+            if self.movimientos > 0:
+                self.movimientos -= 1
+                self.info.movim_restantes(self.movimientos)
                 self.corredores[int(self.turno)].ficha.mover_ficha(direccion)
 
     def _cambio_turno(self):
