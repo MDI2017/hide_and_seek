@@ -11,7 +11,6 @@ from pygame_functions import *
 from constantes import DIVISIONES, ZONAS, CASILLAS
 
 
-
 class Partida():
     """
     Clase encargada de dibujar el tablero, iniciar la partida, crear los jugadores (cazador y corredor/es), del 
@@ -137,7 +136,7 @@ class Partida():
                 if self.tablero.casilleros[self.posicionCazadorX][self.posicionCazadorY].paredes[DIVISIONES.INFERIOR]:
                     return False
                 elif self.tablero.casilleros[self.posicionCazadorX][self.posicionCazadorY + 1].esta_ocupado:
-                     return False
+                    return False
                 else:
                     self.tablero.casilleros[self.posicionCazadorX][self.posicionCazadorY + 1].esta_ocupado = True
             if direccion == pygame.K_RIGHT:
@@ -156,7 +155,7 @@ class Partida():
                 if self.tablero.casilleros[self.posicionCazadorX][self.posicionCazadorY].paredes[DIVISIONES.IZQUIERDA]:
                     return False
                 elif self.tablero.casilleros[self.posicionCazadorX - 1][self.posicionCazadorY].esta_ocupado:
-                     return False
+                    return False
                 else:
                     self.tablero.casilleros[self.posicionCazadorX - 1][self.posicionCazadorY].esta_ocupado = True
 
@@ -203,7 +202,8 @@ class Partida():
             if direccion == pygame.K_LEFT:
                 if self.posicionCorredorX == 0:
                     return False
-                if self.tablero.casilleros[self.posicionCorredorX][self.posicionCorredorY].paredes[DIVISIONES.IZQUIERDA]:
+                if self.tablero.casilleros[self.posicionCorredorX][self.posicionCorredorY].paredes[
+                    DIVISIONES.IZQUIERDA]:
                     return False
                 if self.tablero.casilleros[self.posicionCorredorX - 1][self.posicionCorredorY].esta_ocupado:
                     return False
@@ -215,7 +215,6 @@ class Partida():
                 self.info.movim_restantes(self.movimientos)
                 self.tablero.casilleros[self.posicionCorredorX][self.posicionCorredorY].esta_ocupado = False
                 self.corredores[int(self.turno)].ficha.mover_ficha(direccion)
-
 
     def _cambio_turno(self):
         """
@@ -252,7 +251,7 @@ class Partida():
             if self.tablero.casilleros[self.posicionCorredorX][self.posicionCorredorY].zona is ZONAS.PIEDRA_LIBRE:
                 self.corredores[int(self.turno)].ficha.piso_piedra_libre = True
             if self.tablero.casilleros[self.posicionCorredorX][self.posicionCorredorY].zona is ZONAS.LIBERTAD and \
-                        self.corredores[int(self.turno)].ficha.piso_piedra_libre is True:
+                            self.corredores[int(self.turno)].ficha.piso_piedra_libre is True:
                 self.corredores.pop(int(self.turno))
 
     def _fin_turno(self):
@@ -261,7 +260,7 @@ class Partida():
         if True:
             casillero_cazador = self.cazador.ficha.casillero
 
-            #Iterecion desde la pocición del cazador hacia abajo
+            # Iterecion desde la pocición del cazador hacia abajo
             for fila in range(casillero_cazador[CASILLAS.FILA] + 1, 12):
                 casillero = self.tablero.casilleros[casillero_cazador[CASILLAS.COLUMNA]][fila]
                 print(casillero.paredes)
@@ -275,20 +274,19 @@ class Partida():
                     print(str(casillero_cazador[CASILLAS.COLUMNA]), str(fila))
                     break
 
-            #Iterecion desde la pocición del cazador hacia arriba
+            # Iterecion desde la pocición del cazador hacia arriba
             for i in range(0, casillero_cazador[CASILLAS.FILA]):
                 indice_filas = casillero_cazador[CASILLAS.FILA] - 1 - i
                 print(self.tablero.casilleros[casillero_cazador[CASILLAS.COLUMNA]][indice_filas].paredes)
 
-            #Iterecion desde la pocición del cazador hacia derecha
+            # Iterecion desde la pocición del cazador hacia derecha
             for columna in range(casillero_cazador[CASILLAS.COLUMNA] + 1, 10):
                 print(self.tablero.casilleros[columna][casillero_cazador[CASILLAS.FILA]].paredes)
 
-            #Iterecion desde la pocición del cazador hacia izquierda
+            # Iterecion desde la pocición del cazador hacia izquierda
             for i in range(0, casillero_cazador[CASILLAS.COLUMNA]):
                 indice_columnas = casillero_cazador[CASILLAS.COLUMNA] - 1 - i
                 print(self.tablero.casilleros[indice_columnas][casillero_cazador[CASILLAS.FILA]].paredes)
-
 
             # Iterecion diagonal inferior derecha desde la pocición del cazador
             columna = casillero_cazador[CASILLAS.COLUMNA] + 1
@@ -323,6 +321,3 @@ class Partida():
                 indice_filas = casillero_cazador[CASILLAS.FILA] - 1 - i
                 print(self.tablero.casilleros[columna][indice_filas].paredes)
                 columna -= 1
-
-
-
