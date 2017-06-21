@@ -8,7 +8,8 @@ from pygame_functions import clearShapes
 from tablero.tablero import Tablero
 from partida.dado import Dado
 from pygame_functions import *
-from constantes import DIVISIONES, ZONAS
+from constantes import DIVISIONES
+
 
 
 class Partida():
@@ -118,43 +119,101 @@ class Partida():
         self.posicionCazadorY = self.cazador.ficha.casillero[1]
 
         if self.turno == 'cazador':
+            self.tablero.casilleros[self.posicionCazadorX][self.posicionCazadorY].esta_ocupado = True
             if direccion == pygame.K_UP:
                 if self.tablero.casilleros[self.posicionCazadorX][self.posicionCazadorY].paredes[DIVISIONES.SUPERIOR]:
                     return False
+                # if self.tablero.casilleros[self.posicionCazadorX][(self.posicionCazadorY - 1) < 0]:
+                #     return False
+                elif self.tablero.casilleros[self.posicionCazadorX][self.posicionCazadorY - 1].esta_ocupado:
+                     return False
+                else:
+                    self.tablero.casilleros[self.posicionCazadorX][self.posicionCazadorY - 1].esta_ocupado = True
             if direccion == pygame.K_DOWN:
                 if self.tablero.casilleros[self.posicionCazadorX][self.posicionCazadorY].paredes[DIVISIONES.INFERIOR]:
                     return False
+                # if self.tablero.casilleros[self.posicionCazadorX][(self.posicionCazadorY + 1) > 10]:
+                #     return False
+                elif self.tablero.casilleros[self.posicionCazadorX][self.posicionCazadorY + 1].esta_ocupado:
+                     return False
+                else:
+                    self.tablero.casilleros[self.posicionCazadorX][self.posicionCazadorY + 1].esta_ocupado = True
             if direccion == pygame.K_RIGHT:
                 if self.tablero.casilleros[self.posicionCazadorX][self.posicionCazadorY].paredes[DIVISIONES.DERECHA]:
                     return False
+                # if self.tablero.casilleros[(self.posicionCazadorX + 1) > 9][self.posicionCazadorY]:
+                #     return False
+
+                elif self.tablero.casilleros[self.posicionCazadorX + 1][self.posicionCazadorY].esta_ocupado:
+                    return False
+                else:
+                    self.tablero.casilleros[self.posicionCazadorX + 1][self.posicionCazadorY].esta_ocupado = True
+
             if direccion == pygame.K_LEFT:
                 if self.tablero.casilleros[self.posicionCazadorX][self.posicionCazadorY].paredes[DIVISIONES.IZQUIERDA]:
                     return False
+                # if self.tablero.casilleros[(self.posicionCazadorX - 1) < 0][self.posicionCazadorY]:
+                #     return False
+                elif self.tablero.casilleros[self.posicionCazadorX - 1][self.posicionCazadorY].esta_ocupado:
+                     return False
+                else:
+                    self.tablero.casilleros[self.posicionCazadorX - 1][self.posicionCazadorY].esta_ocupado = True
 
             if self.movimientos > 0:
                 self.movimientos -= 1
                 self.info.movim_restantes(self.movimientos)
                 self.cazador.ficha.mover_ficha(direccion)
+                self.tablero.casilleros[self.posicionCazadorX][self.posicionCazadorY].esta_ocupado = False
 
         else:
             self.posicionCorredorX = self.corredores[int(self.turno)].ficha.casillero[0]
             self.posicionCorredorY = self.corredores[int(self.turno)].ficha.casillero[1]
+            self.tablero.casilleros[self.posicionCorredorX][self.posicionCorredorY].esta_ocupado = True
             if direccion == pygame.K_UP:
                 if self.tablero.casilleros[self.posicionCorredorX][self.posicionCorredorY].paredes[DIVISIONES.SUPERIOR]:
                     return False
+                # if self.tablero.casilleros[self.posicionCorredorX][(self.posicionCorredorY - 1) < 0]:
+                #     return False
+                elif self.tablero.casilleros[self.posicionCorredorX][self.posicionCorredorY - 1].esta_ocupado:
+                     return False
+                else:
+                    self.tablero.casilleros[self.posicionCorredorX][self.posicionCorredorY - 1].esta_ocupado = True
             if direccion == pygame.K_DOWN:
                 if self.tablero.casilleros[self.posicionCorredorX][self.posicionCorredorY].paredes[DIVISIONES.INFERIOR]:
                     return False
+                # if self.tablero.casilleros[self.posicionCorredorX][(self.posicionCorredorY + 1) > 11]:
+                #     return False
+                elif self.tablero.casilleros[self.posicionCorredorX][self.posicionCorredorY + 1].esta_ocupado:
+                    return False
+                else:
+                    self.tablero.casilleros[self.posicionCorredorX][self.posicionCorredorY + 1].esta_ocupado = True
             if direccion == pygame.K_RIGHT:
+                if self.posicionCorredorX == 9:
+                    return False
+
                 if self.tablero.casilleros[self.posicionCorredorX][self.posicionCorredorY].paredes[DIVISIONES.DERECHA]:
                     return False
+                # if self.tablero.casilleros[(self.posicionCorredorX + 1) > 9][self.posicionCorredorY]:
+                #     return False
+                elif self.tablero.casilleros[self.posicionCorredorX + 1][self.posicionCorredorY].esta_ocupado:
+                    return False
+                else:
+                    self.tablero.casilleros[self.posicionCorredorX + 1][self.posicionCorredorY].esta_ocupado = True
+
             if direccion == pygame.K_LEFT:
                 if self.tablero.casilleros[self.posicionCorredorX][self.posicionCorredorY].paredes[DIVISIONES.IZQUIERDA]:
                     return False
+                # if self.tablero.casilleros[(self.posicionCorredorX - 1) < 0][self.posicionCorredorY]:
+                #     return False
+                if self.tablero.casilleros[self.posicionCorredorX - 1][self.posicionCorredorY].esta_ocupado:
+                    return False
+                else:
+                    self.tablero.casilleros[self.posicionCorredorX - 1][self.posicionCorredorY].esta_ocupado = True
             if self.movimientos > 0:
                 self.movimientos -= 1
                 self.info.movim_restantes(self.movimientos)
                 self.corredores[int(self.turno)].ficha.mover_ficha(direccion)
+                self.tablero.casilleros[self.posicionCorredorX][self.posicionCorredorY].esta_ocupado = False
 
     def _cambio_turno(self):
         """

@@ -7,6 +7,7 @@ class Ficha(Dibujable):
     """
     Clase que genera y proporciona el dibujo y las propiedades de la ficha 
     """
+
     def __init__(self, casillero, nombre_archivo, ancho=60, alto=60, dibujado=False):
         super().__init__(0, 0, nombre_archivo=nombre_archivo, ancho=ancho, alto=alto, dibujado=dibujado)
         self.casillero = casillero
@@ -15,7 +16,6 @@ class Ficha(Dibujable):
         self.piso_piedra_libre = False
 
     def mover_ficha(self, direccion):
-
         if direccion == pygame.K_UP:
             if self.casillero[1] == 0:
                 return False
