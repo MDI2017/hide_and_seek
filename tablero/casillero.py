@@ -19,6 +19,7 @@ class Casillero:
         self.libre = libre
         self.visible = visible
         self.paredes = paredes
+        self.esta_ocupado = None
         self.color = COLORES.BLANCO
         self.zona = None
 
