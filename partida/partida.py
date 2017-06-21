@@ -89,6 +89,10 @@ class Partida():
                 if self.dado.dibujado and self.dado.click_elemento(mouseAction):
                     self.movimientos = self.dado.tirar_dado()
                     self.info.movim_restantes(self.movimientos)
+                    pause(1000)
+                    self.dado.ocultar()
+
+
 
     def _enter_presionado(self):
         while True:
@@ -96,6 +100,7 @@ class Partida():
                 if event.type == pygame.KEYUP:
                     if event.key == pygame.K_RETURN:
                         self.movimientos = 0
+                        self.dado.dibujar()
                         print('turno jugador ' + self._cambio_turno())
                         return
 
@@ -189,10 +194,10 @@ class Partida():
             self.corredores.pop(int(self.turno))
 
 
-    def _fin_turno(self):
-        if self.turno == 'cazador':
-            casillero_cazador = self.cazador.ficha.casillero.
-
-            for
+    # def _fin_turno(self):
+    #     if self.turno == 'cazador':
+    #         casillero_cazador = self.cazador.ficha.casillero.
+    #
+    #         for
 
 
