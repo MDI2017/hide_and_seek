@@ -119,7 +119,8 @@ class SettingPartida:
 
         posicion_x_botones = pygame.display.Info().current_w - self.botonAgregarJugador.rect[
             RECT.ANCHO] - SEPARACIONES.PADDING_VENTANA_PPAL
-        self.botonAgregarJugador.mover(pos_x=posicion_x_botones)
+        self.botonAgregarJugador.posicionX = posicion_x_botones
+        self.botonAgregarJugador.mover()
 
         posicion_y_cazador_aleatorio = self.botonAgregarJugador.rect[RECT.POS_Y] + self.botonAgregarJugador.rect[
             RECT.ALTO] + SEPARACIONES.SEPARACION

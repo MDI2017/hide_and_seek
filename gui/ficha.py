@@ -13,6 +13,7 @@ class Ficha(Dibujable):
         self.casillero = casillero
         self.posicionX = CASILLAS.LADO * self.casillero[0]
         self.posicionY = CASILLAS.LADO * self.casillero[1]
+        self.piso_piedra_libre = False
 
     def mover_ficha(self, direccion):
         if direccion == pygame.K_UP:
@@ -35,8 +36,10 @@ class Ficha(Dibujable):
                 return False
             else:
                 self.casillero[0] -= 1
-        self.mover(CASILLAS.LADO * self.casillero[0], CASILLAS.LADO * self.casillero[1])
-        print("Casillero luego de moverse", self.casillero)
+
+        self.posicionX = CASILLAS.LADO * self.casillero[0]
+        self.posicionY = CASILLAS.LADO * self.casillero[1]
+        self.mover()
 
     def _al_mover(self):
         pass

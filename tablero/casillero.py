@@ -22,6 +22,7 @@ class Casillero:
         self.esta_ocupado = None
         self.color = COLORES.BLANCO
         self.zona = None
+        self.ficha = None
 
     def dibujarCasillero(self):
         """
@@ -98,3 +99,4 @@ class Casillero:
 
     def _pintarSuperficie(self):
         drawRect(self.posicionX, self.posicionY, self.lado, self.lado, self.color)
+
