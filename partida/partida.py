@@ -130,6 +130,7 @@ class Partida():
                 self.contador += 1
                 self.info.movim_restantes(self.movimientos - self.contador)
                 self.cazador.ficha.mover_ficha(direccion)
+                self._fin_turno()
 
         else:
             self.posicionCorredorX = self.corredores[int(self.turno)].ficha.casillero[0]
@@ -137,14 +138,9 @@ class Partida():
             if direccion == pygame.K_UP:
                 if self.tablero.casilleros[self.posicionCorredorX][self.posicionCorredorY].paredes[DIVISIONES.SUPERIOR]:
                     return False
-                if self.tablero.casilleros[self.posicionCorredorX][self.posicionCorredorY].zona is ZONAS.PIEDRA_LIBRE:
-                    self.corredores[int(self.turno)].ficha.piso_piedra_libre = True
             if direccion == pygame.K_DOWN:
                 if self.tablero.casilleros[self.posicionCorredorX][self.posicionCorredorY].paredes[DIVISIONES.INFERIOR]:
                     return False
-                if self.tablero.casilleros[self.posicionCorredorX][self.posicionCorredorY].zona is ZONAS.LIBERTAD and \
-                                self.corredores[int(self.turno)].ficha.piso_piedra_libre is True:
-                    self.corredores.pop(int(self.turno))
             if direccion == pygame.K_RIGHT:
                 if self.tablero.casilleros[self.posicionCorredorX][self.posicionCorredorY].paredes[DIVISIONES.DERECHA]:
                     return False
@@ -186,9 +182,18 @@ class Partida():
                 self.turno = 'cazador'
                 return self.turno
 
+    def _chequear_zona(self):
+        if self.tablero.casilleros[self.posicionCorredorX][self.posicionCorredorY].zona is ZONAS.PIEDRA_LIBRE:
+            self.corredores[int(self.turno)].ficha.piso_piedra_libre = True
+        if self.tablero.casilleros[self.posicionCorredorX][self.posicionCorredorY].zona is ZONAS.LIBERTAD and \
+                        self.corredores[int(self.turno)].ficha.piso_piedra_libre is True:
+            self.corredores.pop(int(self.turno))
+
+
     def _fin_turno(self):
         if self.turno == 'cazador':
-            casillero_cazador = self.cazador.ficha.casillero
+            casillero_cazador = self.cazador.ficha.casillero.
+
             for
 
 

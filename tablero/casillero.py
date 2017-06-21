@@ -21,6 +21,7 @@ class Casillero:
         self.paredes = paredes
         self.color = COLORES.BLANCO
         self.zona = None
+        self.ficha = None
 
     def dibujarCasillero(self):
         """
