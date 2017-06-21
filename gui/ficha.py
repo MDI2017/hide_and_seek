@@ -14,6 +14,7 @@ class Ficha(Dibujable):
         self.posicionX = CASILLAS.LADO * self.casillero[0]
         self.posicionY = CASILLAS.LADO * self.casillero[1]
         self.piso_piedra_libre = False
+        self.doble_turno = False
 
     def mover_ficha(self, direccion):
         if direccion == pygame.K_UP:

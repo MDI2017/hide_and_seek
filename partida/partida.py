@@ -8,7 +8,7 @@ from pygame_functions import clearShapes
 from tablero.tablero import Tablero
 from partida.dado import Dado
 from pygame_functions import *
-from constantes import DIVISIONES
+from constantes import DIVISIONES, ZONAS
 
 
 
@@ -85,12 +85,16 @@ class Partida():
                     for corredor in self.corredores:
                         corredor.ficha.ocultar()
                     self.boton_atras.ocultar()
+                    self.info.borrar(self.turno)
+                    hideLabel(self.info.movimientos)
+                    self.dado.ocultar()
+                    clearShapes()
                     en_partida = False
 
                 if self.dado.dibujado and self.dado.click_elemento(mouseAction):
                     self.movimientos = self.dado.tirar_dado()
                     self.info.movim_restantes(self.movimientos)
-                    pause(1000)
+                    pause(500)
                     self.dado.ocultar()
 
 
@@ -165,6 +169,9 @@ class Partida():
                 self.cazador.ficha.mover_ficha(direccion)
                 self.tablero.casilleros[self.posicionCazadorX][self.posicionCazadorY].esta_ocupado = False
 
+            elif self.movimientos is 0 and self.cazador.ficha.doble_turno is True:
+                self.dado.dibujar()
+
         else:
             self.posicionCorredorX = self.corredores[int(self.turno)].ficha.casillero[0]
             self.posicionCorredorY = self.corredores[int(self.turno)].ficha.casillero[1]
@@ -213,6 +220,7 @@ class Partida():
                 self.movimientos -= 1
                 self.info.movim_restantes(self.movimientos)
                 self.corredores[int(self.turno)].ficha.mover_ficha(direccion)
+                self._chequear_zona(direccion)
                 self.tablero.casilleros[self.posicionCorredorX][self.posicionCorredorY].esta_ocupado = False
 
     def _cambio_turno(self):
@@ -245,12 +253,15 @@ class Partida():
                 self.turno = 'cazador'
                 return self.turno
 
-    def _chequear_zona(self):
-        if self.tablero.casilleros[self.posicionCorredorX][self.posicionCorredorY].zona is ZONAS.PIEDRA_LIBRE:
-            self.corredores[int(self.turno)].ficha.piso_piedra_libre = True
-        if self.tablero.casilleros[self.posicionCorredorX][self.posicionCorredorY].zona is ZONAS.LIBERTAD and \
+    def _chequear_zona(self, direccion):
+        if direccion == pygame.K_DOWN:
+            if self.tablero.casilleros[self.posicionCorredorX][self.posicionCorredorY].zona is ZONAS.PIEDRA_LIBRE:
+                self.corredores[int(self.turno)].ficha.piso_piedra_libre = True
+            if self.tablero.casilleros[self.posicionCorredorX][self.posicionCorredorY].zona is ZONAS.LIBERTAD and \
                         self.corredores[int(self.turno)].ficha.piso_piedra_libre is True:
-            self.corredores.pop(int(self.turno))
+                self.corredores.pop(int(self.turno))
+
+
 
 
     # def _fin_turno(self):

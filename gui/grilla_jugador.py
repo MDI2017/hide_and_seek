@@ -42,9 +42,12 @@ class GrillaJugador:
         self.posY -= 64
         self.textBox.posicionY = self.posY + (self._mediaGrilla - ALTO_GRILLA / 2)
         self.textBox.mover_input()
-        self.botonBorrar.mover(None, self.posY + (self._mediaGrilla - self.botonBorrar.rect[ALTO] / 2))
-        self.radioButtonCazador.mover(None, self.posY + (self._mediaGrilla - self.radioButtonCazador.rect[ALTO] / 2))
-        self.botonSeleccionAvatar.mover(None,self.posY + (self._mediaGrilla - self.botonSeleccionAvatar.rect[ALTO] / 2) )
+        self.botonBorrar.posicionY = self.posY + (self._mediaGrilla - self.botonBorrar.rect[ALTO] / 2)
+        self.botonBorrar.mover()
+        self.radioButtonCazador.posicionY = self.posY + (self._mediaGrilla - self.radioButtonCazador.rect[ALTO] / 2)
+        self.radioButtonCazador.mover()
+        self.botonSeleccionAvatar.posicionY = self.posY + (self._mediaGrilla - self.botonSeleccionAvatar.rect[ALTO] / 2)
+        self.botonSeleccionAvatar.mover()
 
     def _dibujar_textbox(self):
         posicion_x_text_box = self.botonBorrar.rect[POS_X] + self.botonBorrar.rect[ANCHO] + SEPARACIONES.SEPARACION
