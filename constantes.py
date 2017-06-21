@@ -3,7 +3,8 @@ import os
 
 class CASILLAS:
     LADO = 60
-
+    FILA = 1
+    COLUMNA = 0
 
 class ESTADOS:
     ESTA_OCUPADO = True

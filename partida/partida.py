@@ -8,7 +8,7 @@ from pygame_functions import clearShapes
 from tablero.tablero import Tablero
 from partida.dado import Dado
 from pygame_functions import *
-from constantes import DIVISIONES, ZONAS
+from constantes import DIVISIONES, ZONAS, CASILLAS
 
 
 
@@ -262,64 +262,65 @@ class Partida():
             casillero_cazador = self.cazador.ficha.casillero
 
             #Iterecion desde la pocición del cazador hacia abajo
-            for fila in range(casillero_cazador[1] + 1, 12):
-                print(self.tablero.casilleros[casillero_cazador[1]][fila].paredes)
+            for fila in range(casillero_cazador[CASILLAS.FILA] + 1, 12):
+                casillero = self.tablero.casilleros[casillero_cazador[CASILLAS.COLUMNA]][fila]
+                print(casillero.paredes)
+                if casillero.esta_ocupado:
+                    print('avistaje')
+                    print(str(casillero_cazador[CASILLAS.COLUMNA]), str(fila))
+                    break
 
-            print('-------------------')
+                if casillero.paredes[DIVISIONES.INFERIOR]:
+                    print('pared')
+                    print(str(casillero_cazador[CASILLAS.COLUMNA]), str(fila))
+                    break
 
             #Iterecion desde la pocición del cazador hacia arriba
-            for i in range(0, casillero_cazador[1]):
-                indice_filas = casillero_cazador[1] - 1 - i
-                print(self.tablero.casilleros[casillero_cazador[1]][indice_filas].paredes)
+            for i in range(0, casillero_cazador[CASILLAS.FILA]):
+                indice_filas = casillero_cazador[CASILLAS.FILA] - 1 - i
+                print(self.tablero.casilleros[casillero_cazador[CASILLAS.COLUMNA]][indice_filas].paredes)
 
-            print('-------------------')
             #Iterecion desde la pocición del cazador hacia derecha
-            for columna in range(casillero_cazador[0] + 1, 10):
-                print(self.tablero.casilleros[columna][casillero_cazador[0]].paredes)
+            for columna in range(casillero_cazador[CASILLAS.COLUMNA] + 1, 10):
+                print(self.tablero.casilleros[columna][casillero_cazador[CASILLAS.FILA]].paredes)
 
-            print('-------------------')
             #Iterecion desde la pocición del cazador hacia izquierda
-            for i in range(0, casillero_cazador[1]):
-                indice_columnas = casillero_cazador[1] - 1 - i
-                print(self.tablero.casilleros[indice_columnas][casillero_cazador[0]].paredes)
+            for i in range(0, casillero_cazador[CASILLAS.COLUMNA]):
+                indice_columnas = casillero_cazador[CASILLAS.COLUMNA] - 1 - i
+                print(self.tablero.casilleros[indice_columnas][casillero_cazador[CASILLAS.FILA]].paredes)
 
 
-            print('-------------------')
             # Iterecion diagonal inferior derecha desde la pocición del cazador
-            columna = casillero_cazador[0] + 1
-            for fila in range(casillero_cazador[1] + 1, 12):
+            columna = casillero_cazador[CASILLAS.COLUMNA] + 1
+            for fila in range(casillero_cazador[CASILLAS.FILA] + 1, 12):
                 if columna > 9:
                     break
                 print(self.tablero.casilleros[columna][fila].paredes)
                 columna += 1
 
-            print('-------------------')
             # Iterecion diagonal inferior izquierda desde la pocición del cazador
-            columna = casillero_cazador[0] - 1
-            for fila in range(casillero_cazador[1] + 1, 12):
+            columna = casillero_cazador[CASILLAS.COLUMNA] - 1
+            for fila in range(casillero_cazador[CASILLAS.FILA] + 1, 12):
                 if columna < 0:
                     break
                 print(self.tablero.casilleros[columna][fila].paredes)
                 columna -= 1
 
-
-            print('-------------------')
             # Iterecion diagonal superior derecha desde la pocición del cazador
-            columna = casillero_cazador[0] + 1
-            for i in range(0, casillero_cazador[1]):
+            columna = casillero_cazador[CASILLAS.COLUMNA] + 1
+            for i in range(0, casillero_cazador[CASILLAS.FILA]):
                 if columna > 9:
                     break
-                indice_filas = casillero_cazador[1] - 1 - i
+                indice_filas = casillero_cazador[CASILLAS.FILA] - 1 - i
                 print(self.tablero.casilleros[columna][indice_filas].paredes)
                 columna += 1
 
-            print('-------------------')
             # Iterecion diagonal superior izquierda desde la pocición del cazador
-            columna = casillero_cazador[0] - 1
-            for i in range(0, casillero_cazador[1]):
+            columna = casillero_cazador[CASILLAS.COLUMNA] - 1
+            for i in range(0, casillero_cazador[CASILLAS.FILA]):
                 if columna > 9:
                     break
-                indice_filas = casillero_cazador[1] - 1 - i
+                indice_filas = casillero_cazador[CASILLAS.FILA] - 1 - i
                 print(self.tablero.casilleros[columna][indice_filas].paredes)
                 columna -= 1
 
