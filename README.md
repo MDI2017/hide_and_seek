@@ -1,5 +1,5 @@
 ﻿# hide_and_seek
-Desarrollo para la materia Metodología de la investigación
+Desarrollo de un videojuego para la materia Metodología de la investigación
 
 ## Integrantes:
   
