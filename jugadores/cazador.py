@@ -10,7 +10,7 @@ class Cazador(Jugador):
         super().__init__(nombre, avatar)
         if self.avatar is None:
             self.avatar = "no_avatar.png"
-        self.crear_ficha([4, 11])
+        self.crear_ficha([4, 4])
 
     def crear_ficha(self, casillero):
         self.ficha = Ficha(casillero, nombre_archivo=self.avatar)
