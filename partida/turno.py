@@ -3,9 +3,10 @@ from constantes import CASILLAS, DIVISIONES
 
 
 class Turno:
-    def __init__(self, jugador, tablero):
-        self.jugador = jugador
+    def __init__(self, tablero):
         self.tablero = tablero
+        self.jugador = None
+        self.primer_turno = True
 
     def fin_turno(self):
         if isinstance(self.jugador, Cazador):

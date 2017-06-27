@@ -21,7 +21,6 @@ class Partida:
     """
 
     def __init__(self):
-        # self.turno = Turno()  Clase Turno todavía no creada
 
         self.tablero = Tablero()
         self.corredores = []
@@ -29,7 +28,7 @@ class Partida:
         self.boton_atras = Button(880, 680, "boton_iniciar_partida_habilitado.png")
         self.boton_atras.agregar_imagen("boton_iniciar_partida_presionado.png")
         self.boton_atras.agregar_imagen("boton_iniciar_partida_desactivado.png")
-        self.turno = 0
+        self.turno = Turno(self.tablero)
         self.primer_turno = True
         self.linea_doble_turno = False
         self.dado = None
@@ -45,7 +44,8 @@ class Partida:
         self.dado.dibujar()
         self.info.jugador_actual(self.turno)
         self.info.movim_restantes(self.movimientos)
-        print('turno jugador: ' + str(self.turno))
+        self.turno.jugador = self.corredores[0]
+        print('turno jugador: ' + self.turno.jugador.nombre)
         self.__bucle_partida()
 
     def _crear_jugadores(self, jugadores):
@@ -257,4 +257,4 @@ class Partida:
 
     def _fin_turno(self):
 
-        Turno(self.cazador, self.tablero).fin_turno()
+        Turno(self.tablero).fin_turno()
