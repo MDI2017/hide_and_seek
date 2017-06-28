@@ -1,5 +1,5 @@
 from jugadores.cazador import Cazador
-from constantes import CASILLAS, DIVISIONES
+from constantes import CASILLAS, DIVISIONES, TABLERO
 
 
 class Turno:
@@ -12,68 +12,66 @@ class Turno:
         if isinstance(self.jugador, Cazador):
             self._verificar_avistaje()
 
+    def _vertical_verification(self, inicio, final, abajo=False):
+        columna = self.jugador.ficha.casillero[CASILLAS.COLUMNA]
+
+        if abajo:
+            division = DIVISIONES.SUPERIOR
+        else:
+            division = DIVISIONES.INFERIOR
+
+        for i in range(inicio, final):
+
+            if abajo:  # itera hacia abajo
+                fila = i
+            else:  # itera hacia arriba
+                fila = final - i - 1
+
+            casillero = self.tablero.casilleros[columna][fila]
+
+            if casillero.paredes[division]:
+                return False
+            if casillero.esta_ocupado:
+                return columna, fila
+
+        return False
+
+    def _horizontal_verification(self, inicio, final, derecha=False):
+        fila = self.jugador.ficha.casillero[CASILLAS.FILA]
+
+        if derecha:
+            division = DIVISIONES.IZQUIERDA
+        else:
+            division = DIVISIONES.DERECHA
+
+        for i in range(inicio, final):
+
+            if derecha:  # itera hacia Derecha
+                columna = i
+            else:  # itera hacia izquierda
+                columna = final - i - 1
+
+            casillero = self.tablero.casilleros[columna][fila]
+
+            if casillero.paredes[division]:
+                return False
+            if casillero.esta_ocupado:
+                return columna, fila
+
+        return False
+
     def _verificar_avistaje(self):
         casillero_cazador = self.jugador.ficha.casillero
 
-        # Iterecion desde la pocición del cazador hacia abajo
-        for fila in range(casillero_cazador[CASILLAS.FILA] + 1, 12):
-            casillero = self.tablero.casilleros[casillero_cazador[CASILLAS.COLUMNA]][fila]
-            if casillero.esta_ocupado:
-                print('avistaje')
-                print(str(casillero_cazador[CASILLAS.COLUMNA]), str(fila))
-                break
+        print('avistaje vertical inferior')
+        self._vertical_verification(casillero_cazador[CASILLAS.FILA] + 1, TABLERO.FILAS, True)
 
-            if casillero.paredes[DIVISIONES.INFERIOR]:
-                print('pared')
-                print(str(casillero_cazador[CASILLAS.COLUMNA]), str(fila))
-                break
+        print('avistaje vertical superior')
+        self._vertical_verification(TABLERO.INICIO, casillero_cazador[CASILLAS.FILA])
 
-        # Iterecion desde la pocición del cazador hacia arriba
-        for i in range(0, casillero_cazador[CASILLAS.FILA]):
-            indice_filas = casillero_cazador[CASILLAS.FILA] - 1 - i
+        self._horizontal_verification(casillero_cazador[CASILLAS.COLUMNA] + 1, TABLERO.COLUMNAS, True)
 
-            casillero = self.tablero.casilleros[casillero_cazador[CASILLAS.COLUMNA]][indice_filas]
-
-            if casillero.esta_ocupado:
-                print('avistaje')
-                print(str(casillero_cazador[CASILLAS.COLUMNA]), str(indice_filas))
-                break
-
-            if casillero.paredes[DIVISIONES.SUPERIOR]:
-                print('pared')
-                print(str(casillero_cazador[CASILLAS.COLUMNA]), str(indice_filas))
-                break
-
-        # Iterecion desde la pocición del cazador hacia derecha
-        for columna in range(casillero_cazador[CASILLAS.COLUMNA] + 1, 10):
-            casillero = self.tablero.casilleros[columna][casillero_cazador[CASILLAS.FILA]]
-
-            if casillero.esta_ocupado:
-                print('avistaje')
-                print(str(casillero_cazador[columna]), str(casillero_cazador[CASILLAS.FILA]))
-                break
-
-            if casillero.paredes[DIVISIONES.DERECHA]:
-                print('pared')
-                print('columna', str(columna))
-                print('fila', str(CASILLAS.FILA))
-                print(str(columna), str(casillero_cazador[CASILLAS.FILA]))
-                break
-
-        # Iterecion desde la pocición del cazador hacia izquierda
-        for i in range(0, casillero_cazador[CASILLAS.COLUMNA]):
-            indice_columnas = casillero_cazador[CASILLAS.COLUMNA] - 1 - i
-            casillero = self.tablero.casilleros[indice_columnas][casillero_cazador[CASILLAS.FILA]]
-
-            if casillero.esta_ocupado:
-                print('avistaje')
-                print(str(casillero_cazador[indice_columnas]), str(casillero_cazador[CASILLAS.FILA]))
-                break
-
-            if casillero.paredes[DIVISIONES.IZQUIERDA]:
-                print('pared')
-                print(str(indice_columnas), str(casillero_cazador[CASILLAS.FILA]))
-                break
+        self._horizontal_verification(TABLERO.INICIO, casillero_cazador[CASILLAS.COLUMNA])
 
         # Iterecion diagonal inferior derecha desde la pocición del cazador
         columna = casillero_cazador[CASILLAS.COLUMNA] + 1

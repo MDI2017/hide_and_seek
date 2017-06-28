@@ -3,8 +3,8 @@ import os
 
 class CASILLAS:
     LADO = 60
-    FILA = 1
     COLUMNA = 0
+    FILA = 1
 
 class ESTADOS:
     ESTA_OCUPADO = True
@@ -77,3 +77,9 @@ class RECT:
     POS_Y = 1
     ANCHO = 2
     ALTO = 3
+
+
+class TABLERO:
+    COLUMNAS = 10
+    FILAS = 12
+    INICIO = 0

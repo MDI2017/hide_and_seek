@@ -42,10 +42,9 @@ class Partida:
         self.info = Info_turno(jugadores)
         self.dado = Dado(670, 100)
         self.dado.dibujar()
-        self.info.jugador_actual(self.turno)
-        self.info.movim_restantes(self.movimientos)
+        # self.info.jugador_actual(self.turno)
+        # self.info.movim_restantes(self.movimientos)
         self.turno.jugador = self.corredores[0]
-        print('turno jugador: ' + self.turno.jugador.nombre)
         self.__bucle_partida()
 
     def _crear_jugadores(self, jugadores):
@@ -54,7 +53,6 @@ class Partida:
             if data_jugador['es_cazador']:
                 self.cazador = Cazador(data_jugador['nombre'], data_jugador['avatar'])
             else:
-                print('corredor')
                 corredor = Corredor(data_jugador['nombre'], data_jugador['avatar'])
                 self.corredores.append(corredor)
                 corredor.crear_ficha(len(self.corredores) - 1)
@@ -85,7 +83,7 @@ class Partida:
                     for corredor in self.corredores:
                         corredor.ficha.ocultar()
                     self.boton_atras.ocultar()
-                    self.info.borrar(self.turno)
+                    # self.info.borrar(self.turno)
                     hideLabel(self.info.movimientos)
                     self.dado.ocultar()
                     clearShapes()
@@ -93,7 +91,7 @@ class Partida:
 
                 if self.dado.dibujado and self.dado.click_elemento(mouseAction):
                     self.movimientos = self.dado.tirar_dado()
-                    self.info.movim_restantes(self.movimientos)
+                    # self.info.movim_restantes(self.movimientos)
                     pause(500)
                     self.dado.ocultar()
 
@@ -105,7 +103,7 @@ class Partida:
                         self.movimientos = 0
                         self.dado.dibujar()
                         self._fin_turno()
-                        print('turno jugador ' + self._cambio_turno())
+                        self._cambio_turno()
                         return
 
     def _arrow_presionado(self, tecla_precionada):
@@ -162,7 +160,7 @@ class Partida:
 
             if self.movimientos > 0:
                 self.movimientos -= 1
-                self.info.movim_restantes(self.movimientos)
+                # self.info.movim_restantes(self.movimientos)
                 self.tablero.casilleros[self.posicionCazadorX][self.posicionCazadorY].esta_ocupado = False
                 self.cazador.ficha.mover_ficha(direccion)
 
@@ -213,7 +211,7 @@ class Partida:
 
             if self.movimientos > 0:
                 self.movimientos -= 1
-                self.info.movim_restantes(self.movimientos)
+                # self.info.movim_restantes(self.movimientos)
                 self.tablero.casilleros[self.posicionCorredorX][self.posicionCorredorY].esta_ocupado = False
                 self.corredores[int(self.turno)].ficha.mover_ficha(direccion)
 
@@ -221,31 +219,44 @@ class Partida:
         """
         Cambia de turno y saltea a cazador en la primera ronda.
         """
-        self.info.borrar(self.turno)
 
-        if self.turno == 'cazador':
-            self.turno = 0
+        if isinstance(self.turno.jugador, Cazador):
+            self.turno.jugador = self.corredores[0]
         else:
-            self.turno += 1
+            numero_jugador = self.corredores.index(self.turno.jugador)
 
-        if self.primer_turno is True and self.turno is len(self.corredores):
-            self.info.jugador_actual(0)
-        else:
-            self.info.jugador_actual(self.turno)
-
-        self.info.movim_restantes(self.movimientos)
-
-        if self.turno < len(self.corredores):
-            return str(self.turno)
-        else:
-            if self.primer_turno is True:
-                print(self.turno)
-                self.turno = 0
-                self.primer_turno = False
-                return str(self.turno)
+            if numero_jugador < len(self.corredores) - 1:
+                self.turno.jugador = self.corredores[numero_jugador + 1]
             else:
-                self.turno = 'cazador'
-                return self.turno
+                self.turno.jugador = self.cazador
+
+        print('turno jugador: ' + self.turno.jugador.nombre)
+
+        # self.info.borrar(self.turno)
+
+        # if self.turno == 'cazador':
+        #     self.turno = 0
+        # else:
+        #     self.turno += 1
+
+        # if self.primer_turno is True and self.turno is len(self.corredores):
+        #     # self.info.jugador_actual(0)
+        # else:
+        #     self.info.jugador_actual(self.turno)
+        #
+        # self.info.movim_restantes(self.movimientos)
+
+        # if self.turno < len(self.corredores):
+        #     return str(self.turno)
+        # else:
+        #     if self.primer_turno is True:
+        #         print(self.turno)
+        #         self.turno = 0
+        #         self.primer_turno = False
+        #         return str(self.turno)
+        #     else:
+        #         self.turno = 'cazador'
+        #         return self.turno
 
     def _chequear_zona(self, direccion):
         if direccion == pygame.K_DOWN:
@@ -257,4 +268,4 @@ class Partida:
 
     def _fin_turno(self):
 
-        Turno(self.tablero).fin_turno()
+        self.turno.fin_turno()
