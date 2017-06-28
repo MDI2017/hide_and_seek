@@ -1,5 +1,6 @@
 from jugadores.cazador import Cazador
 from constantes import CASILLAS, DIVISIONES, TABLERO
+from .info_turno import InfoTurno
 
 
 class Turno:
@@ -7,10 +8,49 @@ class Turno:
         self.tablero = tablero
         self.jugador = None
         self.primer_turno = True
+        self.info = InfoTurno()
+
+    def cambio_turno(self, jugador):
+        self.jugador = jugador
+        self._set_info()
+
+    def _set_info(self):
+        self.info.jugador_actual(self.jugador)
+
+    def set_movimientos(self, movimientos):
+        self.info.movim_restantes(movimientos)
+
 
     def fin_turno(self):
         if isinstance(self.jugador, Cazador):
             self._verificar_avistaje()
+
+    def _verificar_avistaje(self):
+        casillero_cazador = self.jugador.ficha.casillero
+
+        # verificación vertical inferior
+        print(self._vertical_verification(casillero_cazador[CASILLAS.FILA] + 1, TABLERO.FILAS, True))
+
+        # verificación vertical superior
+        print(self._vertical_verification(TABLERO.INICIO, casillero_cazador[CASILLAS.FILA]))
+
+        # verificación horizontal derecha
+        print(self._horizontal_verification(casillero_cazador[CASILLAS.COLUMNA] + 1, TABLERO.COLUMNAS, True))
+
+        # verificación horizontal izquierda
+        print(self._horizontal_verification(TABLERO.INICIO, casillero_cazador[CASILLAS.COLUMNA]))
+
+        # verificación diagona superior derecha
+        print(self._diagonal_verification(TABLERO.INICIO, casillero_cazador[CASILLAS.FILA], True))
+
+        # verificación diagona superior izquierda
+        print(self._diagonal_verification(TABLERO.INICIO, casillero_cazador[CASILLAS.FILA]))
+
+        # verificación diagona superior derecha
+        print(self._diagonal_verification(casillero_cazador[CASILLAS.FILA] + 1, TABLERO.FILAS, True, True))
+
+        # verificación diagona superios izquierda
+        print(self._diagonal_verification(casillero_cazador[CASILLAS.FILA] + 1, TABLERO.FILAS, False, True))
 
     def _vertical_verification(self, inicio, final, abajo=False):
         columna = self.jugador.ficha.casillero[CASILLAS.COLUMNA]
@@ -81,7 +121,7 @@ class Turno:
             if abajo:  # itera hacia abajo
                 fila = i
             else:  # itera hacia arriba
-              fila = final - i - 1
+                fila = final - i - 1
 
             # corroboro no estar iterando fuera de los límites del tablero
             if (derecha and columna > 9) or (not derecha and columna < 0):
@@ -97,30 +137,3 @@ class Turno:
                 return columna, fila
 
         return False
-
-    def _verificar_avistaje(self):
-        casillero_cazador = self.jugador.ficha.casillero
-
-        # verificación vertical inferior
-        self._vertical_verification(casillero_cazador[CASILLAS.FILA] + 1, TABLERO.FILAS, True)
-
-        # verificación vertical superior
-        self._vertical_verification(TABLERO.INICIO, casillero_cazador[CASILLAS.FILA])
-
-        # verificación horizontal derecha
-        self._horizontal_verification(casillero_cazador[CASILLAS.COLUMNA] + 1, TABLERO.COLUMNAS, True)
-
-        # verificación horizontal izquierda
-        self._horizontal_verification(TABLERO.INICIO, casillero_cazador[CASILLAS.COLUMNA])
-
-        # verificación diagona superior derecha
-        self._diagonal_verification(TABLERO.INICIO, casillero_cazador[CASILLAS.FILA], True)
-
-        # verificación diagona superior izquierda
-        self._diagonal_verification(TABLERO.INICIO, casillero_cazador[CASILLAS.FILA])
-
-        # verificación diagona superior derecha
-        self._diagonal_verification(casillero_cazador[CASILLAS.FILA] + 1, TABLERO.FILAS, True, True)
-
-        # verificación diagona superios izquierda
-        self._diagonal_verification(casillero_cazador[CASILLAS.FILA] + 1, TABLERO.FILAS, False, True)
