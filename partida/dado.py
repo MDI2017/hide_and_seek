@@ -22,7 +22,8 @@ class Dado(Clickeable, Dibujable):
         self.dibujar()
 
     def _al_liberar_click(self):
-        self.tirar_dado()
+        pass
+        # self.tirar_dado()
 
     # def _clickeado(self):
     #     return super()._clickeado()

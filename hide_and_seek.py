@@ -22,23 +22,23 @@ partida = Partida()
 
 setting = SettingPartida()
 
-# jugadores = [
-#     {'nombre': "Jugador 1", 'es_cazador': False, 'avatar': "avatar1.png"},
-#     {'nombre': "Jugador 2", 'es_cazador': False, 'avatar': "avatar2.png"},
-#     {'nombre': "Jugador 3", 'es_cazador': False, 'avatar': "avatar3.png"},
-#     {'nombre': "Jugador 4", 'es_cazador': False, 'avatar': "avatar4.png"},
-#     {'nombre': "Cazador", 'es_cazador': True, 'avatar': "avatar5.png"}
-#
-# ]
+jugadores = [
+    {'nombre': "Jugador 1", 'es_cazador': False, 'avatar': "avatar1.png"},
+    {'nombre': "Jugador 2", 'es_cazador': False, 'avatar': "avatar2.png"},
+    {'nombre': "Jugador 3", 'es_cazador': False, 'avatar': "avatar3.png"},
+    {'nombre': "Jugador 4", 'es_cazador': False, 'avatar': "avatar4.png"},
+    {'nombre': "Cazador", 'es_cazador': True, 'avatar': "avatar5.png"}
+
+]
 
 
 def mostrar_setting():
     global partida
-    datos_jugadores = setting.mostrar_pantalla_sentting()
-    clearShapes()
-    setting.ocultar_setting()
-    partida.iniciar_partida(datos_jugadores)
-    # partida.iniciar_partida(jugadores)
+    # datos_jugadores = setting.mostrar_pantalla_sentting()
+    # clearShapes()
+    # setting.ocultar_setting()
+    # partida.iniciar_partida(datos_jugadores)
+    partida.iniciar_partida(jugadores)
 
 pygame.display.set_caption("VENTANA PRINCIPAL")
 

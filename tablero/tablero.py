@@ -10,8 +10,8 @@ class Tablero:
     """
     def __init__(self, renderizado=False):
         self.casilleros = [
-            [Casillero(60, 60 * x, 60 * i) for i in range(TABLERO.FILAS)]
-            for x in range(TABLERO.COLUMNAS)
+            [Casillero(ALTO_CASILLERO, (columnas, filas)) for filas in range(TABLERO.FILAS)]
+            for columnas in range(TABLERO.COLUMNAS)
         ]
         self.renderizado = renderizado
 

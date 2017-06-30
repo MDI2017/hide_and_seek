@@ -18,15 +18,19 @@ class Turno:
         self.info.jugador_actual(self.jugador)
 
     def set_movimientos(self, movimientos):
+        self.jugador.ficha.movimientos = movimientos
         self.info.movim_restantes(movimientos)
 
+    def mover_ficha(self, nuevo_casillero):
+        movimientos = self.jugador.ficha.mover_ficha(nuevo_casillero)
+        self.info.movim_restantes(movimientos)
 
     def fin_turno(self):
         if isinstance(self.jugador, Cazador):
             self._verificar_avistaje()
 
     def _verificar_avistaje(self):
-        casillero_cazador = self.jugador.ficha.casillero
+        casillero_cazador = self.jugador.ficha.casillero.indice
 
         # verificación vertical inferior
         print(self._vertical_verification(casillero_cazador[CASILLAS.FILA] + 1, TABLERO.FILAS, True))
@@ -53,7 +57,7 @@ class Turno:
         print(self._diagonal_verification(casillero_cazador[CASILLAS.FILA] + 1, TABLERO.FILAS, False, True))
 
     def _vertical_verification(self, inicio, final, abajo=False):
-        columna = self.jugador.ficha.casillero[CASILLAS.COLUMNA]
+        columna = self.jugador.ficha.casillero.indice[CASILLAS.COLUMNA]
 
         if abajo:
             division = DIVISIONES.SUPERIOR
@@ -77,7 +81,7 @@ class Turno:
         return False
 
     def _horizontal_verification(self, inicio, final, derecha=False):
-        fila = self.jugador.ficha.casillero[CASILLAS.FILA]
+        fila = self.jugador.ficha.casillero.indice[CASILLAS.FILA]
 
         if derecha:
             division = DIVISIONES.IZQUIERDA
@@ -102,7 +106,7 @@ class Turno:
 
     def _diagonal_verification(self, inicio, final, derecha=False, abajo=False):
 
-        columna = self.jugador.ficha.casillero[CASILLAS.COLUMNA]
+        columna = self.jugador.ficha.casillero.indice[CASILLAS.COLUMNA]
 
         if (derecha and abajo) or (not derecha and not abajo):
             division_lateral_superior = DIVISIONES.IZQUIERDA

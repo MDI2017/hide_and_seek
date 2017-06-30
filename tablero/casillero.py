@@ -7,15 +7,15 @@ class Casillero:
     la clase Casillero es la responsable de contener las fichas de los jugadores
     """
 
-    def __init__(self, lado, posicion_x, posicion_y,
-                 libre=True, paredes=None, visible=True, ):
+    def __init__(self, lado, indice, libre=True, paredes=None, visible=True, ):
 
         if paredes is None:
             paredes = [0, 0, 0, 0]
 
         self.lado = lado
-        self.posicionX = posicion_x
-        self.posicionY = posicion_y
+        self.posicionX = indice[CASILLAS.COLUMNA] * self.lado
+        self.posicionY = indice[CASILLAS.FILA] * self.lado
+        self.indice = indice
         self.libre = libre
         self.visible = visible
         self.paredes = paredes
