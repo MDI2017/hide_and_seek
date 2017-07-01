@@ -55,11 +55,11 @@ class Partida:
                 self.cazador.crear_ficha(casillero_cazador)
             else:
                 corredor = Corredor(data_jugador['nombre'], data_jugador['avatar'])
+                self.corredores.append(corredor)
                 pos_inicial = corredor.set_position(len(self.corredores) - 1)
                 casillero_corredor = self.tablero.casilleros[pos_inicial[CASILLAS.COLUMNA]][pos_inicial[CASILLAS.FILA]]
                 corredor.crear_ficha(casillero_corredor)
 
-                self.corredores.append(corredor)
 
     def __bucle_partida(self):
         en_partida = True
