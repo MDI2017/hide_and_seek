@@ -21,8 +21,10 @@ class Casillero:
         self.paredes = paredes
         self.esta_ocupado = None
         self.color = COLORES.BLANCO
+        self.secondaryColor = COLORES.ACCENT
         self.zona = None
         self.ficha = None
+        self.highlighted = None
 
     def dibujarCasillero(self):
         """
@@ -100,3 +102,12 @@ class Casillero:
     def _pintarSuperficie(self):
         drawRect(self.posicionX, self.posicionY, self.lado, self.lado, self.color)
 
+    def highlight(self):
+        drawRect(self.posicionX, self.posicionY, self.lado, self.lado, self.secondaryColor)
+        self.dibujarDivisiones()
+        self.highlighted = True
+
+    def restore(self):
+        self._pintarSuperficie()
+        self.dibujarDivisiones()
+        self.highlighted = False

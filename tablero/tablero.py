@@ -8,6 +8,7 @@ class Tablero:
     """
     Clase encargada de dibujar el tablero, los casilleros y las divisiones que estos conllevan
     """
+
     def __init__(self, renderizado=False):
         self.casilleros = [
             [Casillero(ALTO_CASILLERO, (columnas, filas)) for filas in range(TABLERO.FILAS)]
@@ -41,7 +42,7 @@ class Tablero:
                         casillero.paredes[DIVISIONES.DERECHA] = ESTADOS.TIENE_MURO
                     if indexColumna == 2 or indexColumna == 8:
                         casillero.paredes[DIVISIONES.IZQUIERDA] = ESTADOS.TIENE_MURO
-                    if (1 <= indexColumna <= 3) or(6 <= indexColumna <= 8):
+                    if (1 <= indexColumna <= 3) or (6 <= indexColumna <= 8):
                         casillero.paredes[DIVISIONES.INFERIOR] = ESTADOS.TIENE_MURO
 
                 elif indexFila == 2:
@@ -49,7 +50,7 @@ class Tablero:
                         casillero.paredes[DIVISIONES.DERECHA] = ESTADOS.TIENE_MURO
                     if indexColumna == 2 or indexColumna == 8:
                         casillero.paredes[DIVISIONES.IZQUIERDA] = ESTADOS.TIENE_MURO
-                    if (1 <= indexColumna <= 3) or(6 <= indexColumna <= 8):
+                    if (1 <= indexColumna <= 3) or (6 <= indexColumna <= 8):
                         casillero.paredes[DIVISIONES.SUPERIOR] = ESTADOS.TIENE_MURO
 
                 elif indexFila == 3:

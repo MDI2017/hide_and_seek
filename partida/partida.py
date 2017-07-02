@@ -7,7 +7,7 @@ from pygame_functions import clearShapes
 from tablero.tablero import Tablero
 from partida.dado import Dado
 from pygame_functions import *
-from constantes import DIVISIONES, ZONAS, CASILLAS
+from constantes import DIVISIONES, ZONAS, CASILLAS, COLORES
 from .turno import Turno
 
 
@@ -60,7 +60,6 @@ class Partida:
                 casillero_corredor = self.tablero.casilleros[pos_inicial[CASILLAS.COLUMNA]][pos_inicial[CASILLAS.FILA]]
                 corredor.crear_ficha(casillero_corredor)
 
-
     def __bucle_partida(self):
         en_partida = True
         while en_partida:
@@ -95,6 +94,7 @@ class Partida:
                 if self.dado.dibujado and self.dado.click_elemento(mouseAction):
                     # self.turno.set_movimientos(1000)
                     self.turno.set_movimientos(self.dado.tirar_dado())
+                    self._check_casilleo(self.turno.jugador.ficha.casillero)
                     pause(500)
                     self.dado.ocultar()
 
@@ -116,13 +116,15 @@ class Partida:
                         return
 
     def _mover_ficha(self, direccion):
-        
+
         columna_ficha = self.turno.jugador.ficha.casillero.indice[CASILLAS.COLUMNA]
         fila_ficha = self.turno.jugador.ficha.casillero.indice[CASILLAS.FILA]
+
+
         nuevo_casillero = None
 
         if direccion == pygame.K_UP:
-            nuevo_casillero= self.tablero.casilleros[columna_ficha][fila_ficha - 1]
+            nuevo_casillero = self.tablero.casilleros[columna_ficha][fila_ficha - 1]
 
             if fila_ficha == 0:
                 return False
@@ -162,7 +164,61 @@ class Partida:
             if nuevo_casillero.esta_ocupado:
                 return False
 
+        self.restore_casilleros(self.turno.jugador.ficha.casillero)
         self.turno.mover_ficha(nuevo_casillero)
+        if self.turno.jugador.ficha.movimientos > 0:
+            self._check_casilleo(self.turno.jugador.ficha.casillero)
+
+    def _check_casilleo(self, casillero):
+        columna_ficha = casillero.indice[CASILLAS.COLUMNA]
+        fila_ficha = casillero.indice[CASILLAS.FILA]
+
+        casillero_superior = self.tablero.casilleros[columna_ficha][fila_ficha - 1]
+        casillero_derecha = self.tablero.casilleros[columna_ficha + 1][fila_ficha]
+        casillero_inferior = self.tablero.casilleros[columna_ficha][fila_ficha + 1]
+        casillero_izquierza = self.tablero.casilleros[columna_ficha - 1][fila_ficha]
+
+        if not casillero_superior.paredes[DIVISIONES.INFERIOR] \
+                and not casillero_superior.esta_ocupado \
+                and fila_ficha > 0:
+            casillero_superior.highlight()
+
+        if not casillero_derecha.paredes[DIVISIONES.IZQUIERDA] \
+                and not casillero_derecha.esta_ocupado \
+                and columna_ficha < 9:
+            casillero_derecha.highlight()
+
+        if not casillero_inferior.paredes[DIVISIONES.SUPERIOR] \
+                and not casillero_inferior.esta_ocupado \
+                and fila_ficha < 10:
+            casillero_inferior.highlight()
+
+        if not casillero_izquierza.paredes[DIVISIONES.DERECHA] \
+                and not casillero_izquierza.esta_ocupado \
+                and columna_ficha > 0:
+            casillero_izquierza.highlight()
+
+    def restore_casilleros(self, casillero):
+
+        columna_ficha = casillero.indice[CASILLAS.COLUMNA]
+        fila_ficha = casillero.indice[CASILLAS.FILA]
+
+        casillero_superior = self.tablero.casilleros[columna_ficha][fila_ficha - 1]
+        casillero_derecha = self.tablero.casilleros[columna_ficha + 1][fila_ficha]
+        casillero_inferior = self.tablero.casilleros[columna_ficha][fila_ficha + 1]
+        casillero_izquierza = self.tablero.casilleros[columna_ficha - 1][fila_ficha]
+
+        if casillero_superior.highlighted:
+            casillero_superior.restore()
+
+        if casillero_derecha.highlighted:
+            casillero_derecha.restore()
+
+        if casillero_inferior.highlighted:
+            casillero_inferior.restore()
+
+        if casillero_izquierza.highlighted:
+            casillero_izquierza.restore()
 
     def _cambio_turno(self):
         """
@@ -181,8 +237,6 @@ class Partida:
 
         self.turno.set_movimientos(0)
         self.dado.dibujar()
-
-
 
     def _chequear_zona(self, direccion):
         if direccion == pygame.K_DOWN:
