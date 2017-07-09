@@ -179,27 +179,47 @@ class Partida:
         columna_ficha = casillero.indice[CASILLAS.COLUMNA]
         fila_ficha = casillero.indice[CASILLAS.FILA]
 
-        casillero_superior = self.tablero.casilleros[columna_ficha][fila_ficha - 1]
-        casillero_derecha = self.tablero.casilleros[columna_ficha + 1][fila_ficha]
-        casillero_inferior = self.tablero.casilleros[columna_ficha][fila_ficha + 1]
-        casillero_izquierza = self.tablero.casilleros[columna_ficha - 1][fila_ficha]
+        #Sanity check
+        if fila_ficha == 0:
+            casillero_superior = None
+        else:
+            casillero_superior = self.tablero.casilleros[columna_ficha][fila_ficha - 1]
 
-        if not casillero_superior.paredes[DIVISIONES.INFERIOR] \
+        if columna_ficha == 9:
+            casillero_derecha = None
+        else:
+            casillero_derecha = self.tablero.casilleros[columna_ficha + 1][fila_ficha]
+
+        if fila_ficha == 11:
+            casillero_inferior = None
+        else:
+            casillero_inferior = self.tablero.casilleros[columna_ficha][fila_ficha + 1]
+
+        if columna_ficha == 0:
+            casillero_izquierza = None
+        else:
+            casillero_izquierza = self.tablero.casilleros[columna_ficha - 1][fila_ficha]
+
+        if casillero_superior \
+                and not casillero_superior.paredes[DIVISIONES.INFERIOR] \
                 and not casillero_superior.esta_ocupado \
                 and fila_ficha > 0:
             casillero_superior.highlight()
 
-        if not casillero_derecha.paredes[DIVISIONES.IZQUIERDA] \
+        if casillero_derecha \
+                and not casillero_derecha.paredes[DIVISIONES.IZQUIERDA] \
                 and not casillero_derecha.esta_ocupado \
                 and columna_ficha < 9:
             casillero_derecha.highlight()
 
-        if not casillero_inferior.paredes[DIVISIONES.SUPERIOR] \
+        if casillero_inferior \
+                and not casillero_inferior.paredes[DIVISIONES.SUPERIOR] \
                 and not casillero_inferior.esta_ocupado \
                 and fila_ficha < 10:
             casillero_inferior.highlight()
 
-        if not casillero_izquierza.paredes[DIVISIONES.DERECHA] \
+        if casillero_izquierza \
+                and not casillero_izquierza.paredes[DIVISIONES.DERECHA] \
                 and not casillero_izquierza.esta_ocupado \
                 and columna_ficha > 0:
             casillero_izquierza.highlight()
