@@ -206,6 +206,12 @@ class Partida:
 
     def restore_casilleros(self, casillero):
 
+        """
+        Vuelve al color normal los casilleros resaltados por self._posibles_movimientos()
+        :param casillero: 
+        :return: 
+        """
+
         columna_ficha = casillero.indice[CASILLAS.COLUMNA]
         fila_ficha = casillero.indice[CASILLAS.FILA]
 
