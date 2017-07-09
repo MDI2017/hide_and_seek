@@ -235,21 +235,37 @@ class Partida:
         columna_ficha = casillero.indice[CASILLAS.COLUMNA]
         fila_ficha = casillero.indice[CASILLAS.FILA]
 
-        casillero_superior = self.tablero.casilleros[columna_ficha][fila_ficha - 1]
-        casillero_derecha = self.tablero.casilleros[columna_ficha + 1][fila_ficha]
-        casillero_inferior = self.tablero.casilleros[columna_ficha][fila_ficha + 1]
-        casillero_izquierza = self.tablero.casilleros[columna_ficha - 1][fila_ficha]
+        # Sanity check
+        if fila_ficha == 0:
+            casillero_superior = None
+        else:
+            casillero_superior = self.tablero.casilleros[columna_ficha][fila_ficha - 1]
 
-        if casillero_superior.highlighted:
+        if columna_ficha == 9:
+            casillero_derecha = None
+        else:
+            casillero_derecha = self.tablero.casilleros[columna_ficha + 1][fila_ficha]
+
+        if fila_ficha == 11:
+            casillero_inferior = None
+        else:
+            casillero_inferior = self.tablero.casilleros[columna_ficha][fila_ficha + 1]
+
+        if columna_ficha == 0:
+            casillero_izquierza = None
+        else:
+            casillero_izquierza = self.tablero.casilleros[columna_ficha - 1][fila_ficha]
+
+        if casillero_superior and casillero_superior.highlighted:
             casillero_superior.restore()
 
-        if casillero_derecha.highlighted:
+        if casillero_derecha and casillero_derecha.highlighted:
             casillero_derecha.restore()
 
-        if casillero_inferior.highlighted:
+        if casillero_inferior and casillero_inferior.highlighted:
             casillero_inferior.restore()
 
-        if casillero_izquierza.highlighted:
+        if casillero_izquierza and casillero_izquierza.highlighted:
             casillero_izquierza.restore()
 
     def _cambio_turno(self):
