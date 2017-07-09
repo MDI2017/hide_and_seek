@@ -170,6 +170,12 @@ class Partida:
             self._posibles_movimientos(self.turno.jugador.ficha.casillero)
 
     def _posibles_movimientos(self, casillero):
+
+        """
+        Funcion que chequea los posibles movimientos de una ficha y señala esos casilleros
+        :param casillero: 
+        :return: 
+        """
         columna_ficha = casillero.indice[CASILLAS.COLUMNA]
         fila_ficha = casillero.indice[CASILLAS.FILA]
 
