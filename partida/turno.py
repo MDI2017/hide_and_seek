@@ -1,5 +1,5 @@
 from jugadores.cazador import Cazador
-from constantes import CASILLAS, DIVISIONES, TABLERO
+from constantes import CASILLAS, DIVISIONES, TABLERO, ZONAS
 from .info_turno import InfoTurno
 
 
@@ -28,6 +28,19 @@ class Turno:
     def fin_turno(self):
         if isinstance(self.jugador, Cazador):
             self._verificar_avistaje()
+        else:
+            self._verificar_zonas()
+
+    def _verificar_zonas(self):
+        """
+        Chequea que los corredores pasen por las distintas zonas al finalizar cada turnos
+        :return: 
+        """
+        ficha = self.jugador.ficha
+
+        if not ficha.piso_piedra_libre and ficha.casillero.zona == ZONAS.PIEDRA_LIBRE:
+            self.jugador.ficha.piso_piedra_libre = True
+
 
     def _verificar_avistaje(self):
         casillero_cazador = self.jugador.ficha.casillero.indice

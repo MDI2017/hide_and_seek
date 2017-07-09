@@ -6,6 +6,7 @@ class Corredor(Jugador):
     """
     Clase que crea a jugador corredor, le asigna un nombre, un avatar y crea la ficha
     """
+
     def __init__(self, nombre, avatar):
         super().__init__(nombre, avatar)
         if self.avatar is None:
