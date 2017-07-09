@@ -94,7 +94,7 @@ class Partida:
                 if self.dado.dibujado and self.dado.click_elemento(mouseAction):
                     # self.turno.set_movimientos(1000)
                     self.turno.set_movimientos(self.dado.tirar_dado())
-                    self._check_casilleo(self.turno.jugador.ficha.casillero)
+                    self._posibles_movimientos(self.turno.jugador.ficha.casillero)
                     pause(500)
                     self.dado.ocultar()
 
@@ -167,9 +167,9 @@ class Partida:
         self.restore_casilleros(self.turno.jugador.ficha.casillero)
         self.turno.mover_ficha(nuevo_casillero)
         if self.turno.jugador.ficha.movimientos > 0:
-            self._check_casilleo(self.turno.jugador.ficha.casillero)
+            self._posibles_movimientos(self.turno.jugador.ficha.casillero)
 
-    def _check_casilleo(self, casillero):
+    def _posibles_movimientos(self, casillero):
         columna_ficha = casillero.indice[CASILLAS.COLUMNA]
         fila_ficha = casillero.indice[CASILLAS.FILA]
 
