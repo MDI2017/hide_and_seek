@@ -18,7 +18,7 @@ class Tablero:
 
     def dibujar_tablero(self):
         self.dibujar_casilleros()
-        self.dibujarDivisiones()
+        self.dibujar_divisiones()
         self.renderizado = True
 
     def dibujar_casilleros(self):
@@ -132,7 +132,7 @@ class Tablero:
 
                 casillero.dibujarCasillero()
 
-    def dibujarDivisiones(self):
+    def dibujar_divisiones(self):
 
         for indexColumna, columna in enumerate(self.casilleros):
             for indexFila, casillero in enumerate(columna):
