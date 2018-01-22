@@ -71,9 +71,11 @@ class Partida:
                     mouseAction = pygame.mouse.get_pos()
 
                 if event.type == pygame.KEYDOWN:
+                    # Controla tecla Enter durante la partida
                     if event.key == pygame.K_RETURN:
                         self._enter_presionado()
 
+                    # Controla las teclasr arrow del teclado durante la partida
                     if event.key == pygame.K_UP or event.key == pygame.K_DOWN \
                             or event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
                         self._arrow_presionado(event.key)
@@ -108,6 +110,13 @@ class Partida:
                         return
 
     def _arrow_presionado(self, tecla_precionada):
+        """
+        funcion que controla las acciones de las teclas arrow durante la partida. La función se ejecuta al momento de
+        precionar alguna de las arrows del teclado y entra en un bucle esperando antes que se suelte para realizar una
+        acción. En este caso, mover una ficha en el tablero.
+        :param tecla_precionada: 
+        :return: 
+        """
         while True:
             for event in pygame.event.get():
                 if event.type == pygame.KEYUP:
@@ -116,6 +125,12 @@ class Partida:
                         return
 
     def _mover_ficha(self, direccion):
+        """
+        Funcion que recibe la dirección hacia la que se desea mover la ficha. Si el movimiento es posible, muefe la
+        ficha al nuevo casillero. Caso contrario no realiza ninguna acción.
+        :param direccion: 
+        :return: 
+        """
 
         columna_ficha = self.turno.jugador.ficha.casillero.indice[CASILLAS.COLUMNA]
         fila_ficha = self.turno.jugador.ficha.casillero.indice[CASILLAS.FILA]
@@ -163,8 +178,10 @@ class Partida:
             if nuevo_casillero.esta_ocupado:
                 return False
 
+        # Si todas las comprobaciones son exitosas, se mueve la ficha
         self.restore_casilleros(self.turno.jugador.ficha.casillero)
         self.turno.mover_ficha(nuevo_casillero)
+        # Si aún quedan movimientos, se muestran los posibles movimientos que puede realizar
         if self.turno.jugador.ficha.movimientos > 0:
             self._posibles_movimientos(self.turno.jugador.ficha.casillero)
 
@@ -285,6 +302,7 @@ class Partida:
         self.turno.set_movimientos(0)
         self.dado.dibujar()
 
+# TODO: Revisar usilidad de esta función
     def _chequear_zona(self, direccion):
         if direccion == pygame.K_DOWN:
             if self.tablero.casilleros[columna_ficha][fila_ficha].zona is ZONAS.PIEDRA_LIBRE:
