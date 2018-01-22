@@ -16,12 +16,12 @@ class Tablero:
         ]
         self.renderizado = renderizado
 
-    def dibujarTablero(self):
-        self.dibujarCasilleros()
+    def dibujar_tablero(self):
+        self.dibujar_casilleros()
         self.dibujarDivisiones()
         self.renderizado = True
 
-    def dibujarCasilleros(self):
+    def dibujar_casilleros(self):
 
         for indexColumna, columna in enumerate(self.casilleros):
             for indexFila, casillero in enumerate(columna):

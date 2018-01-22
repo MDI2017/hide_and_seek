@@ -34,7 +34,7 @@ class Partida:
         self.info = None
 
     def iniciar_partida(self, jugadores):
-        self.tablero.dibujarTablero()
+        self.tablero.dibujar_tablero()
         self.turno = Turno(self.tablero)
 
         self.dado = Dado(670, 100)
@@ -120,7 +120,6 @@ class Partida:
         columna_ficha = self.turno.jugador.ficha.casillero.indice[CASILLAS.COLUMNA]
         fila_ficha = self.turno.jugador.ficha.casillero.indice[CASILLAS.FILA]
 
-
         nuevo_casillero = None
 
         if direccion == pygame.K_UP:
@@ -179,7 +178,7 @@ class Partida:
         columna_ficha = casillero.indice[CASILLAS.COLUMNA]
         fila_ficha = casillero.indice[CASILLAS.FILA]
 
-        #Sanity check
+        # Sanity check
         if fila_ficha == 0:
             casillero_superior = None
         else:
