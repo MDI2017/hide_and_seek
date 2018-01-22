@@ -41,7 +41,6 @@ class Turno:
         if not ficha.piso_piedra_libre and ficha.casillero.zona == ZONAS.PIEDRA_LIBRE:
             self.jugador.ficha.piso_piedra_libre = True
 
-
     def _verificar_avistaje(self):
         casillero_cazador = self.jugador.ficha.casillero.indice
 
