@@ -69,7 +69,7 @@ class Turno:
         print(self._diagonal_verification(casillero_cazador[CASILLAS.FILA] + 1, TABLERO.FILAS, False, True))
 
     def _vertical_verification(self, inicio, final, abajo=False):
-        columna = self.jugador.ficha.casillero.indice[CASILLAS.COLUMNA]
+        columna_cazador = self.jugador.ficha.casillero.indice[CASILLAS.COLUMNA]
 
         if abajo:
             division = DIVISIONES.SUPERIOR
@@ -83,12 +83,12 @@ class Turno:
             else:  # itera hacia arriba
                 fila = final - i - 1
 
-            casillero = self.tablero.casilleros[columna][fila]
+            casillero = self.tablero.casilleros[columna_cazador][fila]
 
             if casillero.paredes[division]:
                 return False
             if casillero.esta_ocupado:
-                return columna, fila
+                return columna_cazador, fila
 
         return False
 
